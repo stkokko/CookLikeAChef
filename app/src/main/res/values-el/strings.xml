@@ -1,0 +1,111 @@
+<resources>
+    <string name="app_name">Cook Like A Chef</string>
+    <string name="e_mail">E-Mail</string>
+    <string name="password">Κωδικός Πρόσβασης</string>
+    <string name="login_button_text">Εισοδος</string>
+    <string name="new_to_appname">Νέο μέλος του Cook Like A Chef? </string>
+    <string name="confirm_password">Επιβεβαίωση Κωδικόυ Πρόσβασης</string>
+    <string name="string_register">Εγγραφή</string>
+    <string name="register_textView">Είστε ήδη μέλος στο Cook Like A Chef?</string>
+    <string name="latest_recipes">Πρόσφατες Συνταγές</string>
+
+
+    <string name="search">Αναζήτηση…</string>
+    <string name="search_button">Αναζητηση</string>
+
+
+    <string name="categories">Κατηγορίες</string>
+
+
+    <string name="about">Σχετικά με εμάς</string>
+    <string name="welcome_to_appname">Καλώς ήρθατε στο Cook Like A Chef</string>
+
+
+    <string name="favourites">Αγαπημένα</string>
+
+
+    <string name="logo_icon">εικόνα_λόγκο</string>
+
+
+    <string name="ingredients">Υλικά</string>
+
+
+    <string name="recipe_steps">Εκτέλεση</string>
+    <string name="comment_hint">Σχολιάστε…</string>
+    <string name="comments">Σχόλια</string>
+    <string name="recipe_image">εικόνα_συνταγής</string>
+    <string name="recipe">Συνταγή</string>
+    <string name="send_comment">Αποστολή Σχολίου</string>
+    <string name="brunch">Brunch</string>
+    <string name="salads">Σαλάτες</string>
+    <string name="main_dishes">Κυρίως Πιάτα</string>
+    <string name="burgers">Burgers</string>
+    <string name="desserts">Επιδόρπιο</string>
+    <string name="home">Αρχική Σελίδα</string>
+
+
+    <string name="choose_ingredients">Επιλεξτε Υλικα</string>
+
+
+    <string name="view_recipes">Προβολη Συνταγων</string>
+
+
+    <string name="choose_category_ingredient">Παρακαλώ επιλέξτε κατηγορία υλικών</string>
+
+
+    <string name="select_ingredient_category">Επιλέξτε Κατηγορία</string>
+    <string name="selected_ingredients">Επιλεγμένα υλικά</string>
+
+    <string name="delete">Διαγραφη</string>
+    <string name="add">Προσθηκη</string>
+    <string name="register">Εγγραφή</string>
+    <string name="error_message_login">Το e-mail ή ο κωδικός πρόσβασης είναι λανθασμένο(ς)</string>
+    <string name="error_message_password_length">Ο κωδικός πρόσβασης πρέπει να περιέχει τουλάχιστον 6 χαρακτήρες</string>
+    <string name="error_message_password_confirm">Ο κωδικός πρόσβασης δεν είναι ο ίδιος</string>
+    <string name="error_message_email_exists">Το e-mail υπάρχει ήδη</string>
+
+    <string name="recipe_error">Δεν βρέθηκε καμία συνταγή</string>
+
+    <string name="return_icon">Εικόνα Επιστροφής</string>
+    <string name="language">Γλώσσα</string>
+
+
+    <string name="nav_menu_icon">Εικόνα πλοήγησης</string>
+    <string name="ingredient_exists">Το υλικό υπάρχει ήδη</string>
+    <string name="loading_text">Παρακαλώ Περιμένετε.....</string>
+    <string name="profile">Προφίλ</string>
+    <string name="language_image">Εικόνα Γλώσσας</string>
+
+    <string name="app_email">cooklikeachef96@gmail.com</string>
+
+    <string name="salty">αλμυρά</string>
+    <string name="sweet">γλυκά</string>
+    <string name="select_ingredient_spinner">Επιλέξτε Υλικά</string>
+    <string name="forgot_password_text">Ξέχασα τον κωδικό πρόσβασης</string>
+    <string name="reset_password_text">Επαναφορά κωδικού πρόσβασης</string>
+    <string name="reset_password_message">Εισάγετε το E-Mail για επαναφορά κωδικού πρόσβασης</string>
+    <string name="yes_text">Ναι</string>
+    <string name="no_text">Οχι</string>
+    <string name="email_succ_text">Το E-Mail στάλθηκε με επιτυχία</string>
+    <string name="email_fail_text">Το E-Mail δεν στάλθηκε με επιτυχία</string>
+    <string name="send_text">Αποστολή</string>
+    <string name="please_choose_ingredient">Παρακαλώ επιλέξτε υλικό(ά)</string>
+    <string name="floating_action_button_content_description">Κουμπί Αγαπημένων</string>
+    <string name="list_is_empty">Η λίστα είναι κενή</string>
+    <string name="myComment">Εγώ: </string>
+    <string name="show_more">Περισσότερα</string>
+    <string name="show_less">Λιγότερα</string>
+    <string name="login_header">Εικόνα Κεφαλίδας Εισόδου</string>
+    <string name="read_more">Περισσότερα</string>
+    <string name="logout">Αποσύνδεση</string>
+    <string name="contact_us">Επικοινωνήστε μαζί μας</string>
+    <string name="filter_image">Filter Image</string>
+    <string name="main_dishes_icon">Main Dishes Icon</string>
+    <string name="salads_icon">Salads Icon</string>
+    <string name="close_icon">Close Icon</string>
+    <string name="cancel_all">Cancel all</string>
+    <string name="filters">Filters</string>
+    <string name="dessert_icons">Dessert Icons</string>
+    <string name="burger_icons">Burger Icons</string>
+    <string name="brunch_icon">Brunch Icon</string>
+</resources>

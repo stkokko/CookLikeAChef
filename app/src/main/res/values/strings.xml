@@ -1,0 +1,117 @@
+<resources>
+    <string name="app_name">Cook Like A Chef</string>
+    <string name="e_mail">E-Mail</string>
+    <string name="password">Password</string>
+    <string name="login_button_text">Login</string>
+    <string name="new_to_appname">New to Cook Like A Chef? </string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="string_register">Register</string>
+    <string name="register_textView">Already a member of Cook Like A Chef?</string>
+    <string name="latest_recipes">Latest Recipes</string>
+
+
+    <string name="search">Search…</string>
+    <string name="search_button">Search</string>
+
+
+    <string name="categories">Categories</string>
+
+
+    <string name="about">About</string>
+    <string name="welcome_to_appname">Welcome to \nCook Like A Chef</string>
+
+    <string name="favourites">Favourites</string>
+
+
+    <string name="logo_icon">logo_icon</string>
+
+
+    <string name="ingredients">Ingredients</string>
+
+
+    <string name="recipe_steps">Recipe Steps</string>
+
+
+    <string name="comment_hint">Comment…</string>
+    <string name="comments">Comments</string>
+    <string name="recipe_image">recipe_image</string>
+
+
+    <string name="recipe">Recipe</string>
+
+
+    <string name="send_comment">Send Comment</string>
+
+    <string name="brunch">Brunch</string>
+    <string name="salads">Salads</string>
+    <string name="main_dishes">Main Dishes</string>
+    <string name="burgers">Burgers</string>
+    <string name="desserts">Desserts</string>
+    <string name="home">Home</string>
+
+
+    <string name="choose_ingredients">Choose Ingredients</string>
+
+
+    <string name="view_recipes">View Recipes</string>
+
+
+    <string name="choose_category_ingredient">Please choose ingredient category</string>
+
+
+    <string name="selected_ingredients">Selected Ingredient(s)</string>
+    <string name="select_ingredient_category">Select Category</string>
+
+    <string name="delete">delete</string>
+    <string name="add">add</string>
+    <string name="register">Register</string>
+    <string name="error_message_login">Email or Password is invalid!</string>
+    <string name="error_message_password_length">Password must be at least 6 characters</string>
+    <string name="error_message_password_confirm">The password is not the same</string>
+    <string name="error_message_email_exists">Email already exists</string>
+
+    <string name="recipe_error">Could Not Find Any Recipe</string>
+
+    <string name="return_icon">Return Icon</string>
+    <string name="language">language</string>
+
+
+    <string name="nav_menu_icon">Nav Menu Icon</string>
+    <string name="ingredient_exists">Ingredient exists</string>
+    <string name="loading_text">Please wait.....</string>
+    <string name="profile">Profile</string>
+    <string name="language_image">language_image</string>
+
+    <string name="app_email">cooklikeachef96@gmail.com</string>
+
+    <string name="salty">salty</string>
+    <string name="sweet">sweet</string>
+    <string name="select_ingredient_spinner">select ingredient</string>
+    <string name="forgot_password_text">Forgot password</string>
+    <string name="reset_password_text">Reset password</string>
+    <string name="reset_password_message">Enter your E-Mail to reset password</string>
+    <string name="yes_text">Yes</string>
+    <string name="no_text">No</string>
+    <string name="email_succ_text">Reset E-Mail was sent successfully</string>
+    <string name="email_fail_text">Reset E-Mail was not sent successfully</string>
+    <string name="send_text">Send</string>
+    <string name="please_choose_ingredient">Please choose ingredient(s)</string>
+    <string name="floating_action_button_content_description">favourites button</string>
+    <string name="list_is_empty">List is empty</string>
+    <string name="myComment">Me: </string>
+    <string name="show_more">Show More</string>
+    <string name="show_less">Show Less</string>
+    <string name="login_header">Login Header Image</string>
+    <string name="read_more">Read More</string>
+    <string name="logout">Log Out</string>
+    <string name="contact_us">Contact Us</string>
+    <string name="filter_image">Filter Image</string>
+    <string name="dessert_icons">Dessert Icons</string>
+    <string name="burger_icons">Burger Icons</string>
+    <string name="main_dishes_icon">Main Dishes Icon</string>
+    <string name="salads_icon">Salads Icon</string>
+    <string name="brunch_icon">Brunch Icon</string>
+    <string name="close_icon">Close Icon</string>
+    <string name="cancel_all">Cancel all</string>
+    <string name="filters">Filters</string>
+</resources>

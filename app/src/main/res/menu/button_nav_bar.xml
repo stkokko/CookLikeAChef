@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/recipeNavIcon"
+        android:title="@string/recipe"
+        android:icon="@drawable/ic_dining" />
+
+    <item
+        android:id="@+id/commentsNavIcon"
+        android:title="@string/comments"
+        android:icon="@drawable/ic_comment" />
+
+</menu>

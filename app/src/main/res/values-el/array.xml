@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="salty_ingredients">
+        <item>Γκούντα</item>
+        <item>Μπέικον</item>
+        <item>Τσένταρ</item>
+        <item>Γαλοπούλα Καπντιστή</item>
+        <item>Τυρί Κρέμα</item>
+        <item>Ζαμπόν Καπντιστό</item>
+        <item>Γάλα</item>
+        <item>Γιαούρτι</item>
+        <item>Αυγά</item>
+        <item>Σολομός Καπντιστός</item>
+        <item>Αβοκάντο</item>
+    </string-array>
+
+    <string-array name="sweet_ingredients">
+        <item>Φυστικοβούτηρο</item>
+        <item>Μπισκότο Oreo</item>
+        <item>Μέλι</item>
+        <item>Μπισκότα Πτι Μπερ</item>
+        <item>Σιρόπι Σοκολάτας</item>
+        <item>Σιρόπι Καραμέλας</item>
+        <item>Κρέμα Βανίλια</item>
+        <item>Κρέμα Λεμόνι</item>
+        <item>Πραλίνα</item>
+        <item>Πραλίνα Λευκή</item>
+        <item>Πραλίνα Bueno</item>
+    </string-array>
+
+    <string-array name="brunch_ingredients">
+        <item>Γκούντα</item>
+        <item>Μπέικον</item>
+        <item>Τσένταρ</item>
+        <item>Γαλοπούλα Καπντιστή</item>
+        <item>Τυρί Κρέμα</item>
+        <item>Ζαμπόν Καπντιστό</item>
+        <item>Γάλα</item>
+        <item>Γιαούρτι</item>
+        <item>Αυγά</item>
+        <item>Σολομός Καπντιστός</item>
+        <item>Αβοκάντο</item>
+        <item>Φυστικοβούτηρο</item>
+        <item>Μπισκότο Oreo</item>
+        <item>Μέλι</item>
+        <item>Μπισκότα Πτι Μπερ</item>
+        <item>Σιρόπι Σοκολάτας</item>
+        <item>Σιρόπι Καραμέλας</item>
+        <item>Κρέμα Βανίλια</item>
+        <item>Κρέμα Λεμόνι</item>
+        <item>Πραλίνα</item>
+        <item>Πραλίνα Λευκή</item>
+        <item>Πραλίνα Bueno</item>
+    </string-array>
+
+    <string-array name="salads_ingredients">
+        <item>Μαρούλι</item>
+        <item>Ντομάτα</item>
+        <item>Πατάτα</item>
+        <item>Αβοκάντο</item>
+        <item>Κινόα</item>
+        <item>Σπανάκι</item>
+        <item>Ρόκα</item>
+        <item>Λόλα</item>
+        <item>Ζυμαρικά</item>
+        <item>Πλιγούρι</item>
+        <item>Αγγούρι</item>
+    </string-array>
+
+    <string-array name="main_dishes_ingredients">
+        <item>Ζυμαρικά</item>
+        <item>Πατάτα</item>
+        <item>Γλυκοπατάτα</item>
+        <item>Σολομός</item>
+        <item>Κοτόπουλο Στήθος</item>
+        <item>Κοτόπουλο Μπούτι</item>
+        <item>Ρύζι</item>
+        <item>Χοιρινό Φιλέτο</item>
+        <item>Χοιρινή Μπριζόλα</item>
+        <item>Πανσέτα</item>
+        <item>Αρνί</item>
+        <item>Μοσχαρίσιο Φιλέτο</item>
+        <item>Μπιφτέκι Κοτόπουλο</item>
+        <item>Μπιφτέκι Μοσχαρίσιο</item>
+        <item>Μπιφτέκι Γαλοπούλας</item>
+        <item>Λαβράκι</item>
+        <item>Σκουμπρί</item>
+        <item>Γαρίδα</item>
+        <item>Καλαμάρι</item>
+        <item>Χταπόδι</item>
+        <item>Σουπία</item>
+    </string-array>
+
+    <string-array name="burger_ingredients">
+        <item>Ψωμί Burger</item>
+        <item>Ψωμί Brioche</item>
+        <item>Ψωμί Χωριάτικο</item>
+        <item>Μπιφτέκι Μοσχαρίσιο</item>
+        <item>Μπιφτέκι Κοτόπουλο</item>
+        <item>Μπιφτέκι Προβατίνας</item>
+        <item>Μπιφτέκι Γαλοπούλας</item>
+        <item>Πανσέτα</item>
+        <item>Χοιρινό Φιλέτο Πανέ</item>
+        <item>Κοτόπουλο Φιλέτο Πανέ</item>
+        <item>Φαλάφελ Φιλέτο Πανέ</item>
+    </string-array>
+
+
+</resources>

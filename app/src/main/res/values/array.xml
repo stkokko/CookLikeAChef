@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="salty_ingredients">
+        <item>Gouda</item>
+        <item>Bacon</item>
+        <item>Cheddar</item>
+        <item>Smoked Τurkey</item>
+        <item>Cream Cheese</item>
+        <item>Smoked Ham</item>
+        <item>Milk</item>
+        <item>Yogurt</item>
+        <item>Eggs</item>
+        <item>Smoked Salmon</item>
+        <item>Avocado</item>
+    </string-array>
+
+    <string-array name="sweet_ingredients">
+        <item>Peanut Butter</item>
+        <item>Cookies Oreo</item>
+        <item>Honey</item>
+        <item>Biscuit</item>
+        <item>Chocolate Syrup</item>
+        <item>Caramel Syrup</item>
+        <item>Vanilla Cream</item>
+        <item>Lemon Cream</item>
+        <item>Chocolate Praline</item>
+        <item>White Chocolate Praline</item>
+        <item>Bueno Praline</item>
+    </string-array>
+
+    <string-array name="brunch_ingredients">
+        <item>Gouda</item>
+        <item>Bacon</item>
+        <item>Cheddar</item>
+        <item>Smoked Τurkey</item>
+        <item>Cream Cheese</item>
+        <item>Smoked Ham</item>
+        <item>Milk</item>
+        <item>Yogurt</item>
+        <item>Eggs</item>
+        <item>Smoked Salmon</item>
+        <item>Avocado</item>
+        <item>Peanut Butter</item>
+        <item>Cookies Oreo</item>
+        <item>Honey</item>
+        <item>Biscuit</item>
+        <item>Chocolate Syrup</item>
+        <item>Caramel Syrup</item>
+        <item>Vanilla Cream</item>
+        <item>Lemon Cream</item>
+        <item>Chocolate Praline</item>
+        <item>White Chocolate Praline</item>
+        <item>Bueno Praline</item>
+    </string-array>
+
+    <string-array name="salads_ingredients">
+        <item>Iceberg</item>
+        <item>Tomato</item>
+        <item>Potato</item>
+        <item>Avocado</item>
+        <item>Quinoa</item>
+        <item>Spinach</item>
+        <item>Arugula</item>
+        <item>Lola</item>
+        <item>Pasta</item>
+        <item>Groats</item>
+        <item>Cucumber</item>
+    </string-array>
+
+    <string-array name="main_dishes_ingredients">
+        <item>Pasta</item>
+        <item>Potato</item>
+        <item>Sweet Potato</item>
+        <item>Salmon</item>
+        <item>Pork Fillet</item>
+        <item>Pork Stake</item>
+        <item>Beef Fillet</item>
+        <item>Pancetta</item>
+        <item>Lamb</item>
+        <item>Rice</item>
+        <item>Chicken Breast</item>
+        <item>Chicken Leg</item>
+        <item>Chicken Burger</item>
+        <item>Beef Burger</item>
+        <item>Turkey Burger</item>
+        <item>Shrimp</item>
+        <item>Mackerel</item>
+        <item>Squid</item>
+        <item>Octopus</item>
+        <item>Hard to find</item>
+        <item>Sea bass</item>
+    </string-array>
+
+    <string-array name="burger_ingredients">
+        <item>Pancetta</item>
+        <item>Breaded Pork Fillet</item>
+        <item>Breaded Chicken Fillet</item>
+        <item>Falafel</item>
+        <item>Beef Burger</item>
+        <item>Chicken Burger</item>
+        <item>Turkey Burger</item>
+        <item>Μutton Burger</item>
+        <item>Burger Bread</item>
+        <item>Brioche Bread</item>
+        <item>Traditional Bread</item>
+    </string-array>
+
+
+</resources>

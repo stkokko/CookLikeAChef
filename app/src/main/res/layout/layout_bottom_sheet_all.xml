@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/bottomSheetContainer"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bottom_sheet_background"
+    android:paddingStart="40dp"
+    android:paddingEnd="15dp"
+    android:paddingBottom="15dp">
+
+    <include
+        android:id="@+id/header"
+        layout="@layout/bsd_header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"/>
+
+    <TextView
+        android:id="@+id/ingredients_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/ingredients"
+        android:layout_below="@+id/header"
+        android:textColor="@android:color/black"
+        android:textSize="26sp" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_below="@+id/ingredients_textView"
+        android:id="@+id/ingredients_recyclerView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:scrollbarSize="5dp"
+        android:scrollbars="vertical" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/ingredient_filter_fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:backgroundTint="@color/general_color"
+        app:borderWidth="0dp"
+        app:srcCompat="@drawable/ic_filter"
+        app:tint="@android:color/white"
+        android:contentDescription="Filter Fab" />
+
+</RelativeLayout>
