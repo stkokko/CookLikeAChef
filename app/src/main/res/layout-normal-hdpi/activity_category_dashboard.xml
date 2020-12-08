@@ -33,11 +33,11 @@
             android:letterSpacing="0.25"
             android:text="@string/categories"
             android:textColor="@android:color/white"
-            android:textSize="32sp" />
+            android:textSize="22sp" />
 
         <LinearLayout
-            android:layout_width="250dp"
-            android:layout_height="40dp"
+            android:layout_width="200dp"
+            android:layout_height="25dp"
             android:layout_below="@+id/categories_title"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="25dp"
@@ -54,7 +54,6 @@
                 android:hint="@string/search"
                 android:imeOptions="actionSearch"
                 android:inputType="text"
-                android:padding="10dp"
                 android:paddingStart="15dp"
                 android:paddingEnd="15dp"
                 android:textColor="@android:color/black"
@@ -81,8 +80,8 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/brunch"
-            android:layout_width="160dp"
-            android:layout_height="110dp"
+            android:layout_width="120dp"
+            android:layout_height="80dp"
             android:layout_toStartOf="@+id/view"
             android:elevation="3dp"
             app:cardCornerRadius="15dp">
@@ -94,7 +93,7 @@
                 <ImageView
                     android:id="@+id/brunch_icon"
                     android:layout_width="match_parent"
-                    android:layout_height="80dp"
+                    android:layout_height="55dp"
                     android:layout_centerHorizontal="true"
                     android:contentDescription="@string/brunch_icon"
                     android:src="@drawable/brunch_icon" />
@@ -106,7 +105,7 @@
                     android:layout_centerHorizontal="true"
                     android:text="@string/brunch"
                     android:textColor="@color/blackColor"
-                    android:textSize="18sp" />
+                    android:textSize="16sp" />
 
             </RelativeLayout>
 
@@ -114,10 +113,10 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/salads"
-            android:layout_width="160dp"
-            android:layout_height="110dp"
+            android:layout_width="120dp"
+            android:layout_height="80dp"
             android:layout_marginStart="15dp"
-            android:layout_marginTop="55dp"
+            android:layout_marginTop="40dp"
             android:layout_toEndOf="@+id/brunch"
             android:elevation="3dp"
             app:cardCornerRadius="15dp">
@@ -129,7 +128,7 @@
                 <ImageView
                     android:id="@+id/salad_icon"
                     android:layout_width="match_parent"
-                    android:layout_height="80dp"
+                    android:layout_height="55dp"
                     android:layout_centerHorizontal="true"
                     android:contentDescription="@string/salads_icon"
                     android:src="@drawable/salads_icon" />
@@ -141,7 +140,7 @@
                     android:layout_centerHorizontal="true"
                     android:text="@string/salads"
                     android:textColor="@color/blackColor"
-                    android:textSize="18sp" />
+                    android:textSize="16sp" />
 
             </RelativeLayout>
 
@@ -149,8 +148,8 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/main_dishes"
-            android:layout_width="160dp"
-            android:layout_height="110dp"
+            android:layout_width="120dp"
+            android:layout_height="80dp"
             android:layout_below="@+id/brunch"
             android:layout_marginTop="10dp"
             android:layout_toStartOf="@+id/view"
@@ -164,7 +163,7 @@
                 <ImageView
                     android:id="@+id/main_dishes_icon"
                     android:layout_width="match_parent"
-                    android:layout_height="80dp"
+                    android:layout_height="55dp"
                     android:layout_centerHorizontal="true"
                     android:contentDescription="@string/main_dishes_icon"
                     android:src="@drawable/main_dishes_icon" />
@@ -176,7 +175,7 @@
                     android:layout_centerHorizontal="true"
                     android:text="@string/main_dishes"
                     android:textColor="@color/blackColor"
-                    android:textSize="18sp" />
+                    android:textSize="16sp" />
 
             </RelativeLayout>
 
@@ -184,8 +183,8 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/burgers"
-            android:layout_width="160dp"
-            android:layout_height="110dp"
+            android:layout_width="120dp"
+            android:layout_height="80dp"
             android:layout_below="@+id/salads"
             android:layout_marginStart="15dp"
             android:layout_marginTop="10dp"
@@ -200,7 +199,7 @@
                 <ImageView
                     android:id="@+id/burgers_icon"
                     android:layout_width="match_parent"
-                    android:layout_height="80dp"
+                    android:layout_height="55dp"
                     android:layout_centerHorizontal="true"
                     android:contentDescription="@string/burger_icons"
                     android:src="@drawable/burgers_icon" />
@@ -212,7 +211,7 @@
                     android:layout_centerHorizontal="true"
                     android:text="@string/burgers"
                     android:textColor="@color/blackColor"
-                    android:textSize="18sp" />
+                    android:textSize="16sp" />
 
             </RelativeLayout>
 
@@ -220,8 +219,8 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/desserts"
-            android:layout_width="160dp"
-            android:layout_height="110dp"
+            android:layout_width="120dp"
+            android:layout_height="80dp"
             android:layout_below="@+id/main_dishes"
             android:layout_marginTop="10dp"
             android:layout_toStartOf="@+id/view"
@@ -235,7 +234,7 @@
                 <ImageView
                     android:id="@+id/desserts_icon"
                     android:layout_width="match_parent"
-                    android:layout_height="80dp"
+                    android:layout_height="55dp"
                     android:layout_centerHorizontal="true"
                     android:contentDescription="@string/dessert_icons"
                     android:src="@drawable/desserts_icon" />
@@ -247,7 +246,7 @@
                     android:layout_centerHorizontal="true"
                     android:text="@string/desserts"
                     android:textColor="@color/blackColor"
-                    android:textSize="18sp" />
+                    android:textSize="16sp" />
 
             </RelativeLayout>
 
@@ -258,7 +257,7 @@
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigationView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="45dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"

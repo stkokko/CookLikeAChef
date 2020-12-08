@@ -13,34 +13,34 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:elevation="3dp" />
+        android:background="#D1BA3B46" />
 
     <RelativeLayout
         android:id="@+id/relative_background"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="340dp"
+        android:layout_below="@id/toolbar"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
-        android:background="@drawable/category_background"
-        android:paddingTop="40dp">
+        android:background="@drawable/category_background">
 
 
         <TextView
             android:id="@+id/categories_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="40dp"
+            android:layout_marginStart="80dp"
             android:letterSpacing="0.25"
             android:text="@string/categories"
             android:textColor="@android:color/white"
-            android:textSize="32sp" />
+            android:textSize="38sp" />
 
         <LinearLayout
-            android:layout_width="250dp"
-            android:layout_height="40dp"
+            android:layout_width="370dp"
+            android:layout_height="60dp"
             android:layout_below="@+id/categories_title"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="25dp"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="55dp"
             android:background="@drawable/search_bg"
             android:focusable="true"
             android:focusableInTouchMode="true">
@@ -58,6 +58,7 @@
                 android:paddingStart="15dp"
                 android:paddingEnd="15dp"
                 android:textColor="@android:color/black"
+                android:textSize="28sp"
                 android:textColorHint="#8B000000" />
 
         </LinearLayout>
@@ -71,7 +72,7 @@
         android:layout_below="@+id/relative_background"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="-30dp">
+        android:layout_marginTop="-40dp">
 
         <View
             android:id="@+id/view"
@@ -81,11 +82,11 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/brunch"
-            android:layout_width="160dp"
-            android:layout_height="110dp"
+            android:layout_width="240dp"
+            android:layout_height="190dp"
             android:layout_toStartOf="@+id/view"
-            android:elevation="3dp"
-            app:cardCornerRadius="15dp">
+            app:cardCornerRadius="15dp"
+            app:cardElevation="3dp">
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -94,7 +95,7 @@
                 <ImageView
                     android:id="@+id/brunch_icon"
                     android:layout_width="match_parent"
-                    android:layout_height="80dp"
+                    android:layout_height="120dp"
                     android:layout_centerHorizontal="true"
                     android:contentDescription="@string/brunch_icon"
                     android:src="@drawable/brunch_icon" />
@@ -102,11 +103,12 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/brunch_icon"
                     android:layout_centerHorizontal="true"
+                    android:layout_alignParentBottom="true"
                     android:text="@string/brunch"
+                    android:layout_marginBottom="25dp"
                     android:textColor="@color/blackColor"
-                    android:textSize="18sp" />
+                    android:textSize="24sp" />
 
             </RelativeLayout>
 
@@ -114,12 +116,12 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/salads"
-            android:layout_width="160dp"
-            android:layout_height="110dp"
+            android:layout_width="240dp"
+            android:layout_height="190dp"
             android:layout_marginStart="15dp"
-            android:layout_marginTop="55dp"
+            android:layout_marginTop="95dp"
             android:layout_toEndOf="@+id/brunch"
-            android:elevation="3dp"
+            app:cardElevation="3dp"
             app:cardCornerRadius="15dp">
 
             <RelativeLayout
@@ -129,7 +131,7 @@
                 <ImageView
                     android:id="@+id/salad_icon"
                     android:layout_width="match_parent"
-                    android:layout_height="80dp"
+                    android:layout_height="120dp"
                     android:layout_centerHorizontal="true"
                     android:contentDescription="@string/salads_icon"
                     android:src="@drawable/salads_icon" />
@@ -137,11 +139,12 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/salad_icon"
                     android:layout_centerHorizontal="true"
                     android:text="@string/salads"
                     android:textColor="@color/blackColor"
-                    android:textSize="18sp" />
+                    android:textSize="24sp"
+                    android:layout_marginBottom="25dp"
+                    android:layout_alignParentBottom="true" />
 
             </RelativeLayout>
 
@@ -149,12 +152,12 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/main_dishes"
-            android:layout_width="160dp"
-            android:layout_height="110dp"
+            android:layout_width="240dp"
+            android:layout_height="190dp"
             android:layout_below="@+id/brunch"
             android:layout_marginTop="10dp"
             android:layout_toStartOf="@+id/view"
-            android:elevation="3dp"
+            app:cardElevation="3dp"
             app:cardCornerRadius="15dp">
 
             <RelativeLayout
@@ -164,7 +167,7 @@
                 <ImageView
                     android:id="@+id/main_dishes_icon"
                     android:layout_width="match_parent"
-                    android:layout_height="80dp"
+                    android:layout_height="120dp"
                     android:layout_centerHorizontal="true"
                     android:contentDescription="@string/main_dishes_icon"
                     android:src="@drawable/main_dishes_icon" />
@@ -172,11 +175,12 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/main_dishes_icon"
                     android:layout_centerHorizontal="true"
                     android:text="@string/main_dishes"
                     android:textColor="@color/blackColor"
-                    android:textSize="18sp" />
+                    android:textSize="24sp"
+                    android:layout_marginBottom="25dp"
+                    android:layout_alignParentBottom="true" />
 
             </RelativeLayout>
 
@@ -184,13 +188,13 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/burgers"
-            android:layout_width="160dp"
-            android:layout_height="110dp"
+            android:layout_width="240dp"
+            android:layout_height="190dp"
             android:layout_below="@+id/salads"
             android:layout_marginStart="15dp"
             android:layout_marginTop="10dp"
             android:layout_toEndOf="@+id/main_dishes"
-            android:elevation="3dp"
+            app:cardElevation="3dp"
             app:cardCornerRadius="15dp">
 
             <RelativeLayout
@@ -200,7 +204,7 @@
                 <ImageView
                     android:id="@+id/burgers_icon"
                     android:layout_width="match_parent"
-                    android:layout_height="80dp"
+                    android:layout_height="120dp"
                     android:layout_centerHorizontal="true"
                     android:contentDescription="@string/burger_icons"
                     android:src="@drawable/burgers_icon" />
@@ -208,11 +212,12 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/burgers_icon"
                     android:layout_centerHorizontal="true"
                     android:text="@string/burgers"
                     android:textColor="@color/blackColor"
-                    android:textSize="18sp" />
+                    android:textSize="24sp"
+                    android:layout_marginBottom="25dp"
+                    android:layout_alignParentBottom="true" />
 
             </RelativeLayout>
 
@@ -220,12 +225,12 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/desserts"
-            android:layout_width="160dp"
-            android:layout_height="110dp"
+            android:layout_width="240dp"
+            android:layout_height="190dp"
             android:layout_below="@+id/main_dishes"
             android:layout_marginTop="10dp"
             android:layout_toStartOf="@+id/view"
-            android:elevation="3dp"
+            app:cardElevation="3dp"
             app:cardCornerRadius="15dp">
 
             <RelativeLayout
@@ -235,7 +240,7 @@
                 <ImageView
                     android:id="@+id/desserts_icon"
                     android:layout_width="match_parent"
-                    android:layout_height="80dp"
+                    android:layout_height="120dp"
                     android:layout_centerHorizontal="true"
                     android:contentDescription="@string/dessert_icons"
                     android:src="@drawable/desserts_icon" />
@@ -243,11 +248,12 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/desserts_icon"
                     android:layout_centerHorizontal="true"
                     android:text="@string/desserts"
                     android:textColor="@color/blackColor"
-                    android:textSize="18sp" />
+                    android:textSize="24sp"
+                    android:layout_marginBottom="25dp"
+                    android:layout_alignParentBottom="true" />
 
             </RelativeLayout>
 
@@ -258,7 +264,7 @@
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigationView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="70dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
