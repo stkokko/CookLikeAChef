@@ -24,10 +24,12 @@
             android:background="#D1BA3B46" />
 
         <LinearLayout
-            android:layout_width="250dp"
-            android:layout_height="40dp"
+            android:layout_width="200dp"
+            android:layout_height="30dp"
             android:layout_centerInParent="true"
-            android:background="@drawable/search_bg">
+            android:background="@drawable/search_bg"
+            android:focusable="true"
+            android:focusableInTouchMode="true">
 
             <AutoCompleteTextView
                 android:id="@+id/searchAutoCompleteEditText"
@@ -38,7 +40,6 @@
                 android:hint="@string/search"
                 android:imeOptions="actionSearch"
                 android:inputType="text"
-                android:padding="10dp"
                 android:paddingStart="15dp"
                 android:paddingEnd="15dp"
                 android:textColor="@android:color/black"

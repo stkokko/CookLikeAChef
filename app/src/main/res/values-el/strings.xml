@@ -18,7 +18,7 @@
 
 
     <string name="about">Σχετικά με εμάς</string>
-    <string name="welcome_to_appname">Καλώς ήρθατε στο Cook Like A Chef</string>
+    <string name="welcome_to_appname">Καλώς ήρθατε στο \nCook Like A Chef</string>
 
 
     <string name="favourites">Αγαπημένα</string>

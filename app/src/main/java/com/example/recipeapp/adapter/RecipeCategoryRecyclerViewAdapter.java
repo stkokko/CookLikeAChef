@@ -46,7 +46,7 @@ public class RecipeCategoryRecyclerViewAdapter extends RecyclerView.Adapter<Reci
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
         Recipe recipe = recipes.get(position);
-        holder.recipeTextView.setText(recipe.getName());
+        holder.recipeTextView.setText(String.format("%s\n\n\n%s", recipe.getName(), recipe.getSteps()));
         Glide.with(context).load(recipe.getImageURL()).apply(options).into(holder.recipeImageView);
 
     }
@@ -61,6 +61,7 @@ public class RecipeCategoryRecyclerViewAdapter extends RecyclerView.Adapter<Reci
         public CardView recipeCardView;
         public ImageView recipeImageView;
         public TextView recipeTextView;
+        public TextView readMoreTextView;
 
 
         public ViewHolder(@NonNull View itemView) {
@@ -69,8 +70,9 @@ public class RecipeCategoryRecyclerViewAdapter extends RecyclerView.Adapter<Reci
             recipeCardView = itemView.findViewById(R.id.recipe_cardView);
             recipeImageView = itemView.findViewById(R.id.recipe_imageView);
             recipeTextView = itemView.findViewById(R.id.recipe_textView);
+            readMoreTextView = itemView.findViewById(R.id.read_more_TextView);
 
-            recipeCardView.setOnClickListener(new View.OnClickListener() {
+            readMoreTextView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Intent recipeIntent = new Intent(context, RecipeActivity.class);

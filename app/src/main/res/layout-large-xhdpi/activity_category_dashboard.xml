@@ -38,7 +38,7 @@
             android:textSize="36sp" />
 
         <LinearLayout
-            android:layout_width="280dp"
+            android:layout_width="320dp"
             android:layout_height="50dp"
             android:layout_below="@+id/categories_title"
             android:layout_centerHorizontal="true"

@@ -36,8 +36,8 @@
             android:textSize="38sp" />
 
         <LinearLayout
-            android:layout_width="370dp"
-            android:layout_height="60dp"
+            android:layout_width="320dp"
+            android:layout_height="50dp"
             android:layout_below="@+id/categories_title"
             android:layout_centerInParent="true"
             android:layout_marginTop="55dp"
