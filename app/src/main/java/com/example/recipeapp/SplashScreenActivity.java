@@ -9,6 +9,7 @@ import android.os.Handler;
 
 public class SplashScreenActivity extends AppCompatActivity {
 
+    /*----- Variables -----*/
     private Handler handler = new Handler();
 
     @Override
@@ -17,6 +18,7 @@ public class SplashScreenActivity extends AppCompatActivity {
         setContentView(R.layout.activity_splash_screen);
     }
 
+    
     private Runnable runnable = new Runnable() {
         @Override
         public void run() {

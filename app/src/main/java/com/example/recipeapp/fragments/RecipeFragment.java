@@ -45,14 +45,16 @@ import static android.content.Context.MODE_PRIVATE;
 
 public class RecipeFragment extends Fragment implements View.OnClickListener {
 
+    /*----- Variables -----*/
     private Recipe recipe;
+    private String language;
+    private String currentUser;
+
+    /*----- XML Element Variables -----*/
     private FloatingActionButton addToFavouritesFab;
 
-    private String language;
-
+    /*----- Database Variables -----*/
     private DatabaseReference mDatabase;
-
-    private String currentUser;
 
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
@@ -60,27 +62,33 @@ public class RecipeFragment extends Fragment implements View.OnClickListener {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
+        /*----- Hooks -----*/
         View view = inflater.inflate(R.layout.recipe_fragment, container, false);
         Toolbar toolbar = view.findViewById(R.id.toolbar);
-        //Recipe Variables
         ImageView recipeImage = view.findViewById(R.id.recipeFragment_ImageView);
         TextView recipeIngredients = view.findViewById(R.id.ingredientsTextView);
         TextView recipeSteps = view.findViewById(R.id.recipeStepsTextView);
         CollapsingToolbarLayout collapsingToolbarLayout = view.findViewById(R.id.collapsingToolbarLayout);
         addToFavouritesFab = view.findViewById(R.id.add_to_favourites_fab);
 
+        /*----- Get Selected Language -----*/
         SharedPreferences sharedPreferences = Objects.requireNonNull(getActivity()).getSharedPreferences(LanguageUtils.LANGUAGE_ID, MODE_PRIVATE);
         SharedPreferencesLanguage sharedPreferencesLanguage = new SharedPreferencesLanguage(sharedPreferences);
         language = sharedPreferencesLanguage.getLanguage();
 
+        /*---------- Set Up Toolbar ----------*/
         ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
         Objects.requireNonNull(((AppCompatActivity) getActivity()).getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         toolbar.setNavigationIcon(R.drawable.return_white_icon);
 
+        /*---------- Getting Extras ----------*/
         Intent intent = getActivity().getIntent();
         recipe = (Recipe) intent.getSerializableExtra("recipe");
+
+        /*---------- Set Up glide options ----------*/
         RequestOptions options = new RequestOptions().centerCrop().placeholder(R.drawable.progress_animation).error(R.drawable.ic_warning);
 
+        /*---------- Init Variables ----------*/
         FirebaseAuth auth = FirebaseAuth.getInstance();
         FirebaseUser user = auth.getCurrentUser();
         currentUser = Objects.requireNonNull(user).getUid();
@@ -108,11 +116,14 @@ public class RecipeFragment extends Fragment implements View.OnClickListener {
             String name = i.getName().trim().substring(0, 1).toUpperCase() + i.getName().trim().substring(1).toLowerCase();
             ingredients.append("\b• ").append(name).append(" (").append(i.getQuantity()).append(")\n");
         }
+
+        /*---------- Init XML Variables ----------*/
         collapsingToolbarLayout.setTitle(recipe.getName());
         recipeIngredients.setText(ingredients.toString());
         recipeSteps.setText(recipe.getSteps());
         Glide.with(getActivity().getApplicationContext()).load(recipe.getImageURL()).apply(options).into(recipeImage);
 
+        /*---------- Event Listeners ----------*/
         addToFavouritesFab.setOnClickListener(this);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -134,8 +145,6 @@ public class RecipeFragment extends Fragment implements View.OnClickListener {
     private void addToFavourites(final String currentUser, final Recipe recipe) {
 
         mDatabase = FirebaseDatabase.getInstance().getReference().child("Favourites").child(language);
-
-
         mDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -164,8 +173,6 @@ public class RecipeFragment extends Fragment implements View.OnClickListener {
                     mDatabase.push().setValue(hashMap);
 
                 }
-
-                //getActivity().setResult(Activity.RESULT_OK, intent);
 
             }
 

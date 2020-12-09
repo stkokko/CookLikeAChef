@@ -30,11 +30,11 @@
             android:id="@+id/categories_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
             android:layout_marginStart="60dp"
             android:letterSpacing="0.25"
             android:text="@string/categories"
             android:textColor="@android:color/white"
-            android:layout_alignParentTop="true"
             android:textSize="36sp" />
 
         <LinearLayout
@@ -59,9 +59,9 @@
                 android:padding="10dp"
                 android:paddingStart="15dp"
                 android:paddingEnd="15dp"
-                android:textSize="26sp"
                 android:textColor="@android:color/black"
-                android:textColorHint="#8B000000" />
+                android:textColorHint="#8B000000"
+                android:textSize="26sp" />
 
         </LinearLayout>
 
@@ -122,8 +122,8 @@
             android:layout_marginStart="15dp"
             android:layout_marginTop="55dp"
             android:layout_toEndOf="@+id/brunch"
-            app:cardElevation="3dp"
-            app:cardCornerRadius="15dp">
+            app:cardCornerRadius="15dp"
+            app:cardElevation="3dp">
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -157,8 +157,8 @@
             android:layout_below="@+id/brunch"
             android:layout_marginTop="10dp"
             android:layout_toStartOf="@+id/view"
-            app:cardElevation="3dp"
-            app:cardCornerRadius="15dp">
+            app:cardCornerRadius="15dp"
+            app:cardElevation="3dp">
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -193,8 +193,8 @@
             android:layout_marginStart="15dp"
             android:layout_marginTop="10dp"
             android:layout_toEndOf="@+id/main_dishes"
-            app:cardElevation="3dp"
-            app:cardCornerRadius="15dp">
+            app:cardCornerRadius="15dp"
+            app:cardElevation="3dp">
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -228,8 +228,8 @@
             android:layout_below="@+id/main_dishes"
             android:layout_marginTop="10dp"
             android:layout_toStartOf="@+id/view"
-            app:cardElevation="3dp"
-            app:cardCornerRadius="15dp">
+            app:cardCornerRadius="15dp"
+            app:cardElevation="3dp">
 
             <RelativeLayout
                 android:layout_width="match_parent"

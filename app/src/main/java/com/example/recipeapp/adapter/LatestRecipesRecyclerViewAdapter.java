@@ -24,10 +24,12 @@ import java.util.ArrayList;
 
 public class LatestRecipesRecyclerViewAdapter extends RecyclerView.Adapter<LatestRecipesRecyclerViewAdapter.ViewHolder> {
 
+    /*----- Variables -----*/
     private ArrayList<Recipe> latestRecipes;
     private Context context;
     private RequestOptions options;
 
+    /*----- Constructor -----*/
     public LatestRecipesRecyclerViewAdapter(ArrayList<Recipe> latestRecipes, Context context) {
         this.latestRecipes = latestRecipes;
         this.context = context;
@@ -45,8 +47,8 @@ public class LatestRecipesRecyclerViewAdapter extends RecyclerView.Adapter<Lates
     @Override
     public void onBindViewHolder(@NonNull LatestRecipesRecyclerViewAdapter.ViewHolder holder, int position) {
 
+        /*----- Init Variables -----*/
         Recipe current_latest_recipe = latestRecipes.get(position);
-
         holder.recipeTitleTextView.setText(current_latest_recipe.getName());
         Glide.with(context).load(current_latest_recipe.getImageURL()).apply(options).into(holder.recipeImageView);
 
@@ -59,7 +61,7 @@ public class LatestRecipesRecyclerViewAdapter extends RecyclerView.Adapter<Lates
 
     public class ViewHolder extends RecyclerView.ViewHolder implements AdapterView.OnClickListener {
 
-
+        /*----- XML Element Variables -----*/
         public ImageView recipeImageView;
         public TextView recipeTitleTextView;
         public Button readMoreButton;
@@ -67,10 +69,12 @@ public class LatestRecipesRecyclerViewAdapter extends RecyclerView.Adapter<Lates
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
+            /*---------- Hooks ----------*/
             recipeImageView = itemView.findViewById(R.id.latest_imageView);
             recipeTitleTextView = itemView.findViewById(R.id.latest_textView);
             readMoreButton = itemView.findViewById(R.id.latest_button);
 
+            /*---------- Event Listeners ----------*/
             readMoreButton.setOnClickListener(this);
 
         }

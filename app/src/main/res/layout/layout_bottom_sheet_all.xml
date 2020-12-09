@@ -14,22 +14,22 @@
         layout="@layout/bsd_header"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"/>
+        android:layout_alignParentTop="true" />
 
     <TextView
         android:id="@+id/ingredients_textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/ingredients"
         android:layout_below="@+id/header"
+        android:text="@string/ingredients"
         android:textColor="@android:color/black"
         android:textSize="26sp" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:layout_below="@+id/ingredients_textView"
         android:id="@+id/ingredients_recyclerView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/ingredients_textView"
         android:layout_marginTop="10dp"
         android:scrollbarSize="5dp"
         android:scrollbars="vertical" />
@@ -41,9 +41,9 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:backgroundTint="@color/general_color"
+        android:contentDescription="@string/filter_fab"
         app:borderWidth="0dp"
         app:srcCompat="@drawable/ic_filter"
-        app:tint="@android:color/white"
-        android:contentDescription="Filter Fab" />
+        app:tint="@android:color/white" />
 
 </RelativeLayout>

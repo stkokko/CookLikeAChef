@@ -99,7 +99,7 @@
             android:text="@string/forgot_password_text"
             android:textAlignment="center"
             android:textColor="@color/general_color"
-            android:textSize="20sp"/>
+            android:textSize="20sp" />
 
         <LinearLayout
             android:layout_width="wrap_content"

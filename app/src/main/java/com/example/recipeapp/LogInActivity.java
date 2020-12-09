@@ -32,7 +32,7 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class LogInActivity extends AppCompatActivity implements View.OnClickListener {
 
-
+    /*----- XML Element Variables -----*/
     private TextView errorMessage;
     private EditText email;
     private EditText password;
@@ -42,11 +42,13 @@ public class LogInActivity extends AppCompatActivity implements View.OnClickList
     private Button loginButton;
     private TextView forgotPasswordTextView;
 
+    /*----- Variables -----*/
     private LoadingDialog loadingDialog;
     private User userToConnect;
     private String language;
     private SharedPreferencesLanguage sharedPreferencesLanguage;
 
+    /*----- Database Variables -----*/
     private FirebaseAuth auth;
     private RecipeBankFirebase recipeBankFirebase;
 
@@ -66,14 +68,17 @@ public class LogInActivity extends AppCompatActivity implements View.OnClickList
 
         super.onCreate(savedInstanceState);
 
+        /*----- Get Selected Language -----*/
         SharedPreferences sharedPreferences = getSharedPreferences(LanguageUtils.LANGUAGE_ID, MODE_PRIVATE);
         sharedPreferencesLanguage = new SharedPreferencesLanguage(sharedPreferences);
         language = sharedPreferencesLanguage.getLanguage();
 
+        /*----- Init Variables -----*/
         recipeBankFirebase = new RecipeBankFirebase();
         auth = FirebaseAuth.getInstance();
+        loadingDialog = new LoadingDialog(this);
 
-        //Setting Language
+        /*----- Setting Up Language -----*/
         if (language.equalsIgnoreCase(LanguageUtils.ENGLISH)) {
             LocaleHelper.setLocale(this, "en");
         } else {
@@ -81,9 +86,6 @@ public class LogInActivity extends AppCompatActivity implements View.OnClickList
         }
 
         setContentView(R.layout.activity_login);
-        loadingDialog = new LoadingDialog(this);
-
-
 
         /*---------- Checking Internet Connection ----------*/
         if (isConnected(this)) {
@@ -97,6 +99,7 @@ public class LogInActivity extends AppCompatActivity implements View.OnClickList
         }
 
 
+        /*----- Hooks -----*/
         registerTextView = findViewById(R.id.registerTextView);
         errorMessage = findViewById(R.id.errorMessageTextView);
         msgTextView = findViewById(R.id.msg_textView);
@@ -106,6 +109,7 @@ public class LogInActivity extends AppCompatActivity implements View.OnClickList
         languageImageView = findViewById(R.id.language);
         forgotPasswordTextView = findViewById(R.id.forgot_password_textView);
 
+        /*----- Setting Up Language Image -----*/
         if (language.equalsIgnoreCase(LanguageUtils.ENGLISH)) {
             languageImageView.setImageResource(R.drawable.united_kingdom);
         } else {
@@ -113,6 +117,7 @@ public class LogInActivity extends AppCompatActivity implements View.OnClickList
         }
 
 
+        /*----- Listeners -----*/
         registerTextView.setOnClickListener(this);
         loginButton.setOnClickListener(this);
         languageImageView.setOnClickListener(this);

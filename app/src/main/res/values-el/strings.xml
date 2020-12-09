@@ -99,13 +99,14 @@
     <string name="read_more">Περισσότερα</string>
     <string name="logout">Αποσύνδεση</string>
     <string name="contact_us">Επικοινωνήστε μαζί μας</string>
-    <string name="filter_image">Filter Image</string>
-    <string name="main_dishes_icon">Main Dishes Icon</string>
-    <string name="salads_icon">Salads Icon</string>
-    <string name="close_icon">Close Icon</string>
-    <string name="cancel_all">Cancel all</string>
-    <string name="filters">Filters</string>
-    <string name="dessert_icons">Dessert Icons</string>
-    <string name="burger_icons">Burger Icons</string>
-    <string name="brunch_icon">Brunch Icon</string>
+    <string name="filter_image">Εικόνα φίλτρου</string>
+    <string name="main_dishes_icon">Εικονίδιο Κύρια Πιάτα</string>
+    <string name="salads_icon">Εικονίδιο Σαλάτες</string>
+    <string name="close_icon">Εικονίδιο Κλεισίματος</string>
+    <string name="cancel_all">Ακύρωση όλων</string>
+    <string name="filters">Φίλτρα</string>
+    <string name="dessert_icons">Εικονίδιο Επιδόρπιων</string>
+    <string name="burger_icons">Εικονίδιο Burgers</string>
+    <string name="brunch_icon">Εικονίδιο Brunch</string>
+    <string name="filter_fab">Κουμπί φίλτρων</string>
 </resources>

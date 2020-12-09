@@ -31,6 +31,7 @@ public class SearchResultsActivity extends AppCompatActivity {
         TextView empty_list_textView = findViewById(R.id.empty_list_textView);
         RecyclerView recyclerView = findViewById(R.id.filtered_recipes_recyclerView);
 
+        /*---------- Getting Extras ----------*/
         Bundle bundle = getIntent().getExtras();
         ArrayList<Recipe> recipes;
         if (bundle != null) {
@@ -38,7 +39,7 @@ public class SearchResultsActivity extends AppCompatActivity {
         } else {
             recipes = new ArrayList<>();
         }
-
+        
         if (recipes != null) {
             if (recipes.size() == 0) {
                 empty_list_textView.setVisibility(View.VISIBLE);
@@ -53,6 +54,7 @@ public class SearchResultsActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         toolbar.setNavigationIcon(R.drawable.return_white_icon);
 
+        /*---------- Event Listeners ----------*/
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

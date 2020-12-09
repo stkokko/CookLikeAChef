@@ -47,7 +47,7 @@
                     android:layout_height="wrap_content"
                     android:textSize="22sp"
                     android:layout_gravity="center"
-                    android:text="..."/>
+                    android:text="..." />
 
 
             </LinearLayout>
@@ -59,9 +59,8 @@
                 android:text="@string/read_more"
                 android:textSize="22sp"
                 android:textAlignment="center"
-                android:textColor="@color/general_color"/>
+                android:textColor="@color/general_color" />
         </LinearLayout>
-
 
 
     </RelativeLayout>

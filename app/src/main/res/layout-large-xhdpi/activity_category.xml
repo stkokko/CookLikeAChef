@@ -59,9 +59,9 @@
                     android:padding="10dp"
                     android:paddingStart="15dp"
                     android:paddingEnd="15dp"
-                    android:textSize="26sp"
                     android:textColor="@android:color/black"
-                    android:textColorHint="#8B000000" />
+                    android:textColorHint="#8B000000"
+                    android:textSize="26sp" />
 
 
             </LinearLayout>

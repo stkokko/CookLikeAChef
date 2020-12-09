@@ -23,10 +23,12 @@ import java.util.List;
 
 public class CommentRecyclerViewAdapter extends RecyclerView.Adapter<CommentRecyclerViewAdapter.ViewHolder> {
 
+    /*----- Variables -----*/
     private List<Comment> commentList;
     private static Context context;
     private String userId;
 
+    /*----- Constructor -----*/
     public CommentRecyclerViewAdapter(List<Comment> commentList, Context context, String userId) {
         this.commentList = commentList;
         this.context = context;
@@ -44,6 +46,7 @@ public class CommentRecyclerViewAdapter extends RecyclerView.Adapter<CommentRecy
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
 
+        /*----- Init Variables -----*/
         Comment comment = commentList.get(position);
         if (comment.getAuthor().equals(userId)) {
             holder.comment.setText(context.getResources().getText(R.string.myComment) + " " + comment.getComment());
@@ -67,12 +70,14 @@ public class CommentRecyclerViewAdapter extends RecyclerView.Adapter<CommentRecy
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
+        /*----- XML Element Variables -----*/
         public TextView comment;
         public TextView date;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
+            /*---------- Hooks ----------*/
             comment = itemView.findViewById(R.id.comment);
             date = itemView.findViewById(R.id.comment_date);
         }

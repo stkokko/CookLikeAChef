@@ -38,6 +38,7 @@ import java.util.Objects;
 public class CategoryActivity extends AppCompatActivity implements AdapterView.OnItemClickListener, TextView.OnEditorActionListener,
         TextWatcher, View.OnClickListener, IngredientRecyclerViewAdapter.OnIngredientListener {
 
+    /*----- XML Element Variables -----*/
     private TextView categoryTextView;
     private AutoCompleteTextView searchAutoCompleteEditText;
     private TextView cancelFilters;
@@ -45,6 +46,8 @@ public class CategoryActivity extends AppCompatActivity implements AdapterView.O
     private CheckBox saltyCheckbox;
     private CheckBox sweetCheckbox;
     private RecyclerView ingredientRecyclerView;
+
+    /*----- Variables -----*/
     private IngredientRecyclerViewAdapter ingredientRecyclerViewAdapter;
     private ArrayList<Recipe> recipes;
     private ArrayAdapter<String> adapterNames;
@@ -62,7 +65,7 @@ public class CategoryActivity extends AppCompatActivity implements AdapterView.O
         ImageView filterImageView = findViewById(R.id.filter_imageView);
         RecyclerView recipesRecyclerView = findViewById(R.id.category_recipes_recyclerView);
 
-        /*---------- Set Up Bundle ----------*/
+        /*---------- Getting Extras ----------*/
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
             categoryTextView.setText((String) bundle.get("category"));
@@ -71,14 +74,17 @@ public class CategoryActivity extends AppCompatActivity implements AdapterView.O
             recipes = new ArrayList<>();
         }
 
+        /*----- Set Up an array for recipes names -----*/
         ArrayList<String> recipeNames = new ArrayList<>();
         for (Recipe recipe : recipes) {
             recipeNames.add(recipe.getName());
         }
 
+        /*----- Desserts has no filters -----*/
         if (categoryTextView.getText().toString().equalsIgnoreCase(getResources().getString(R.string.desserts)))
             filterImageView.setVisibility(View.GONE);
 
+        /*----- Setting Up ArrayAdapter -----*/
         adapterNames = new ArrayAdapter<>(CategoryActivity.this, android.R.layout.simple_dropdown_item_1line, recipeNames);
         searchAutoCompleteEditText.setThreshold(1);
         searchAutoCompleteEditText.setAdapter(adapterNames);
@@ -89,7 +95,7 @@ public class CategoryActivity extends AppCompatActivity implements AdapterView.O
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         toolbar.setNavigationIcon(R.drawable.return_white_icon);
 
-        /*---------- Set Up Adapter ----------*/
+        /*---------- Set Up RecyclerViewAdapter ----------*/
         RecipeCategoryRecyclerViewAdapter adapter = new RecipeCategoryRecyclerViewAdapter(this, recipes);
 
         /*---------- Set Up Recycler View ----------*/
@@ -97,7 +103,7 @@ public class CategoryActivity extends AppCompatActivity implements AdapterView.O
         recipesRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         recipesRecyclerView.setAdapter(adapter);
 
-
+        /*----- Event Listeners -----*/
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -115,11 +121,16 @@ public class CategoryActivity extends AppCompatActivity implements AdapterView.O
         searchAutoCompleteEditText.setOnItemClickListener(this);
     }
 
+
     private void openBottomSheetDialog() {
 
+        /*----- Variables -----*/
         View bottomSheetView;
         FloatingActionButton ingredientFilterFab;
+
         if (categoryTextView.getText().toString().equalsIgnoreCase(getResources().getString(R.string.brunch))) {
+
+            /*---------- Hooks ----------*/
             bottomSheetDialog = new BottomSheetDialog(CategoryActivity.this, R.style.BottomSheetDialogTheme);
             bottomSheetView = LayoutInflater.from(this).inflate(R.layout.layout_bottom_sheet_brunch,
                     (RelativeLayout) findViewById(R.id.bottomSheetContainer));
@@ -130,29 +141,32 @@ public class CategoryActivity extends AppCompatActivity implements AdapterView.O
             sweetCheckbox = bottomSheetView.findViewById(R.id.checkbox_sweet);
             ingredientFilterFab = bottomSheetView.findViewById(R.id.ingredient_filter_fab);
 
+            /*---------- Set Up RecyclerViewAdapter ----------*/
             if (!sweetCheckbox.isChecked() && !saltyCheckbox.isChecked()) {
                 String[] brunchIngredients = getResources().getStringArray(R.array.brunch_ingredients);
                 ingredientRecyclerViewAdapter = new IngredientRecyclerViewAdapter(CategoryActivity.this, new ArrayList<>(Arrays.asList(brunchIngredients)), this);
             }
 
-            closeImageView.setOnClickListener(this);
-            saltyCheckbox.setOnClickListener(this);
-            sweetCheckbox.setOnClickListener(this);
-
-
             bottomSheetDialog.setContentView(bottomSheetView);
             bottomSheetDialog.show();
 
 
+            /*---------- Set Up Recycler View ----------*/
             ingredientRecyclerView.setHasFixedSize(true);
             ingredientRecyclerView.setLayoutManager(new LinearLayoutManager(CategoryActivity.this));
             ingredientRecyclerView.setAdapter(ingredientRecyclerViewAdapter);
+
+            /*----- Event Listeners -----*/
+            closeImageView.setOnClickListener(this);
+            saltyCheckbox.setOnClickListener(this);
+            sweetCheckbox.setOnClickListener(this);
             cancelFilters.setOnClickListener(this);
             ingredientFilterFab.setOnClickListener(this);
 
 
         } else if (categoryTextView.getText().toString().equalsIgnoreCase(getResources().getString(R.string.salads))) {
 
+            /*---------- Hooks ----------*/
             bottomSheetDialog = new BottomSheetDialog(CategoryActivity.this, R.style.BottomSheetDialogTheme);
             bottomSheetView = LayoutInflater.from(this).inflate(R.layout.layout_bottom_sheet_all,
                     (RelativeLayout) findViewById(R.id.bottomSheetContainer));
@@ -160,23 +174,28 @@ public class CategoryActivity extends AppCompatActivity implements AdapterView.O
             ingredientRecyclerView = bottomSheetView.findViewById(R.id.ingredients_recyclerView);
             cancelFilters = bottomSheetView.findViewById(R.id.cancel_textView);
 
+            /*---------- Set Up RecyclerViewAdapter ----------*/
             String[] saladsIngredients = getResources().getStringArray(R.array.salads_ingredients);
             ingredientRecyclerViewAdapter = new IngredientRecyclerViewAdapter(CategoryActivity.this, new ArrayList<>(Arrays.asList(saladsIngredients)), this);
             ingredientFilterFab = bottomSheetView.findViewById(R.id.ingredient_filter_fab);
 
-            closeImageView.setOnClickListener(this);
             bottomSheetDialog.setContentView(bottomSheetView);
             bottomSheetDialog.show();
 
+            /*---------- Set Up Recycler View ----------*/
             ingredientRecyclerView.setHasFixedSize(true);
             ingredientRecyclerView.setLayoutManager(new LinearLayoutManager(CategoryActivity.this));
             ingredientRecyclerView.setAdapter(ingredientRecyclerViewAdapter);
+
+            /*----- Event Listeners -----*/
             cancelFilters.setOnClickListener(this);
             ingredientFilterFab.setOnClickListener(this);
+            closeImageView.setOnClickListener(this);
 
 
         } else if (categoryTextView.getText().toString().equalsIgnoreCase(getResources().getString(R.string.main_dishes))) {
 
+            /*---------- Hooks ----------*/
             bottomSheetDialog = new BottomSheetDialog(CategoryActivity.this, R.style.BottomSheetDialogTheme);
             bottomSheetView = LayoutInflater.from(this).inflate(R.layout.layout_bottom_sheet_all,
                     (RelativeLayout) findViewById(R.id.bottomSheetContainer));
@@ -185,21 +204,27 @@ public class CategoryActivity extends AppCompatActivity implements AdapterView.O
             cancelFilters = bottomSheetView.findViewById(R.id.cancel_textView);
             ingredientFilterFab = bottomSheetView.findViewById(R.id.ingredient_filter_fab);
 
+            /*---------- Set Up RecyclerViewAdapter ----------*/
             String[] mainDishesIngredients = getResources().getStringArray(R.array.main_dishes_ingredients);
             ingredientRecyclerViewAdapter = new IngredientRecyclerViewAdapter(CategoryActivity.this, new ArrayList<>(Arrays.asList(mainDishesIngredients)), this);
 
-            closeImageView.setOnClickListener(this);
+
             bottomSheetDialog.setContentView(bottomSheetView);
             bottomSheetDialog.show();
 
+            /*---------- Set Up Recycler View ----------*/
             ingredientRecyclerView.setHasFixedSize(true);
             ingredientRecyclerView.setLayoutManager(new LinearLayoutManager(CategoryActivity.this));
             ingredientRecyclerView.setAdapter(ingredientRecyclerViewAdapter);
+
+            /*----- Event Listeners -----*/
             cancelFilters.setOnClickListener(this);
             ingredientFilterFab.setOnClickListener(this);
+            closeImageView.setOnClickListener(this);
 
         } else if (categoryTextView.getText().toString().equalsIgnoreCase(getResources().getString(R.string.burgers))) {
 
+            /*---------- Hooks ----------*/
             bottomSheetDialog = new BottomSheetDialog(CategoryActivity.this, R.style.BottomSheetDialogTheme);
             bottomSheetView = LayoutInflater.from(this).inflate(R.layout.layout_bottom_sheet_all,
                     (RelativeLayout) findViewById(R.id.bottomSheetContainer));
@@ -208,18 +233,22 @@ public class CategoryActivity extends AppCompatActivity implements AdapterView.O
             cancelFilters = bottomSheetView.findViewById(R.id.cancel_textView);
             ingredientFilterFab = bottomSheetView.findViewById(R.id.ingredient_filter_fab);
 
+            /*---------- Set Up RecyclerViewAdapter ----------*/
             String[] burgerIngredients = getResources().getStringArray(R.array.burger_ingredients);
             ingredientRecyclerViewAdapter = new IngredientRecyclerViewAdapter(CategoryActivity.this, new ArrayList<>(Arrays.asList(burgerIngredients)), this);
 
-            closeImageView.setOnClickListener(this);
             bottomSheetDialog.setContentView(bottomSheetView);
             bottomSheetDialog.show();
 
+            /*---------- Set Up Recycler View ----------*/
             ingredientRecyclerView.setHasFixedSize(true);
             ingredientRecyclerView.setLayoutManager(new LinearLayoutManager(CategoryActivity.this));
             ingredientRecyclerView.setAdapter(ingredientRecyclerViewAdapter);
+
+            /*----- Event Listeners -----*/
             cancelFilters.setOnClickListener(this);
             ingredientFilterFab.setOnClickListener(this);
+            closeImageView.setOnClickListener(this);
 
         }
 
@@ -254,6 +283,10 @@ public class CategoryActivity extends AppCompatActivity implements AdapterView.O
         return false;
     }
 
+    /*
+       In this method we return an array list which contains all
+       possible recipe results based on user's input
+    */
     private ArrayList<Recipe> filterByName() {
 
         ArrayList<Recipe> filteredRecipes = new ArrayList<>();
@@ -292,61 +325,71 @@ public class CategoryActivity extends AppCompatActivity implements AdapterView.O
                 bottomSheetDialog.dismiss();
                 break;
             case R.id.checkbox_salty:
-
                 cancelFilters.setVisibility(View.GONE);
                 if (saltyCheckbox.isChecked() && !sweetCheckbox.isChecked()) {
+                    /*---------- Set Up RecyclerViewAdapter ----------*/
                     brunchSaltyIngredients = getResources().getStringArray(R.array.salty_ingredients);
                     ingredientRecyclerViewAdapter = new IngredientRecyclerViewAdapter(CategoryActivity.this, new ArrayList<>(Arrays.asList(brunchSaltyIngredients)), this);
                 } else if (!saltyCheckbox.isChecked() && sweetCheckbox.isChecked()) {
+                    /*---------- Set Up RecyclerViewAdapter ----------*/
                     brunchSweetIngredients = getResources().getStringArray(R.array.sweet_ingredients);
                     ingredientRecyclerViewAdapter = new IngredientRecyclerViewAdapter(CategoryActivity.this, new ArrayList<>(Arrays.asList(brunchSweetIngredients)), this);
                 } else {
+                    /*---------- Set Up RecyclerViewAdapter ----------*/
                     String[] brunchIngredients = getResources().getStringArray(R.array.brunch_ingredients);
                     ingredientRecyclerViewAdapter = new IngredientRecyclerViewAdapter(CategoryActivity.this, new ArrayList<>(Arrays.asList(brunchIngredients)), this);
                 }
                 ingredientRecyclerView.setAdapter(ingredientRecyclerViewAdapter);
                 break;
             case R.id.checkbox_sweet:
-
                 cancelFilters.setVisibility(View.GONE);
                 if (sweetCheckbox.isChecked() && !saltyCheckbox.isChecked()) {
+                    /*---------- Set Up RecyclerViewAdapter ----------*/
                     brunchSweetIngredients = getResources().getStringArray(R.array.sweet_ingredients);
                     ingredientRecyclerViewAdapter = new IngredientRecyclerViewAdapter(CategoryActivity.this, new ArrayList<>(Arrays.asList(brunchSweetIngredients)), this);
                 } else if (!sweetCheckbox.isChecked() && saltyCheckbox.isChecked()) {
+                    /*---------- Set Up RecyclerViewAdapter ----------*/
                     brunchSaltyIngredients = getResources().getStringArray(R.array.salty_ingredients);
                     ingredientRecyclerViewAdapter = new IngredientRecyclerViewAdapter(CategoryActivity.this, new ArrayList<>(Arrays.asList(brunchSaltyIngredients)), this);
                 } else {
+                    /*---------- Set Up RecyclerViewAdapter ----------*/
                     String[] brunchIngredients = getResources().getStringArray(R.array.brunch_ingredients);
                     ingredientRecyclerViewAdapter = new IngredientRecyclerViewAdapter(CategoryActivity.this, new ArrayList<>(Arrays.asList(brunchIngredients)), this);
                 }
                 ingredientRecyclerView.setAdapter(ingredientRecyclerViewAdapter);
                 break;
             case R.id.cancel_textView:
-
                 if (saltyCheckbox != null && saltyCheckbox.isChecked()) {
+                    /*---------- Set Up RecyclerViewAdapter ----------*/
                     brunchSaltyIngredients = getResources().getStringArray(R.array.salty_ingredients);
                     ingredientRecyclerViewAdapter = new IngredientRecyclerViewAdapter(CategoryActivity.this, new ArrayList<>(Arrays.asList(brunchSaltyIngredients)), this);
                     saltyCheckbox.setChecked(false);
                 } else if (sweetCheckbox != null && sweetCheckbox.isChecked()) {
+                    /*---------- Set Up RecyclerViewAdapter ----------*/
                     brunchSweetIngredients = getResources().getStringArray(R.array.sweet_ingredients);
                     ingredientRecyclerViewAdapter = new IngredientRecyclerViewAdapter(CategoryActivity.this, new ArrayList<>(Arrays.asList(brunchSweetIngredients)), this);
                     sweetCheckbox.setChecked(false);
                 }
 
                 if (categoryTextView.getText().toString().equalsIgnoreCase(getResources().getString(R.string.brunch))) {
+                    /*---------- Set Up RecyclerViewAdapter ----------*/
                     String[] brunchIngredients = getResources().getStringArray(R.array.brunch_ingredients);
                     ingredientRecyclerViewAdapter = new IngredientRecyclerViewAdapter(CategoryActivity.this, new ArrayList<>(Arrays.asList(brunchIngredients)), this);
                 } else if (categoryTextView.getText().toString().equalsIgnoreCase(getResources().getString(R.string.salads))) {
+                    /*---------- Set Up RecyclerViewAdapter ----------*/
                     String[] saladsIngredients = getResources().getStringArray(R.array.salads_ingredients);
                     ingredientRecyclerViewAdapter = new IngredientRecyclerViewAdapter(CategoryActivity.this, new ArrayList<>(Arrays.asList(saladsIngredients)), this);
                 } else if (categoryTextView.getText().toString().equalsIgnoreCase(getResources().getString(R.string.main_dishes))) {
+                    /*---------- Set Up RecyclerViewAdapter ----------*/
                     String[] mainDishesIngredients = getResources().getStringArray(R.array.main_dishes_ingredients);
                     ingredientRecyclerViewAdapter = new IngredientRecyclerViewAdapter(CategoryActivity.this, new ArrayList<>(Arrays.asList(mainDishesIngredients)), this);
                 } else if (categoryTextView.getText().toString().equalsIgnoreCase(getResources().getString(R.string.burgers))) {
+                    /*---------- Set Up RecyclerViewAdapter ----------*/
                     String[] burgersIngredients = getResources().getStringArray(R.array.burger_ingredients);
                     ingredientRecyclerViewAdapter = new IngredientRecyclerViewAdapter(CategoryActivity.this, new ArrayList<>(Arrays.asList(burgersIngredients)), this);
                 }
 
+                /*---------- Set Up RecyclerViewAdapter ----------*/
                 ingredientRecyclerView.setAdapter(ingredientRecyclerViewAdapter);
                 cancelFilters.setVisibility(View.GONE);
                 break;
@@ -362,9 +405,12 @@ public class CategoryActivity extends AppCompatActivity implements AdapterView.O
         }
     }
 
+    /*
+       In this method we return an array list which contains all
+       possible recipe results based on user's filters
+    */
     private ArrayList<Recipe> filterByIngredients() {
         ArrayList<Recipe> filteredRecipes = new ArrayList<>();
-
 
         for (Recipe recipe : recipes) {
             int counter = 0;

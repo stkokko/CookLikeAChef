@@ -58,8 +58,8 @@
                 android:paddingStart="15dp"
                 android:paddingEnd="15dp"
                 android:textColor="@android:color/black"
-                android:textSize="28sp"
-                android:textColorHint="#8B000000" />
+                android:textColorHint="#8B000000"
+                android:textSize="28sp" />
 
         </LinearLayout>
 
@@ -103,10 +103,10 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
                     android:layout_alignParentBottom="true"
-                    android:text="@string/brunch"
+                    android:layout_centerHorizontal="true"
                     android:layout_marginBottom="25dp"
+                    android:text="@string/brunch"
                     android:textColor="@color/blackColor"
                     android:textSize="24sp" />
 
@@ -121,8 +121,8 @@
             android:layout_marginStart="15dp"
             android:layout_marginTop="95dp"
             android:layout_toEndOf="@+id/brunch"
-            app:cardElevation="3dp"
-            app:cardCornerRadius="15dp">
+            app:cardCornerRadius="15dp"
+            app:cardElevation="3dp">
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -139,12 +139,12 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
                     android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="25dp"
                     android:text="@string/salads"
                     android:textColor="@color/blackColor"
-                    android:textSize="24sp"
-                    android:layout_marginBottom="25dp"
-                    android:layout_alignParentBottom="true" />
+                    android:textSize="24sp" />
 
             </RelativeLayout>
 
@@ -157,8 +157,8 @@
             android:layout_below="@+id/brunch"
             android:layout_marginTop="10dp"
             android:layout_toStartOf="@+id/view"
-            app:cardElevation="3dp"
-            app:cardCornerRadius="15dp">
+            app:cardCornerRadius="15dp"
+            app:cardElevation="3dp">
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -175,12 +175,12 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
                     android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="25dp"
                     android:text="@string/main_dishes"
                     android:textColor="@color/blackColor"
-                    android:textSize="24sp"
-                    android:layout_marginBottom="25dp"
-                    android:layout_alignParentBottom="true" />
+                    android:textSize="24sp" />
 
             </RelativeLayout>
 
@@ -194,8 +194,8 @@
             android:layout_marginStart="15dp"
             android:layout_marginTop="10dp"
             android:layout_toEndOf="@+id/main_dishes"
-            app:cardElevation="3dp"
-            app:cardCornerRadius="15dp">
+            app:cardCornerRadius="15dp"
+            app:cardElevation="3dp">
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -212,12 +212,12 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
                     android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="25dp"
                     android:text="@string/burgers"
                     android:textColor="@color/blackColor"
-                    android:textSize="24sp"
-                    android:layout_marginBottom="25dp"
-                    android:layout_alignParentBottom="true" />
+                    android:textSize="24sp" />
 
             </RelativeLayout>
 
@@ -230,8 +230,8 @@
             android:layout_below="@+id/main_dishes"
             android:layout_marginTop="10dp"
             android:layout_toStartOf="@+id/view"
-            app:cardElevation="3dp"
-            app:cardCornerRadius="15dp">
+            app:cardCornerRadius="15dp"
+            app:cardElevation="3dp">
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -248,12 +248,12 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
                     android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="25dp"
                     android:text="@string/desserts"
                     android:textColor="@color/blackColor"
-                    android:textSize="24sp"
-                    android:layout_marginBottom="25dp"
-                    android:layout_alignParentBottom="true" />
+                    android:textSize="24sp" />
 
             </RelativeLayout>
 

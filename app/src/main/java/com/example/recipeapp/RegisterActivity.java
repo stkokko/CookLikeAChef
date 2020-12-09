@@ -24,6 +24,7 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener {
 
+    /*----- XML Element Variables -----*/
     private EditText registerEmailEditText;
     private EditText passwordEditText;
     private EditText confirmEditText;
@@ -33,14 +34,16 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     private Button registerButton;
     private TextView msgTextView;
 
+    /*----- Variables -----*/
     private User userToRegister;
+    private LoadingDialog loadingDialog;
     private String language;
     private SharedPreferencesLanguage sharedPreferencesLanguage;
     private boolean notValidPassword;
     private boolean passwordsDiffer;
 
+    /*----- Database Variables -----*/
     private FirebaseAuth auth;
-    private LoadingDialog loadingDialog;
 
     @Override
     protected void onDestroy() {
@@ -54,11 +57,12 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        /*----- Get Selected Language -----*/
         SharedPreferences sharedPreferences = getSharedPreferences(LanguageUtils.LANGUAGE_ID, MODE_PRIVATE);
         sharedPreferencesLanguage = new SharedPreferencesLanguage(sharedPreferences);
         language = sharedPreferencesLanguage.getLanguage();
 
-        //Setting Language
+        /*----- Setting Up Language -----*/
         if (language.equalsIgnoreCase(LanguageUtils.ENGLISH)) {
             LocaleHelper.setLocale(this, "en");
         } else {
@@ -67,13 +71,14 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
         setContentView(R.layout.activity_register);
 
+        /*----- Init Variables -----*/
         userToRegister = new User();
         auth = FirebaseAuth.getInstance();
         loadingDialog = new LoadingDialog(this);
-        //emailExists = false;
         notValidPassword = false;
         passwordsDiffer = false;
 
+        /*----- Hooks -----*/
         loginTextView = findViewById(R.id.loginTextView);
         registerEmailEditText = findViewById(R.id.registerEmailEditText);
         passwordEditText = findViewById(R.id.registerPasswordEditText);
@@ -83,13 +88,14 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         registerButton = findViewById(R.id.registerButton);
         msgTextView = findViewById(R.id.msg_textView);
 
+        /*----- Setting Up Language Image -----*/
         if (language.equalsIgnoreCase(LanguageUtils.ENGLISH)) {
             languageImageView.setImageResource(R.drawable.united_kingdom);
         } else {
             languageImageView.setImageResource(R.drawable.greece);
         }
 
-
+        /*----- Listeners -----*/
         loginTextView.setOnClickListener(this);
         registerButton.setOnClickListener(this);
         languageImageView.setOnClickListener(this);

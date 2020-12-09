@@ -16,12 +16,14 @@ import java.util.ArrayList;
 
 public class IngredientRecyclerViewAdapter extends RecyclerView.Adapter<IngredientRecyclerViewAdapter.ViewHolder> {
 
+    /*----- Variables -----*/
     private Context context;
     private ArrayList<String> ingredients;
     private boolean[] isSelected;
     private OnIngredientListener onIngredientListener;
     public ArrayList<String> selectedIngredients;
 
+    /*----- Constructor -----*/
     public IngredientRecyclerViewAdapter(Context context, ArrayList<String> ingredients, OnIngredientListener onIngredientListener) {
         this.context = context;
         this.ingredients = ingredients;
@@ -44,6 +46,7 @@ public class IngredientRecyclerViewAdapter extends RecyclerView.Adapter<Ingredie
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
+        /*----- Init Variables -----*/
         holder.ingredientTextView.setText(ingredients.get(position));
         if (isSelected[position])
             holder.ingredientCheckbox.setChecked(true);
@@ -59,15 +62,21 @@ public class IngredientRecyclerViewAdapter extends RecyclerView.Adapter<Ingredie
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
+        /*----- XML Element Variables -----*/
         public TextView ingredientTextView;
         public CheckBox ingredientCheckbox;
+
+
         OnIngredientListener onIngredientListener;
 
         public ViewHolder(@NonNull View itemView, final OnIngredientListener onIngredientListener) {
             super(itemView);
 
+            /*---------- Hooks ----------*/
             ingredientTextView = itemView.findViewById(R.id.ingredient_filter_textView);
             ingredientCheckbox = itemView.findViewById(R.id.ingredient_checkbox);
+
+            /*---------- Event Listeners ----------*/
             this.onIngredientListener = onIngredientListener;
             ingredientCheckbox.setOnClickListener(this);
         }

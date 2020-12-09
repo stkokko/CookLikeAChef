@@ -25,7 +25,7 @@ import java.util.Objects;
 
 public class RecipeActivity extends AppCompatActivity {
 
-    //Fragments Variables
+    /*---------- Fragments Variables ----------*/
     public static BottomNavigationView bottomNavigationView;
     private BottomNavigationView.OnNavigationItemSelectedListener navigationItemSelectedListener =
             new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -52,7 +52,7 @@ public class RecipeActivity extends AppCompatActivity {
                 }
             };
 
-    //Recipe
+    /*---------- Variables ----------*/
     private Recipe recipe;
     private SharedPreferencesLanguage language;
     private BadgeDrawable badgeDrawable;
@@ -68,27 +68,34 @@ public class RecipeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recipe);
 
+        /*----- Get Selected Language -----*/
         SharedPreferences sharedPreferences = getSharedPreferences(LanguageUtils.LANGUAGE_ID, MODE_PRIVATE);
         language = new SharedPreferencesLanguage(sharedPreferences);
-        //recipe
+
+        /*----- Getting Extras -----*/
         recipe = (Recipe) getIntent().getSerializableExtra("recipe");
 
+        /*----- Putting Extras -----*/
         getIntent().putExtra("recipe", recipe);
 
-        //Views of Bottom Navigation
+        /*---------- Hooks ----------*/
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
-        bottomNavigationView.setOnNavigationItemSelectedListener(navigationItemSelectedListener);
+
+        /*---------- Setting Up Badge ----------*/
         badgeDrawable = bottomNavigationView.getOrCreateBadge(R.id.commentsNavIcon);
         badgeDrawable.setBackgroundColor(
                 ContextCompat.getColor(getApplicationContext(),
                         R.color.colorAccent)
         );
 
-
+        /*---------- Fragment Transaction ----------*/
         getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, new RecipeFragment()).commit();
-        //Views and click Listeners of drawer
+
+        /*---------- Display item as selected ----------*/
         bottomNavigationView.setSelectedItemId(R.id.recipeNavIcon);
 
+        /*---------- Event Listeners ----------*/
+        bottomNavigationView.setOnNavigationItemSelectedListener(navigationItemSelectedListener);
     }
 
     @Override

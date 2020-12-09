@@ -51,22 +51,27 @@ import static android.content.Context.MODE_PRIVATE;
 
 public class CommentFragment extends Fragment implements View.OnClickListener {
 
+    /*----- XML Element Variables -----*/
     private RecyclerView recyclerView;
-    private CommentRecyclerViewAdapter commentRecyclerViewAdapter;
-
-    private Recipe recipe;
     private EditText commentEditText;
-    private ArrayList<Comment> commentsArrayList;
 
+    /*----- Database Variables -----*/
     private DatabaseReference mDatabase;
     private FirebaseUser user;
 
+    /*----- Variables -----*/
     private String language;
-
     private LoadingDialog loadingDialog;
+    private Comment deletedComment;
+    private Recipe recipe;
+    private CommentRecyclerViewAdapter commentRecyclerViewAdapter;
+    private ArrayList<Comment> commentsArrayList;
 
-    Comment deletedComment;
-    //Swipe Variables
+
+    /*----- Swipe Variables -----*/
+    /*
+        Deleting comment when user swipes right.
+     */
     ItemTouchHelper.SimpleCallback simpleCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT) {
         @Override
         public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
@@ -124,37 +129,40 @@ public class CommentFragment extends Fragment implements View.OnClickListener {
         });
     }
 
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.comments_fragment, container, false);
 
+        /*----- Init Variables -----*/
         loadingDialog = new LoadingDialog(getContext());
         loadingDialog.startLoadingDialog();
-
         RecipeBankFirebase recipeBankFirebase = new RecipeBankFirebase();
+
+        /*----- Get Selected Language -----*/
         SharedPreferences sharedPreferences = Objects.requireNonNull(getContext()).getSharedPreferences(LanguageUtils.LANGUAGE_ID, MODE_PRIVATE);
         SharedPreferencesLanguage sharedPreferencesLanguage = new SharedPreferencesLanguage(sharedPreferences);
-
         language = sharedPreferencesLanguage.getLanguage();
 
-
-        Log.d("FragmentComm", "onCreateView: ");
+        /*----- Getting Extras -----*/
         Intent intent = Objects.requireNonNull(getActivity()).getIntent();
         recipe = (Recipe) intent.getSerializableExtra("recipe");
 
-
+        /*----- Hooks -----*/
         recyclerView = view.findViewById(R.id.comments_recyclerView);
         ImageView sendComment = view.findViewById(R.id.send_comment_imageView);
         commentEditText = view.findViewById(R.id.comment_editText);
         Toolbar toolbar = view.findViewById(R.id.comment_toolbar);
 
+        /*---------- Set Up Toolbar ----------*/
         ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
         Objects.requireNonNull(((AppCompatActivity) getActivity()).getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         toolbar.setTitle(recipe.getName().trim());
         toolbar.setNavigationIcon(R.drawable.return_white_icon);
 
+        /*----- Init Variables -----*/
         FirebaseAuth auth = FirebaseAuth.getInstance();
         user = auth.getCurrentUser();
 
@@ -184,6 +192,7 @@ public class CommentFragment extends Fragment implements View.OnClickListener {
         }, recipe.getName(), language);
 
 
+        /*----------- Event Listeners -----------*/
         sendComment.setOnClickListener(this);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override

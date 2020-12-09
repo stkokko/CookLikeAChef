@@ -39,52 +39,52 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class FavouritesActivity extends AppCompatActivity implements View.OnClickListener, TextWatcher, BottomNavigationView.OnNavigationItemSelectedListener, AdapterView.OnItemClickListener, TextView.OnEditorActionListener {
+public class FavouritesActivity extends AppCompatActivity implements TextWatcher, BottomNavigationView.OnNavigationItemSelectedListener, AdapterView.OnItemClickListener, TextView.OnEditorActionListener {
 
 
-    //My parameters
+    /*----- XML Element Variables -----*/
     private RecyclerView recipesRecyclerView;
     private AutoCompleteTextView searchAutoCompleteEditText;
     private TextView empty_list_textView;
     private BottomNavigationView bottomNavigationView;
 
+    /*----- Variables -----*/
     private ArrayList<String> recipeNames;
-    private RecipeBankFirebase recipeBankFirebase;
-    private FirebaseAuth auth;
+    private String language;
+    private boolean isListUpdated;
+    private List<Recipe> favouriteRecipes;
     private RecipeRecyclerViewAdapter adapter;
     private ArrayAdapter<String> adapterNames;
     private String currentUser;
 
-    private String language;
-
-    private boolean isListUpdated;
-    private List<Recipe> favouriteRecipes;
-
+    /*----- Database Variables -----*/
+    private RecipeBankFirebase recipeBankFirebase;
+    private FirebaseAuth auth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_favourites);
 
-
-        isListUpdated = false;
-
+        /*----- Hooks -----*/
         searchAutoCompleteEditText = findViewById(R.id.searchAutoCompleteEditText);
         recipesRecyclerView = findViewById(R.id.search_recipes_recyclerView);
         empty_list_textView = findViewById(R.id.empty_list_textView);
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
+        Toolbar toolbar = findViewById(R.id.toolbar);
 
+        /*----- Get Selected Language -----*/
         SharedPreferences sharedPreferences = getSharedPreferences(LanguageUtils.LANGUAGE_ID, MODE_PRIVATE);
         SharedPreferencesLanguage sharedPreferencesLanguage = new SharedPreferencesLanguage(sharedPreferences);
         language = sharedPreferencesLanguage.getLanguage();
+
+        /*----- Init Variables -----*/
         recipeBankFirebase = new RecipeBankFirebase();
         auth = FirebaseAuth.getInstance();
-
-        /*----------- Hooks -----------*/
-        Toolbar toolbar = findViewById(R.id.toolbar);
-
-
         currentUser = recipeBankFirebase.getCurrentUser();
+        isListUpdated = false;
+
+        /*----- Init Recycler View -----*/
         favouriteRecipes = recipeBankFirebase.getFavouriteRecipes(new FavouritesFirebaseAsyncResponse() {
             @Override
             public void processFinishedFavouritesList(ArrayList<Recipe> favouriteRecipes) {
@@ -115,12 +115,12 @@ public class FavouritesActivity extends AppCompatActivity implements View.OnClic
 
         /*---------- Display item as selected ----------*/
         bottomNavigationView.setSelectedItemId(R.id.favourites_item);
-        searchAutoCompleteEditText.addTextChangedListener(this);
 
         /*----------- Event Listeners -----------*/
         bottomNavigationView.setOnNavigationItemSelectedListener(this);
         searchAutoCompleteEditText.setOnItemClickListener(this);
         searchAutoCompleteEditText.setOnEditorActionListener(this);
+        searchAutoCompleteEditText.addTextChangedListener(this);
 
         /*---------- Set Up Toolbar ----------*/
         setSupportActionBar(toolbar);
@@ -160,11 +160,6 @@ public class FavouritesActivity extends AppCompatActivity implements View.OnClic
         });
 
         return true;
-    }
-
-
-    @Override
-    public void onClick(View v) {
     }
 
     @Override

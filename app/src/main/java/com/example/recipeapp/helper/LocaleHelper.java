@@ -10,6 +10,11 @@ import java.util.Locale;
 
 public class LocaleHelper {
 
+    /*
+        This class is used to change language of the phone based on user's click
+     */
+
+
     private static final String SELECTED_LANGUAGE = "Locale.Helper.Selected.Language";
 
     public static void onCreate(Context context) {

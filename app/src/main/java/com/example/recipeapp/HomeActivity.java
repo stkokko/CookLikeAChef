@@ -32,14 +32,19 @@ import java.util.Objects;
 
 public class HomeActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
 
+    /*----- Variables -----*/
     private SharedPreferences sharedPreferences;
     private SharedPreferencesLanguage sharedPreferencesLanguage;
     private LoadingDialog loadingDialog;
-    private RecipeBankFirebase recipeBankFirebase;
-    private RecyclerView latestRecipesRecyclerView;
     private LatestRecipesRecyclerViewAdapter latestRecipesAdapter;
-    private BottomNavigationView bottomNavigationView;
+
+    /*----- Database Variables -----*/
     private FirebaseAuth auth;
+    private RecipeBankFirebase recipeBankFirebase;
+
+    /*----- XML Element Variables -----*/
+    private BottomNavigationView bottomNavigationView;
+    private RecyclerView latestRecipesRecyclerView;
 
 
     @Override
@@ -55,9 +60,12 @@ public class HomeActivity extends AppCompatActivity implements BottomNavigationV
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
+        /*----- Get Selected Language -----*/
         sharedPreferences = getSharedPreferences(LanguageUtils.LANGUAGE_ID, MODE_PRIVATE);
         sharedPreferencesLanguage = new SharedPreferencesLanguage(sharedPreferences);
         String language = sharedPreferencesLanguage.getLanguage();
+
+        /*----- Init Variables -----*/
         loadingDialog = new LoadingDialog(this);
         recipeBankFirebase = new RecipeBankFirebase();
         auth = FirebaseAuth.getInstance();
@@ -71,10 +79,12 @@ public class HomeActivity extends AppCompatActivity implements BottomNavigationV
         /*---------- Set Up Toolbar ----------*/
         setSupportActionBar(toolbar);
         Objects.requireNonNull(getSupportActionBar()).setTitle(null);
+        Objects.requireNonNull(toolbar.getOverflowIcon()).setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_ATOP);
 
         /*---------- Display item as selected ----------*/
         bottomNavigationView.setSelectedItemId(R.id.home_item);
 
+        /*----- Init Recycler View -----*/
         recipeBankFirebase.getRecipes(new RecipeFirebaseAsyncResponse() {
 
             @Override
@@ -98,8 +108,6 @@ public class HomeActivity extends AppCompatActivity implements BottomNavigationV
 
         /*----------- Event Listeners -----------*/
         bottomNavigationView.setOnNavigationItemSelectedListener(this);
-        Objects.requireNonNull(toolbar.getOverflowIcon()).setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_ATOP);
-
     }
 
     @Override

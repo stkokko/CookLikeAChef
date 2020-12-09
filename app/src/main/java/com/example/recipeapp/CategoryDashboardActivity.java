@@ -39,20 +39,23 @@ import java.util.Objects;
 
 public class CategoryDashboardActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener, TextWatcher, AdapterView.OnItemClickListener, TextView.OnEditorActionListener, View.OnClickListener {
 
+    /*----- XML Element Variables -----*/
     private BottomNavigationView bottomNavigationView;
     private AutoCompleteTextView searchAutoCompleteEditText;
 
+    /*----- Variables -----*/
     private ArrayList<String> recipeNames;
     private ArrayAdapter<String> adapterNames;
-    private FirebaseAuth auth;
     private ArrayList<Recipe> brunchRecipes;
     private ArrayList<Recipe> saladsRecipes;
     private ArrayList<Recipe> mainDishesRecipes;
     private ArrayList<Recipe> burgersRecipes;
     private ArrayList<Recipe> dessertsRecipes;
     private LoadingDialog loadingDialog;
-
     private List<Recipe> recipes;
+
+    /*----- Database Variables -----*/
+    private FirebaseAuth auth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,52 +66,30 @@ public class CategoryDashboardActivity extends AppCompatActivity implements Bott
         Toolbar toolbar = findViewById(R.id.toolbar);
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
         searchAutoCompleteEditText = findViewById(R.id.searchAutoCompleteEditText);
-
         CardView brunchCardView = findViewById(R.id.brunch);
         CardView saladsCardView = findViewById(R.id.salads);
         CardView mainDishesCardView = findViewById(R.id.main_dishes);
         CardView burgersCardView = findViewById(R.id.burgers);
         CardView dessertsCardView = findViewById(R.id.desserts);
 
-
+        /*----- Get Selected Language -----*/
         SharedPreferences sharedPreferences = getSharedPreferences(LanguageUtils.LANGUAGE_ID, MODE_PRIVATE);
         SharedPreferencesLanguage sharedPreferencesLanguage = new SharedPreferencesLanguage(sharedPreferences);
-        auth = FirebaseAuth.getInstance();
         String language = sharedPreferencesLanguage.getLanguage();
+
+        /*----- Init Variables -----*/
+        auth = FirebaseAuth.getInstance();
         loadingDialog = new LoadingDialog(this);
         loadingDialog.startLoadingDialog();
-
         RecipeBankFirebase recipeBankFirebase = new RecipeBankFirebase();
+
+
         recipes = recipeBankFirebase.getRecipes(new RecipeFirebaseAsyncResponse() {
             @Override
             public void processFinishedRecipeList(ArrayList<Recipe> recipes) {
-                recipeNames = new ArrayList<>();
-                brunchRecipes = new ArrayList<>();
-                saladsRecipes = new ArrayList<>();
-                mainDishesRecipes = new ArrayList<>();
-                burgersRecipes = new ArrayList<>();
-                dessertsRecipes = new ArrayList<>();
-                for (Recipe recipe : recipes) {
-                    recipeNames.add(recipe.getName());
-                    
-                    switch (recipe.getCategory().getName()) {
-                        case "Brunch":
-                            brunchRecipes.add(recipe);
-                            break;
-                        case "Salads":
-                            saladsRecipes.add(recipe);
-                            break;
-                        case "Main Dishes":
-                            mainDishesRecipes.add(recipe);
-                            break;
-                        case "Burgers":
-                            burgersRecipes.add(recipe);
-                            break;
-                        case "Desserts":
-                            dessertsRecipes.add(recipe);
-                            break;
-                    }
-                }
+
+                initCategoryLists(recipes);
+
                 adapterNames = new ArrayAdapter<>(CategoryDashboardActivity.this, android.R.layout.simple_dropdown_item_1line, recipeNames);
                 searchAutoCompleteEditText.setThreshold(1);
                 searchAutoCompleteEditText.setAdapter(adapterNames);
@@ -139,8 +120,40 @@ public class CategoryDashboardActivity extends AppCompatActivity implements Bott
         mainDishesCardView.setOnClickListener(this);
         burgersCardView.setOnClickListener(this);
         dessertsCardView.setOnClickListener(this);
-
         searchAutoCompleteEditText.setOnItemClickListener(this);
+    }
+
+    /*
+        In this method we separate recipes in categories
+     */
+    private void initCategoryLists(ArrayList<Recipe> recipes) {
+        recipeNames = new ArrayList<>();
+        brunchRecipes = new ArrayList<>();
+        saladsRecipes = new ArrayList<>();
+        mainDishesRecipes = new ArrayList<>();
+        burgersRecipes = new ArrayList<>();
+        dessertsRecipes = new ArrayList<>();
+        for (Recipe recipe : recipes) {
+            recipeNames.add(recipe.getName());
+
+            switch (recipe.getCategory().getName()) {
+                case "Brunch":
+                    brunchRecipes.add(recipe);
+                    break;
+                case "Salads":
+                    saladsRecipes.add(recipe);
+                    break;
+                case "Main Dishes":
+                    mainDishesRecipes.add(recipe);
+                    break;
+                case "Burgers":
+                    burgersRecipes.add(recipe);
+                    break;
+                case "Desserts":
+                    dessertsRecipes.add(recipe);
+                    break;
+            }
+        }
     }
 
     @Override
@@ -235,9 +248,8 @@ public class CategoryDashboardActivity extends AppCompatActivity implements Bott
         if (actionId == EditorInfo.IME_ACTION_SEARCH) {
             searchAutoCompleteEditText.setText("");
 
-
             Intent searchResultsIntent = new Intent(CategoryDashboardActivity.this, SearchResultsActivity.class);
-            searchResultsIntent.putExtra("filteredRecipes", getFilteredRecipes());
+            searchResultsIntent.putExtra("filteredRecipes", getByName());
             startActivity(searchResultsIntent);
 
             return true;
@@ -245,7 +257,11 @@ public class CategoryDashboardActivity extends AppCompatActivity implements Bott
         return false;
     }
 
-    private ArrayList<Recipe> getFilteredRecipes() {
+    /*
+        In this method we return an array list which contains all
+        possible recipe results based on user's input
+     */
+    private ArrayList<Recipe> getByName() {
 
         ArrayList<Recipe> filteredRecipes = new ArrayList<>();
         for (Recipe recipe : recipes) {

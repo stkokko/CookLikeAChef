@@ -29,12 +29,14 @@ import java.util.List;
 
 public class RecipeRecyclerViewAdapter extends RecyclerView.Adapter<RecipeRecyclerViewAdapter.ViewHolder> implements Filterable {
 
+    /*----- Variables -----*/
     private Context context;
     private List<Recipe> recipes;
     private List<Recipe> recipesAll;
     private RequestOptions options;
 
 
+    /*----- Constructor -----*/
     public RecipeRecyclerViewAdapter(Context context, List<Recipe> recipes) {
         this.context = context;
         this.recipes = recipes;
@@ -55,6 +57,7 @@ public class RecipeRecyclerViewAdapter extends RecyclerView.Adapter<RecipeRecycl
     public void onBindViewHolder(@NonNull RecipeRecyclerViewAdapter.ViewHolder holder, int position) {
 
 
+        /*----- Init Variables -----*/
         holder.recipeCardView.setAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_transition_animation));
 
         Recipe recipe = recipes.get(position);
@@ -109,15 +112,18 @@ public class RecipeRecyclerViewAdapter extends RecyclerView.Adapter<RecipeRecycl
 
     public class ViewHolder extends RecyclerView.ViewHolder implements AdapterView.OnClickListener {
 
+        /*----- XML Element Variables -----*/
         public ImageView recipeImageView;
         public TextView recipeTitleTextView;
         public CardView recipeCardView;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
+            /*---------- Hooks ----------*/
             recipeImageView = itemView.findViewById(R.id.recipe_imageView);
             recipeTitleTextView = itemView.findViewById(R.id.recipe_title_TextView);
             recipeCardView = itemView.findViewById(R.id.recipe_cardView);
+            /*---------- Event Listeners ----------*/
             recipeImageView.setOnClickListener(this);
         }
 

@@ -98,9 +98,9 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:backgroundTint="@color/general_color"
+        android:contentDescription="@string/filter_fab"
         app:borderWidth="0dp"
         app:srcCompat="@drawable/ic_filter"
-        app:tint="@android:color/white"
-        android:contentDescription="Filter Fab" />
+        app:tint="@android:color/white" />
 
 </RelativeLayout>
