@@ -39,7 +39,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
                     android:textAlignment="center"
-                    android:maxLines="8"
+                    android:maxLines="5"
                     android:textSize="18sp" />
 
                 <TextView

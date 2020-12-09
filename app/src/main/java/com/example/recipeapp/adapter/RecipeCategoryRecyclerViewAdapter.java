@@ -49,7 +49,7 @@ public class RecipeCategoryRecyclerViewAdapter extends RecyclerView.Adapter<Reci
 
         /*----- Init Variables -----*/
         Recipe recipe = recipes.get(position);
-        holder.recipeTextView.setText(String.format("%s\n\n\n%s", recipe.getName(), recipe.getSteps()));
+        holder.recipeTextView.setText(String.format("%s\n\n%s", recipe.getName(), recipe.getSteps()));
         Glide.with(context).load(recipe.getImageURL()).apply(options).into(holder.recipeImageView);
 
     }
