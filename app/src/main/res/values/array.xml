@@ -88,8 +88,8 @@
         <item>Mackerel</item>
         <item>Squid</item>
         <item>Octopus</item>
-        <item>Hard to find</item>
         <item>Sea bass</item>
+        <item>Cuttlefish</item>
     </string-array>
 
     <string-array name="burger_ingredients">

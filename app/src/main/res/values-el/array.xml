@@ -73,23 +73,23 @@
         <item>Πατάτα</item>
         <item>Γλυκοπατάτα</item>
         <item>Σολομός</item>
-        <item>Κοτόπουλο Στήθος</item>
-        <item>Κοτόπουλο Μπούτι</item>
-        <item>Ρύζι</item>
         <item>Χοιρινό Φιλέτο</item>
         <item>Χοιρινή Μπριζόλα</item>
+        <item>Μοσχαρίσιο Φιλέτο</item>
         <item>Πανσέτα</item>
         <item>Αρνί</item>
-        <item>Μοσχαρίσιο Φιλέτο</item>
+        <item>Ρύζι</item>
+        <item>Κοτόπουλο Στήθος</item>
+        <item>Κοτόπουλο Μπούτι</item>
         <item>Μπιφτέκι Κοτόπουλο</item>
         <item>Μπιφτέκι Μοσχαρίσιο</item>
         <item>Μπιφτέκι Γαλοπούλας</item>
-        <item>Λαβράκι</item>
-        <item>Σκουμπρί</item>
         <item>Γαρίδα</item>
+        <item>Σκουμπρί</item>
         <item>Καλαμάρι</item>
         <item>Χταπόδι</item>
-        <item>Σουπία</item>
+        <item>Λαβράκι</item>
+        <item>Σουπιά</item>
     </string-array>
 
     <string-array name="burger_ingredients">
