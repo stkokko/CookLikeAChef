@@ -41,5 +41,11 @@
         <item name="background">@android:color/transparent</item>
     </style>
 
+    <style name="Splash" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+    </style>
 
 </resources>
