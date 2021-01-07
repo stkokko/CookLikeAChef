@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".RegisterActivity">
 
-
     <RelativeLayout
         android:id="@+id/register_header"
         android:layout_width="match_parent"
@@ -35,81 +34,137 @@
             android:layout_margin="10dp"
             android:contentDescription="@string/language_image"
             android:src="@drawable/united_kingdom" />
+
     </RelativeLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/register_header"
-        android:layout_marginTop="-55dp"
-        android:background="@drawable/login_register_background"
-        android:gravity="center"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
+        android:layout_marginTop="-55dp"
+        android:background="@drawable/login_register_background"
+        android:gravity="center"
         android:orientation="vertical"
-        android:paddingBottom="120dp">
+        android:paddingBottom="80dp">
 
-        <EditText
-            android:id="@+id/registerEmailEditText"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/emailLayout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="320dp"
-            android:layout_height="55dp"
-            android:autofillHints=""
-            android:ems="10"
-            android:textSize="20sp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="30dp"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
             android:hint="@string/e_mail"
-            android:inputType="textEmailAddress" />
+            app:boxCornerRadiusBottomEnd="30dp"
+            app:boxCornerRadiusBottomStart="30dp"
+            app:boxCornerRadiusTopEnd="30dp"
+            app:boxCornerRadiusTopStart="30dp"
+            app:boxStrokeColor="@color/colorPrimary"
+            app:hintTextColor="@color/colorPrimary"
+            app:startIconDrawable="@drawable/ic_email"
+            app:startIconTint="@color/colorPrimary">
 
-        <EditText
-            android:id="@+id/registerPasswordEditText"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/emailEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:imeOptions="actionNext"
+                android:inputType="textEmailAddress"
+                android:textSize="20sp" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/passwordLayout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="320dp"
-            android:layout_height="55dp"
-            android:autofillHints=""
-            android:ems="10"
-            android:textSize="20sp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
             android:hint="@string/password"
-            android:inputType="textPassword" />
+            app:boxCornerRadiusBottomEnd="30dp"
+            app:boxCornerRadiusBottomStart="30dp"
+            app:boxCornerRadiusTopEnd="30dp"
+            app:boxCornerRadiusTopStart="30dp"
+            app:boxStrokeColor="@color/colorPrimary"
+            app:hintTextColor="@color/colorPrimary"
+            app:passwordToggleEnabled="true"
+            app:startIconDrawable="@drawable/ic_password"
+            app:startIconTint="@color/colorPrimary">
 
-        <EditText
-            android:id="@+id/registerConfirmPasswordEditText"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/passwordEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:imeOptions="actionNext"
+                android:inputType="textPassword"
+                android:textSize="20sp" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/confirmPasswordLayout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="320dp"
-            android:layout_height="55dp"
-            android:autofillHints=""
-            android:ems="10"
-            android:textSize="20sp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
             android:hint="@string/confirm_password"
-            android:inputType="textPassword" />
+            app:boxCornerRadiusBottomEnd="30dp"
+            app:boxCornerRadiusBottomStart="30dp"
+            app:boxCornerRadiusTopEnd="30dp"
+            app:boxCornerRadiusTopStart="30dp"
+            app:boxStrokeColor="@color/colorPrimary"
+            app:hintTextColor="@color/colorPrimary"
+            app:passwordToggleEnabled="true"
+            app:startIconDrawable="@drawable/ic_password"
+            app:startIconTint="@color/colorPrimary">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/confirmPasswordEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:imeOptions="actionDone"
+                android:inputType="textPassword"
+                android:textSize="20sp" />
+
+        </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
             android:id="@+id/errorMessageTextView"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="5dp"
             android:textAlignment="center"
             android:textColor="#FF0000"
-            android:visibility="gone" />
+            android:textSize="18sp"
+            android:visibility="invisible" />
 
         <Button
             android:id="@+id/registerButton"
             android:layout_width="140dp"
             android:layout_height="wrap_content"
-            android:textSize="18sp"
-            android:layout_marginTop="25dp"
+            android:layout_marginTop="5dp"
             android:text="@string/string_register"
+            android:textSize="20sp"
             app:backgroundTint="@color/general_color" />
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="25dp">
+            android:layout_marginTop="20dp">
 
             <TextView
                 android:id="@+id/msg_textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="serif"
+                android:text="@string/register_textView"
                 android:textSize="20sp"
-                android:text="@string/register_textView" />
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/loginTextView"
@@ -119,8 +174,12 @@
                 android:paddingStart="5dp"
                 android:paddingEnd="5dp"
                 android:text="@string/login_button_text"
+                android:textColor="@android:color/holo_blue_light"
                 android:textSize="20sp"
-                android:textColor="@android:color/holo_blue_light" />
+                android:textStyle="bold" />
+
         </LinearLayout>
+
     </LinearLayout>
+
 </RelativeLayout>

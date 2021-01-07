@@ -12,6 +12,8 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.util.Log;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -25,17 +27,25 @@ import com.example.recipeapp.helper.LocaleHelper;
 import com.example.recipeapp.model.User;
 import com.example.recipeapp.ui.LoadingDialog;
 import com.example.recipeapp.util.LanguageUtils;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+
+import java.util.Objects;
 
 public class LogInActivity extends AppCompatActivity implements View.OnClickListener {
 
     /*----- XML Element Variables -----*/
     private TextView errorMessage;
-    private EditText email;
-    private EditText password;
+    private TextInputEditText emailEditText;
+    private TextInputEditText passwordEditText;
+    private TextInputLayout emailLayout;
+    private TextInputLayout passwordLayout;
     private TextView msgTextView;
     private ImageView languageImageView;
     private TextView registerTextView;
@@ -87,37 +97,26 @@ public class LogInActivity extends AppCompatActivity implements View.OnClickList
 
         setContentView(R.layout.activity_login);
 
-        /*---------- Checking Internet Connection ----------*/
-        if (isConnected(this)) {
-            showCustomDialog();
-        } else {/*---------- Checking If User Is Already Logged In ----------*/
-            if (recipeBankFirebase.getCurrentUser() != null) {
-                Intent homeIntent = new Intent(LogInActivity.this, HomeActivity.class);
-                startActivity(homeIntent);
-                finish();
-            }
-        }
-
-
-        /*----- Hooks -----*/
+        /*---------- Hooks ----------*/
         registerTextView = findViewById(R.id.registerTextView);
         errorMessage = findViewById(R.id.errorMessageTextView);
         msgTextView = findViewById(R.id.msg_textView);
         loginButton = findViewById(R.id.loginButton);
-        email = findViewById(R.id.emailEditText);
-        password = findViewById(R.id.passwordEditText);
+        emailEditText = findViewById(R.id.emailEditText);
+        passwordEditText = findViewById(R.id.passwordEditText);
         languageImageView = findViewById(R.id.language);
         forgotPasswordTextView = findViewById(R.id.forgot_password_textView);
+        emailLayout = findViewById(R.id.emailLayout);
+        passwordLayout = findViewById(R.id.passwordLayout);
 
-        /*----- Setting Up Language Image -----*/
+        /*---------- Setting Up Language Image ----------*/
         if (language.equalsIgnoreCase(LanguageUtils.ENGLISH)) {
             languageImageView.setImageResource(R.drawable.united_kingdom);
         } else {
             languageImageView.setImageResource(R.drawable.greece);
         }
 
-
-        /*----- Listeners -----*/
+        /*---------- Event Listeners ----------*/
         registerTextView.setOnClickListener(this);
         loginButton.setOnClickListener(this);
         languageImageView.setOnClickListener(this);
@@ -151,8 +150,13 @@ public class LogInActivity extends AppCompatActivity implements View.OnClickList
             finish();
         } else if (v.getId() == R.id.loginButton) {
             initUser();
-            loadingDialog.startLoadingDialog();
-            loginUser(userToConnect.getEmail(), userToConnect.getPassword());
+            errorMessage.setVisibility(View.INVISIBLE);
+            if (isEmailValid() && isPasswordValid()) {
+                loadingDialog.startLoadingDialog();
+                loginUser(userToConnect.getEmail(), userToConnect.getPassword());
+                loadingDialog.dismissDialog();
+            }
+
         } else if (v.getId() == R.id.language) {
             if (language.equalsIgnoreCase(LanguageUtils.ENGLISH)) {
                 languageImageView.setImageResource(R.drawable.greece);
@@ -172,34 +176,39 @@ public class LogInActivity extends AppCompatActivity implements View.OnClickList
         } else if (v.getId() == R.id.forgot_password_textView) {
 
             final EditText resetEmail = new EditText(v.getContext());
-            AlertDialog.Builder passwordResetDialog = new AlertDialog.Builder(v.getContext());
+            final AlertDialog.Builder passwordResetDialog = new AlertDialog.Builder(v.getContext());
             passwordResetDialog.setTitle(R.string.reset_password_text);
             passwordResetDialog.setMessage(R.string.reset_password_message);
             passwordResetDialog.setView(resetEmail);
+            passwordResetDialog.setCancelable(false);
 
             passwordResetDialog.setPositiveButton(R.string.send_text, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
 
-                    String mail = resetEmail.getText().toString();
-                    auth.sendPasswordResetEmail(mail)
-                            .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                @Override
-                                public void onSuccess(Void aVoid) {
+                    String email = resetEmail.getText().toString();
+                    if (email.isEmpty() || !Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+                        Toast.makeText(LogInActivity.this, getResources().getString(R.string.enter_valid_email), Toast.LENGTH_LONG)
+                                .show();
+                    } else {
+                        auth.sendPasswordResetEmail(email).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if (task.isSuccessful()) {
                                     Toast.makeText(LogInActivity.this, R.string.email_succ_text, Toast.LENGTH_LONG)
                                             .show();
-                                }
-                            })
-                            .addOnFailureListener(new OnFailureListener() {
-                                @Override
-                                public void onFailure(@NonNull Exception e) {
-
+                                } else {
                                     Toast.makeText(LogInActivity.this, R.string.email_fail_text, Toast.LENGTH_LONG)
                                             .show();
-
                                 }
-                            });
-
+                            }
+                        });
+                    }
+                }
+            }).setNegativeButton(getString(R.string.cancel), new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
                 }
             });
 
@@ -216,35 +225,57 @@ public class LogInActivity extends AppCompatActivity implements View.OnClickList
         msgTextView.setText(R.string.new_to_appname);
         loginButton.setText(R.string.login_button_text);
         forgotPasswordTextView.setText(R.string.forgot_password_text);
-        password.setHint(R.string.password);
+        passwordLayout.setHint(getResources().getString(R.string.password));
     }
 
-    private void loginUser(String email, String password) {
-        if (email.isEmpty() || password.isEmpty()) {
-            errorMessage.setVisibility(View.VISIBLE);
+    /*---------- Checking if the email is valid ----------*/
+    private boolean isEmailValid() {
+        String email = Objects.requireNonNull(emailEditText.getText()).toString();
+        if (email.isEmpty() || !Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            emailLayout.setError(getResources().getString(R.string.enter_valid_email));
+            return false;
         } else {
-            auth.signInWithEmailAndPassword(email, password).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
-                @Override
-                public void onSuccess(AuthResult authResult) {
-                    loadingDialog.dismissDialog();
-                    Intent mainScreenIntent = new Intent(LogInActivity.this, HomeActivity.class);
-                    startActivity(mainScreenIntent);
-                    finish();
-                }
-            }).addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception e) {
-                    loadingDialog.dismissDialog();
-                    errorMessage.setVisibility(View.VISIBLE);
-                }
-            });
+            emailLayout.setError(null);
+            return true;
         }
     }
 
+    /*---------- Checking if password is valid ----------*/
+    private boolean isPasswordValid() {
+        String password = Objects.requireNonNull(passwordEditText.getText()).toString();
+        if (password.isEmpty()) {
+            passwordLayout.setError(getResources().getString(R.string.enter_password));
+            return false;
+        } else {
+            passwordLayout.setError(null);
+            return true;
+        }
+    }
 
+    /*---------- User tries to Log In ----------*/
+    private void loginUser(String email, String password) {
+        auth.signInWithEmailAndPassword(email, password).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
+            @Override
+            public void onSuccess(AuthResult authResult) {
+                loadingDialog.dismissDialog();
+                Intent mainScreenIntent = new Intent(LogInActivity.this, HomeActivity.class);
+                startActivity(mainScreenIntent);
+                finish();
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                loadingDialog.dismissDialog();
+                errorMessage.setVisibility(View.VISIBLE);
+            }
+        });
+
+    }
+
+    /*---------- Initialize User ----------*/
     public void initUser() {
-        userToConnect.setEmail(email.getText().toString());
-        userToConnect.setPassword(password.getText().toString());
+        userToConnect.setEmail(Objects.requireNonNull(emailEditText.getText()).toString());
+        userToConnect.setPassword(Objects.requireNonNull(passwordEditText.getText()).toString());
     }
 
     /*---------- Checking Internet Access ----------*/

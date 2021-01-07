@@ -109,4 +109,7 @@
     <string name="burger_icons">Εικονίδιο Burgers</string>
     <string name="brunch_icon">Εικονίδιο Brunch</string>
     <string name="filter_fab">Κουμπί φίλτρων</string>
+    <string name="cancel">Ακυρωση</string>
+    <string name="enter_valid_email">Παρακαλώ εισάγετε ένα έγκυρο email</string>
+    <string name="enter_password">Παρακαλώ εισάγετε τον κωδικό πρόσβασης.</string>
 </resources>

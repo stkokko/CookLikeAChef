@@ -115,4 +115,7 @@
     <string name="cancel_all">Cancel all</string>
     <string name="filters">Filters</string>
     <string name="filter_fab">Filter Fab</string>
+    <string name="cancel">Cancel</string>
+    <string name="enter_valid_email">Please enter a valid email address</string>
+    <string name="enter_password">Please enter your password.</string>
 </resources>
