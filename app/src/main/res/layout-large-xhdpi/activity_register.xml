@@ -17,7 +17,7 @@
         <ImageView
             android:id="@+id/login_imageView"
             android:layout_width="match_parent"
-            android:layout_height="400dp"
+            android:layout_height="360dp"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
@@ -46,6 +46,8 @@
         android:layout_alignParentBottom="true"
         android:layout_marginTop="-55dp"
         android:background="@drawable/login_register_background"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
         android:gravity="center"
         android:orientation="vertical"
         android:paddingBottom="80dp">
@@ -57,8 +59,6 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="30dp"
-            android:focusable="true"
-            android:focusableInTouchMode="true"
             android:hint="@string/e_mail"
             app:boxCornerRadiusBottomEnd="30dp"
             app:boxCornerRadiusBottomStart="30dp"
