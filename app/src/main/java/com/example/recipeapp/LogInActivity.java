@@ -1,18 +1,15 @@
 package com.example.recipeapp;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.provider.Settings;
-import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
@@ -27,13 +24,8 @@ import com.example.recipeapp.helper.LocaleHelper;
 import com.example.recipeapp.model.User;
 import com.example.recipeapp.ui.LoadingDialog;
 import com.example.recipeapp.util.LanguageUtils;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.Objects;
@@ -182,35 +174,24 @@ public class LogInActivity extends AppCompatActivity implements View.OnClickList
             passwordResetDialog.setView(resetEmail);
             passwordResetDialog.setCancelable(false);
 
-            passwordResetDialog.setPositiveButton(R.string.send_text, new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
+            passwordResetDialog.setPositiveButton(R.string.send_text, (dialog, which) -> {
 
-                    String email = resetEmail.getText().toString();
-                    if (email.isEmpty() || !Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-                        Toast.makeText(LogInActivity.this, getResources().getString(R.string.enter_valid_email), Toast.LENGTH_LONG)
-                                .show();
-                    } else {
-                        auth.sendPasswordResetEmail(email).addOnCompleteListener(new OnCompleteListener<Void>() {
-                            @Override
-                            public void onComplete(@NonNull Task<Void> task) {
-                                if (task.isSuccessful()) {
-                                    Toast.makeText(LogInActivity.this, R.string.email_succ_text, Toast.LENGTH_LONG)
-                                            .show();
-                                } else {
-                                    Toast.makeText(LogInActivity.this, R.string.email_fail_text, Toast.LENGTH_LONG)
-                                            .show();
-                                }
-                            }
-                        });
-                    }
+                String email = resetEmail.getText().toString();
+                if (email.isEmpty() || !Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+                    Toast.makeText(LogInActivity.this, getResources().getString(R.string.enter_valid_email), Toast.LENGTH_LONG)
+                            .show();
+                } else {
+                    auth.sendPasswordResetEmail(email).addOnCompleteListener(task -> {
+                        if (task.isSuccessful()) {
+                            Toast.makeText(LogInActivity.this, R.string.email_succ_text, Toast.LENGTH_LONG)
+                                    .show();
+                        } else {
+                            Toast.makeText(LogInActivity.this, R.string.email_fail_text, Toast.LENGTH_LONG)
+                                    .show();
+                        }
+                    });
                 }
-            }).setNegativeButton(getString(R.string.cancel), new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    dialog.dismiss();
-                }
-            });
+            }).setNegativeButton(getString(R.string.cancel), (dialog, which) -> dialog.dismiss());
 
 
             passwordResetDialog.create().show();
@@ -254,20 +235,14 @@ public class LogInActivity extends AppCompatActivity implements View.OnClickList
 
     /*---------- User tries to Log In ----------*/
     private void loginUser(String email, String password) {
-        auth.signInWithEmailAndPassword(email, password).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
-            @Override
-            public void onSuccess(AuthResult authResult) {
-                loadingDialog.dismissDialog();
-                Intent mainScreenIntent = new Intent(LogInActivity.this, HomeActivity.class);
-                startActivity(mainScreenIntent);
-                finish();
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                loadingDialog.dismissDialog();
-                errorMessage.setVisibility(View.VISIBLE);
-            }
+        auth.signInWithEmailAndPassword(email, password).addOnSuccessListener(authResult -> {
+            loadingDialog.dismissDialog();
+            Intent mainScreenIntent = new Intent(LogInActivity.this, HomeActivity.class);
+            startActivity(mainScreenIntent);
+            finish();
+        }).addOnFailureListener(e -> {
+            loadingDialog.dismissDialog();
+            errorMessage.setVisibility(View.VISIBLE);
         });
 
     }
@@ -297,18 +272,8 @@ public class LogInActivity extends AppCompatActivity implements View.OnClickList
         final AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.AlertDialogTheme);
         builder.setMessage("Δεν υπάρχει σύνδεση στο διαδίκτυο")
                 .setCancelable(false)
-                .setPositiveButton("Συνδεση", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        startActivity(new Intent(Settings.ACTION_WIFI_SETTINGS));
-                    }
-                })
-                .setNegativeButton("Εξοδος", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        finish();
-                    }
-                });
+                .setPositiveButton("Συνδεση", (dialog, which) -> startActivity(new Intent(Settings.ACTION_WIFI_SETTINGS)))
+                .setNegativeButton("Εξοδος", (dialog, which) -> finish());
 
         AlertDialog dialog = builder.create();
         dialog.show();

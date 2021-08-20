@@ -27,7 +27,6 @@ import android.widget.AutoCompleteTextView;
 import android.widget.TextView;
 
 import com.example.recipeapp.adapter.RecipeRecyclerViewAdapter;
-import com.example.recipeapp.data.FavouritesFirebaseAsyncResponse;
 import com.example.recipeapp.data.RecipeBankFirebase;
 import com.example.recipeapp.data.SharedPreferencesLanguage;
 import com.example.recipeapp.model.Recipe;
@@ -85,31 +84,28 @@ public class FavouritesActivity extends AppCompatActivity implements TextWatcher
         isListUpdated = false;
 
         /*----- Init Recycler View -----*/
-        favouriteRecipes = recipeBankFirebase.getFavouriteRecipes(new FavouritesFirebaseAsyncResponse() {
-            @Override
-            public void processFinishedFavouritesList(ArrayList<Recipe> favouriteRecipes) {
+        favouriteRecipes = recipeBankFirebase.getFavouriteRecipes(favouriteRecipes -> {
 
-                recipeNames = new ArrayList<>();
-                adapter = new RecipeRecyclerViewAdapter(FavouritesActivity.this, favouriteRecipes);
+            recipeNames = new ArrayList<>();
+            adapter = new RecipeRecyclerViewAdapter(FavouritesActivity.this, favouriteRecipes);
 
-                for (Recipe recipe : favouriteRecipes) {
-                    recipeNames.add(recipe.getName());
-                }
+            for (Recipe recipe : favouriteRecipes) {
+                recipeNames.add(recipe.getName());
+            }
 
-                adapterNames = new ArrayAdapter<>(FavouritesActivity.this, android.R.layout.simple_dropdown_item_1line, recipeNames);
-                searchAutoCompleteEditText.setThreshold(1);
-                searchAutoCompleteEditText.setAdapter(adapterNames);
+            adapterNames = new ArrayAdapter<>(FavouritesActivity.this, android.R.layout.simple_dropdown_item_1line, recipeNames);
+            searchAutoCompleteEditText.setThreshold(1);
+            searchAutoCompleteEditText.setAdapter(adapterNames);
 
-                recipesRecyclerView.setAdapter(adapter);
-                recipesRecyclerView.setHasFixedSize(true);
-                recipesRecyclerView.setLayoutManager(new LinearLayoutManager(FavouritesActivity.this));
+            recipesRecyclerView.setAdapter(adapter);
+            recipesRecyclerView.setHasFixedSize(true);
+            recipesRecyclerView.setLayoutManager(new LinearLayoutManager(FavouritesActivity.this));
 
 
-                if (favouriteRecipes.size() == 0) {
-                    empty_list_textView.setVisibility(View.VISIBLE);
-                } else {
-                    empty_list_textView.setVisibility(View.GONE);
-                }
+            if (favouriteRecipes.size() == 0) {
+                empty_list_textView.setVisibility(View.VISIBLE);
+            } else {
+                empty_list_textView.setVisibility(View.GONE);
             }
         }, currentUser, language);
 
@@ -131,32 +127,25 @@ public class FavouritesActivity extends AppCompatActivity implements TextWatcher
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.toolbar_menu, menu);
-        menu.getItem(1).setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                auth.signOut();
-                startActivity(new Intent(FavouritesActivity.this, LogInActivity.class));
-                finish();
-                return true;
-            }
+        menu.getItem(1).setOnMenuItemClickListener(item -> {
+            auth.signOut();
+            startActivity(new Intent(FavouritesActivity.this, LogInActivity.class));
+            finish();
+            return true;
         });
 
-        menu.getItem(0).setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
+        menu.getItem(0).setOnMenuItemClickListener(item -> {
 
-                String uriText =
-                        "mailto:" + getResources().getString(R.string.app_email);
+            String uriText =
+                    "mailto:" + getResources().getString(R.string.app_email);
 
-                Uri uri = Uri.parse(uriText);
+            Uri uri = Uri.parse(uriText);
 
-                Intent intent = new Intent(Intent.ACTION_SENDTO);
-                intent.setType("text/plain");
-                intent.setData(uri);
-                startActivity(Intent.createChooser(intent, getResources().getString(R.string.contact_us)));
+            Intent intent = new Intent(Intent.ACTION_SENDTO);
+            intent.setDataAndType(uri, "text/plain");
+            startActivity(Intent.createChooser(intent, getResources().getString(R.string.contact_us)));
 
-                return true;
-            }
+            return true;
         });
 
         return true;
@@ -193,32 +182,29 @@ public class FavouritesActivity extends AppCompatActivity implements TextWatcher
             recipeNames = new ArrayList<>();
             recipeBankFirebase = new RecipeBankFirebase();
             bottomNavigationView.setSelectedItemId(R.id.favourites_item);
-            recipeBankFirebase.getFavouriteRecipes(new FavouritesFirebaseAsyncResponse() {
-                @Override
-                public void processFinishedFavouritesList(ArrayList<Recipe> favouriteRecipes) {
+            recipeBankFirebase.getFavouriteRecipes(favouriteRecipes -> {
 
 
-                    adapter = new RecipeRecyclerViewAdapter(FavouritesActivity.this, favouriteRecipes);
+                adapter = new RecipeRecyclerViewAdapter(FavouritesActivity.this, favouriteRecipes);
 
-                    for (Recipe recipe : favouriteRecipes) {
-                        recipeNames.add(recipe.getName());
-                    }
+                for (Recipe recipe : favouriteRecipes) {
+                    recipeNames.add(recipe.getName());
+                }
 
-                    adapterNames = new ArrayAdapter<>(FavouritesActivity.this, android.R.layout.simple_dropdown_item_1line, recipeNames);
-                    searchAutoCompleteEditText.setThreshold(1);
-                    searchAutoCompleteEditText.setAdapter(adapterNames);
-
-
-                    recipesRecyclerView.setAdapter(adapter);
-                    recipesRecyclerView.setHasFixedSize(true);
-                    recipesRecyclerView.setLayoutManager(new LinearLayoutManager(FavouritesActivity.this));
+                adapterNames = new ArrayAdapter<>(FavouritesActivity.this, android.R.layout.simple_dropdown_item_1line, recipeNames);
+                searchAutoCompleteEditText.setThreshold(1);
+                searchAutoCompleteEditText.setAdapter(adapterNames);
 
 
-                    if (favouriteRecipes.size() == 0) {
-                        empty_list_textView.setVisibility(View.VISIBLE);
-                    } else {
-                        empty_list_textView.setVisibility(View.GONE);
-                    }
+                recipesRecyclerView.setAdapter(adapter);
+                recipesRecyclerView.setHasFixedSize(true);
+                recipesRecyclerView.setLayoutManager(new LinearLayoutManager(FavouritesActivity.this));
+
+
+                if (favouriteRecipes.size() == 0) {
+                    empty_list_textView.setVisibility(View.VISIBLE);
+                } else {
+                    empty_list_textView.setVisibility(View.GONE);
                 }
             }, currentUser, language);
         }

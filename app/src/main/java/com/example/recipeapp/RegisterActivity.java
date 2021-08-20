@@ -1,12 +1,10 @@
 package com.example.recipeapp;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.util.Patterns;
 import android.view.KeyEvent;
 import android.view.View;
@@ -20,11 +18,8 @@ import com.example.recipeapp.helper.LocaleHelper;
 import com.example.recipeapp.model.User;
 import com.example.recipeapp.ui.LoadingDialog;
 import com.example.recipeapp.util.LanguageUtils;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.Objects;
@@ -213,18 +208,15 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
     /*---------- User tries to register ----------*/
     private void registerUser(final String email, String password) {
-        auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(RegisterActivity.this, new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                if (task.isSuccessful()) {
-                    loadingDialog.dismissDialog();
-                    Intent mainScreenIntent = new Intent(RegisterActivity.this, HomeActivity.class);
-                    startActivity(mainScreenIntent);
-                    finish();
-                } else {
-                    errorMessageTextView.setText(R.string.error_message_email_exists);
-                    errorMessageTextView.setVisibility(View.VISIBLE);
-                }
+        auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(RegisterActivity.this, task -> {
+            if (task.isSuccessful()) {
+                loadingDialog.dismissDialog();
+                Intent mainScreenIntent = new Intent(RegisterActivity.this, HomeActivity.class);
+                startActivity(mainScreenIntent);
+                finish();
+            } else {
+                errorMessageTextView.setText(R.string.error_message_email_exists);
+                errorMessageTextView.setVisibility(View.VISIBLE);
             }
         });
     }

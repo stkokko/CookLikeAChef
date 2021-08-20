@@ -113,32 +113,25 @@ public class HomeActivity extends AppCompatActivity implements BottomNavigationV
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.toolbar_menu, menu);
-        menu.getItem(1).setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                auth.signOut();
-                startActivity(new Intent(HomeActivity.this, LogInActivity.class));
-                finish();
-                return true;
-            }
+        menu.getItem(1).setOnMenuItemClickListener(item -> {
+            auth.signOut();
+            startActivity(new Intent(HomeActivity.this, LogInActivity.class));
+            finish();
+            return true;
         });
 
-        menu.getItem(0).setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
+        menu.getItem(0).setOnMenuItemClickListener(item -> {
 
-                String uriText =
-                        "mailto:" + getResources().getString(R.string.app_email);
+            String uriText =
+                    "mailto:" + getResources().getString(R.string.app_email);
 
-                Uri uri = Uri.parse(uriText);
+            Uri uri = Uri.parse(uriText);
 
-                Intent intent = new Intent(Intent.ACTION_SENDTO);
-                intent.setType("text/plain");
-                intent.setData(uri);
-                startActivity(Intent.createChooser(intent, getResources().getString(R.string.contact_us)));
+            Intent intent = new Intent(Intent.ACTION_SENDTO);
+            intent.setDataAndType(uri, "text/plain");
+            startActivity(Intent.createChooser(intent, getResources().getString(R.string.contact_us)));
 
-                return true;
-            }
+            return true;
         });
         return true;
     }

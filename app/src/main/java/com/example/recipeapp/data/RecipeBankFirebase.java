@@ -24,8 +24,8 @@ public class RecipeBankFirebase {
     private ArrayList<Recipe> recipeArrayList;
     private ArrayList<Comment> comments;
     private ArrayList<Recipe> favouriteRecipesList;
-    private DatabaseReference db;
-    private FirebaseUser user;
+    private final DatabaseReference db;
+    private final FirebaseUser user;
 
     public RecipeBankFirebase() {
         db = FirebaseDatabase.getInstance().getReference();

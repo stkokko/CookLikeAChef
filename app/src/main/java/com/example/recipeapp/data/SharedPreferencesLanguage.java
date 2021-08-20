@@ -7,7 +7,7 @@ import com.example.recipeapp.util.LanguageUtils;
 public class SharedPreferencesLanguage {
 
     private String language;
-    private SharedPreferences sharedPreferences;
+    private final SharedPreferences sharedPreferences;
 
     public SharedPreferencesLanguage(SharedPreferences sharedPreferences) {
         this.sharedPreferences = sharedPreferences;

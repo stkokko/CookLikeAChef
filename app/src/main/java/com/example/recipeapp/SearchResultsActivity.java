@@ -5,8 +5,6 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.graphics.Color;
-import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -55,12 +53,7 @@ public class SearchResultsActivity extends AppCompatActivity {
         toolbar.setNavigationIcon(R.drawable.return_white_icon);
 
         /*---------- Event Listeners ----------*/
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onBackPressed();
-            }
-        });
+        toolbar.setNavigationOnClickListener(v -> onBackPressed());
 
         /*---------- Set Up Adapter ----------*/
         RecipeRecyclerViewAdapter adapter = new RecipeRecyclerViewAdapter(this, recipes);

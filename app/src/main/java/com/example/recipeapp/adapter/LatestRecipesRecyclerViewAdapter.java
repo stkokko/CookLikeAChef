@@ -25,9 +25,9 @@ import java.util.ArrayList;
 public class LatestRecipesRecyclerViewAdapter extends RecyclerView.Adapter<LatestRecipesRecyclerViewAdapter.ViewHolder> {
 
     /*----- Variables -----*/
-    private ArrayList<Recipe> latestRecipes;
-    private Context context;
-    private RequestOptions options;
+    private final ArrayList<Recipe> latestRecipes;
+    private final Context context;
+    private final RequestOptions options;
 
     /*----- Constructor -----*/
     public LatestRecipesRecyclerViewAdapter(ArrayList<Recipe> latestRecipes, Context context) {
@@ -82,7 +82,7 @@ public class LatestRecipesRecyclerViewAdapter extends RecyclerView.Adapter<Lates
         @Override
         public void onClick(View v) {
             Intent recipeIntent = new Intent(context, RecipeActivity.class);
-            recipeIntent.putExtra("recipe", latestRecipes.get(getAdapterPosition()));
+            recipeIntent.putExtra("recipe", latestRecipes.get(getBindingAdapterPosition()));
             context.startActivity(recipeIntent);
         }
 

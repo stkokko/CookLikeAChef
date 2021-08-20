@@ -1,5 +1,6 @@
 package com.example.recipeapp.adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -30,10 +31,10 @@ import java.util.List;
 public class RecipeRecyclerViewAdapter extends RecyclerView.Adapter<RecipeRecyclerViewAdapter.ViewHolder> implements Filterable {
 
     /*----- Variables -----*/
-    private Context context;
-    private List<Recipe> recipes;
-    private List<Recipe> recipesAll;
-    private RequestOptions options;
+    private final Context context;
+    private final List<Recipe> recipes;
+    private final List<Recipe> recipesAll;
+    private final RequestOptions options;
 
 
     /*----- Constructor -----*/
@@ -99,6 +100,7 @@ public class RecipeRecyclerViewAdapter extends RecyclerView.Adapter<RecipeRecycl
             return filterResults;
         }
 
+        @SuppressLint("NotifyDataSetChanged")
         @Override
         protected void publishResults(CharSequence constraint, FilterResults results) {
 
@@ -130,7 +132,7 @@ public class RecipeRecyclerViewAdapter extends RecyclerView.Adapter<RecipeRecycl
         @Override
         public void onClick(View v) {
             Intent recipeIntent = new Intent(context, RecipeActivity.class);
-            recipeIntent.putExtra("recipe", recipes.get(getAdapterPosition()));
+            recipeIntent.putExtra("recipe", recipes.get(getBindingAdapterPosition()));
             context.startActivity(recipeIntent);
 
         }

@@ -10,7 +10,7 @@ import com.example.recipeapp.R;
 public class LoadingDialog {
 
     /*----- Variables -----*/
-    private Context context;
+    private final Context context;
     private AlertDialog dialog;
 
 

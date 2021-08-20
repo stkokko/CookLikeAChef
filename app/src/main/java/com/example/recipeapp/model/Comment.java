@@ -1,6 +1,5 @@
 package com.example.recipeapp.model;
 
-
 import java.io.Serializable;
 
 public class Comment implements Serializable {

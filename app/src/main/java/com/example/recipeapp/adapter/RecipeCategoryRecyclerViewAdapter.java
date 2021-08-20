@@ -24,9 +24,9 @@ import java.util.ArrayList;
 public class RecipeCategoryRecyclerViewAdapter extends RecyclerView.Adapter<RecipeCategoryRecyclerViewAdapter.ViewHolder> {
 
     /*----- Variables -----*/
-    private Context context;
-    private ArrayList<Recipe> recipes;
-    private RequestOptions options;
+    private final Context context;
+    private final ArrayList<Recipe> recipes;
+    private final RequestOptions options;
 
     /*----- Constructor -----*/
     public RecipeCategoryRecyclerViewAdapter(Context context, ArrayList<Recipe> recipes) {
@@ -75,13 +75,10 @@ public class RecipeCategoryRecyclerViewAdapter extends RecyclerView.Adapter<Reci
             recipeTextView = itemView.findViewById(R.id.recipe_textView);
 
             /*---------- Event Listeners ----------*/
-            recipeCardView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent recipeIntent = new Intent(context, RecipeActivity.class);
-                    recipeIntent.putExtra("recipe", recipes.get(getAdapterPosition()));
-                    (context).startActivity(recipeIntent);
-                }
+            recipeCardView.setOnClickListener(v -> {
+                Intent recipeIntent = new Intent(context, RecipeActivity.class);
+                recipeIntent.putExtra("recipe", recipes.get(getBindingAdapterPosition()));
+                (context).startActivity(recipeIntent);
             });
         }
 

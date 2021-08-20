@@ -21,7 +21,6 @@ import androidx.fragment.app.Fragment;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.recipeapp.R;
-import com.example.recipeapp.data.FavouritesFirebaseAsyncResponse;
 import com.example.recipeapp.data.RecipeBankFirebase;
 import com.example.recipeapp.data.SharedPreferencesLanguage;
 import com.example.recipeapp.model.Ingredient;
@@ -37,7 +36,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Objects;
 
@@ -72,17 +70,17 @@ public class RecipeFragment extends Fragment implements View.OnClickListener {
         addToFavouritesFab = view.findViewById(R.id.add_to_favourites_fab);
 
         /*----- Get Selected Language -----*/
-        SharedPreferences sharedPreferences = Objects.requireNonNull(getActivity()).getSharedPreferences(LanguageUtils.LANGUAGE_ID, MODE_PRIVATE);
+        SharedPreferences sharedPreferences = requireActivity().getSharedPreferences(LanguageUtils.LANGUAGE_ID, MODE_PRIVATE);
         SharedPreferencesLanguage sharedPreferencesLanguage = new SharedPreferencesLanguage(sharedPreferences);
         language = sharedPreferencesLanguage.getLanguage();
 
         /*---------- Set Up Toolbar ----------*/
-        ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
-        Objects.requireNonNull(((AppCompatActivity) getActivity()).getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+        ((AppCompatActivity) requireActivity()).setSupportActionBar(toolbar);
+        Objects.requireNonNull(((AppCompatActivity) requireActivity()).getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         toolbar.setNavigationIcon(R.drawable.return_white_icon);
 
         /*---------- Getting Extras ----------*/
-        Intent intent = getActivity().getIntent();
+        Intent intent = requireActivity().getIntent();
         recipe = (Recipe) intent.getSerializableExtra("recipe");
 
         /*---------- Set Up glide options ----------*/
@@ -94,19 +92,16 @@ public class RecipeFragment extends Fragment implements View.OnClickListener {
         currentUser = Objects.requireNonNull(user).getUid();
 
 
-        new RecipeBankFirebase().getFavouriteRecipes(new FavouritesFirebaseAsyncResponse() {
-            @Override
-            public void processFinishedFavouritesList(ArrayList<Recipe> favourites) {
+        new RecipeBankFirebase().getFavouriteRecipes(favourites -> {
 
-                for (Recipe favouriteRecipe : favourites) {
-                    if (favouriteRecipe.getName().equalsIgnoreCase(recipe.getName())) {
-                        addToFavouritesFab.setImageResource(R.drawable.ic_baseline_favorite_36);
-                        break;
-                    } else {
-                        addToFavouritesFab.setImageResource(R.drawable.ic_baseline_favorite_border);
-                    }
-
+            for (Recipe favouriteRecipe : favourites) {
+                if (favouriteRecipe.getName().equalsIgnoreCase(recipe.getName())) {
+                    addToFavouritesFab.setImageResource(R.drawable.ic_baseline_favorite_36);
+                    break;
+                } else {
+                    addToFavouritesFab.setImageResource(R.drawable.ic_baseline_favorite_border);
                 }
+
             }
         }, currentUser, language);
 
@@ -121,16 +116,11 @@ public class RecipeFragment extends Fragment implements View.OnClickListener {
         collapsingToolbarLayout.setTitle(recipe.getName());
         recipeIngredients.setText(ingredients.toString());
         recipeSteps.setText(recipe.getSteps());
-        Glide.with(getActivity().getApplicationContext()).load(recipe.getImageURL()).apply(options).into(recipeImage);
+        Glide.with(requireActivity().getApplicationContext()).load(recipe.getImageURL()).apply(options).into(recipeImage);
 
         /*---------- Event Listeners ----------*/
         addToFavouritesFab.setOnClickListener(this);
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Objects.requireNonNull(getActivity()).onBackPressed();
-            }
-        });
+        toolbar.setNavigationOnClickListener(v -> requireActivity().onBackPressed());
 
         return view;
     }

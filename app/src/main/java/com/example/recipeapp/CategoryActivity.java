@@ -18,7 +18,6 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.CheckBox;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -104,18 +103,8 @@ public class CategoryActivity extends AppCompatActivity implements AdapterView.O
         recipesRecyclerView.setAdapter(adapter);
 
         /*----- Event Listeners -----*/
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onBackPressed();
-            }
-        });
-        filterImageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openBottomSheetDialog();
-            }
-        });
+        toolbar.setNavigationOnClickListener(v -> onBackPressed());
+        filterImageView.setOnClickListener(v -> openBottomSheetDialog());
         searchAutoCompleteEditText.addTextChangedListener(this);
         searchAutoCompleteEditText.setOnEditorActionListener(this);
         searchAutoCompleteEditText.setOnItemClickListener(this);
@@ -314,6 +303,13 @@ public class CategoryActivity extends AppCompatActivity implements AdapterView.O
     @Override
     public void afterTextChanged(Editable s) {
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        searchAutoCompleteEditText.setText(null);
+        searchAutoCompleteEditText.clearFocus();
     }
 
     @Override

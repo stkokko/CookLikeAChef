@@ -1,5 +1,6 @@
 package com.example.recipeapp.fragments;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -81,19 +82,14 @@ public class CommentFragment extends Fragment implements View.OnClickListener {
         @Override
         public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
 
-            int position = viewHolder.getAdapterPosition();
+            int position = viewHolder.getBindingAdapterPosition();
             deletedComment = commentsArrayList.get(position);
 
             if (user.getUid().equals(deletedComment.getAuthor())) {
 
                 deleteUserComment(deletedComment, user.getUid(), position);
                 Snackbar.make(recyclerView, "Comment deleted", Snackbar.LENGTH_LONG)
-                        .setAction("Undo", new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                saveComment(deletedComment);
-                            }
-                        }).show();
+                        .setAction("Undo", v -> saveComment(deletedComment)).show();
             } else {
                 commentRecyclerViewAdapter.notifyItemChanged(position);
             }
@@ -105,6 +101,7 @@ public class CommentFragment extends Fragment implements View.OnClickListener {
         mDatabase = mDatabase.child("Recipes").child(language).child(recipe.getName()).child("comments");
 
         mDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
+            @SuppressLint("NotifyDataSetChanged")
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
@@ -112,11 +109,11 @@ public class CommentFragment extends Fragment implements View.OnClickListener {
                     String author = ds.child("userId").getValue(String.class);
                     String commentText = ds.child("comment").getValue(String.class);
                     Log.d("DELETE_COMMENT", "onDataChange: " + " Author: " + ds.getKey());
-                    if (author != null && author.equals(uid) && commentText.equals(deletedComment.getComment())) {
-                        ((RecipeActivity) getActivity()).bottomNavigationView.getBadge(R.id.commentsNavIcon).setNumber(recipe.getComment().size() - 1);
+                    if (author != null && author.equals(uid) && Objects.equals(commentText, deletedComment.getComment())) {
+                        Objects.requireNonNull(((RecipeActivity) getActivity()).bottomNavigationView.getBadge(R.id.commentsNavIcon)).setNumber(recipe.getComment().size() - 1);
                         commentsArrayList.remove(position);
                         commentRecyclerViewAdapter.notifyDataSetChanged();
-                        mDatabase.child(ds.getKey()).removeValue();
+                        mDatabase.child(Objects.requireNonNull(ds.getKey())).removeValue();
                     }
                 }
 
@@ -142,12 +139,12 @@ public class CommentFragment extends Fragment implements View.OnClickListener {
         RecipeBankFirebase recipeBankFirebase = new RecipeBankFirebase();
 
         /*----- Get Selected Language -----*/
-        SharedPreferences sharedPreferences = Objects.requireNonNull(getContext()).getSharedPreferences(LanguageUtils.LANGUAGE_ID, MODE_PRIVATE);
+        SharedPreferences sharedPreferences = requireContext().getSharedPreferences(LanguageUtils.LANGUAGE_ID, MODE_PRIVATE);
         SharedPreferencesLanguage sharedPreferencesLanguage = new SharedPreferencesLanguage(sharedPreferences);
         language = sharedPreferencesLanguage.getLanguage();
 
         /*----- Getting Extras -----*/
-        Intent intent = Objects.requireNonNull(getActivity()).getIntent();
+        Intent intent = requireActivity().getIntent();
         recipe = (Recipe) intent.getSerializableExtra("recipe");
 
         /*----- Hooks -----*/
@@ -157,8 +154,8 @@ public class CommentFragment extends Fragment implements View.OnClickListener {
         Toolbar toolbar = view.findViewById(R.id.comment_toolbar);
 
         /*---------- Set Up Toolbar ----------*/
-        ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
-        Objects.requireNonNull(((AppCompatActivity) getActivity()).getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+        ((AppCompatActivity) requireActivity()).setSupportActionBar(toolbar);
+        Objects.requireNonNull(((AppCompatActivity) requireActivity()).getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         toolbar.setTitle(recipe.getName().trim());
         toolbar.setNavigationIcon(R.drawable.return_white_icon);
 
@@ -194,12 +191,7 @@ public class CommentFragment extends Fragment implements View.OnClickListener {
 
         /*----------- Event Listeners -----------*/
         sendComment.setOnClickListener(this);
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Objects.requireNonNull(getActivity()).onBackPressed();
-            }
-        });
+        toolbar.setNavigationOnClickListener(v -> requireActivity().onBackPressed());
 
         return view;
     }
@@ -212,6 +204,7 @@ public class CommentFragment extends Fragment implements View.OnClickListener {
         }
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     private void saveComment(final Comment comment) {
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
@@ -227,13 +220,10 @@ public class CommentFragment extends Fragment implements View.OnClickListener {
             comments.put(id, commentMap);
 
             mDatabase.child("Recipes").child(language).child(recipe.getName()).child("comments").updateChildren(comments)
-                    .addOnSuccessListener(new OnSuccessListener<Void>() {
-                        @Override
-                        public void onSuccess(Void aVoid) {
-                            ((RecipeActivity) getActivity()).bottomNavigationView.getBadge(R.id.commentsNavIcon).setNumber(recipe.getComment().size() + 1);
-                            recipe.getComment().add(comment);
-                            commentRecyclerViewAdapter.notifyDataSetChanged();
-                        }
+                    .addOnSuccessListener(aVoid -> {
+                        Objects.requireNonNull(((RecipeActivity) getActivity()).bottomNavigationView.getBadge(R.id.commentsNavIcon)).setNumber(recipe.getComment().size() + 1);
+                        recipe.getComment().add(comment);
+                        commentRecyclerViewAdapter.notifyDataSetChanged();
                     });
 
             return;
@@ -256,13 +246,10 @@ public class CommentFragment extends Fragment implements View.OnClickListener {
             comments.put(id, commentMap);
 
             mDatabase.child("Recipes").child(language).child(recipe.getName()).child("comments").updateChildren(comments)
-                    .addOnSuccessListener(new OnSuccessListener<Void>() {
-                        @Override
-                        public void onSuccess(Void aVoid) {
-                            ((RecipeActivity) getActivity()).bottomNavigationView.getBadge(R.id.commentsNavIcon).setNumber(recipe.getComment().size() + 1);
-                            recipe.getComment().add(new Comment(userId, commentText, commentDate));
-                            commentRecyclerViewAdapter.notifyDataSetChanged();
-                        }
+                    .addOnSuccessListener(aVoid -> {
+                        Objects.requireNonNull(((RecipeActivity) getActivity()).bottomNavigationView.getBadge(R.id.commentsNavIcon)).setNumber(recipe.getComment().size() + 1);
+                        recipe.getComment().add(new Comment(userId, commentText, commentDate));
+                        commentRecyclerViewAdapter.notifyDataSetChanged();
                     });
         }
 

@@ -10,7 +10,7 @@ import android.os.Handler;
 public class SplashScreenActivity extends AppCompatActivity {
 
     /*----- Variables -----*/
-    private Handler handler = new Handler();
+    private final Handler handler = new Handler();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,13 +19,10 @@ public class SplashScreenActivity extends AppCompatActivity {
     }
 
     
-    private Runnable runnable = new Runnable() {
-        @Override
-        public void run() {
-            if (!isFinishing()) {
-                startActivity(new Intent(SplashScreenActivity.this, LogInActivity.class));
-                finish();
-            }
+    private final Runnable runnable = () -> {
+        if (!isFinishing()) {
+            startActivity(new Intent(SplashScreenActivity.this, LogInActivity.class));
+            finish();
         }
     };
 

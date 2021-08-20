@@ -1,6 +1,5 @@
 package com.example.recipeapp;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
@@ -8,10 +7,7 @@ import androidx.fragment.app.Fragment;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.view.MenuItem;
 
-
-import com.example.recipeapp.data.CommentsFirebaseAsyncResponse;
 import com.example.recipeapp.data.RecipeBankFirebase;
 import com.example.recipeapp.data.SharedPreferencesLanguage;
 import com.example.recipeapp.fragments.CommentFragment;
@@ -27,29 +23,26 @@ public class RecipeActivity extends AppCompatActivity {
 
     /*---------- Fragments Variables ----------*/
     public static BottomNavigationView bottomNavigationView;
-    private BottomNavigationView.OnNavigationItemSelectedListener navigationItemSelectedListener =
-            new BottomNavigationView.OnNavigationItemSelectedListener() {
-                @Override
-                public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                    Fragment selectedFragment = null;
+    private final BottomNavigationView.OnNavigationItemSelectedListener navigationItemSelectedListener =
+            item -> {
+                Fragment selectedFragment = null;
 
-                    switch (item.getItemId()) {
+                switch (item.getItemId()) {
 
-                        case R.id.recipeNavIcon:
+                    case R.id.recipeNavIcon:
 
-                            selectedFragment = new RecipeFragment();
-                            updateBadge();
-                            break;
+                        selectedFragment = new RecipeFragment();
+                        updateBadge();
+                        break;
 
-                        case R.id.commentsNavIcon:
-                            selectedFragment = new CommentFragment();
-                            updateBadge();
-                            break;
-                    }
-
-                    getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, Objects.requireNonNull(selectedFragment)).commit();
-                    return true;
+                    case R.id.commentsNavIcon:
+                        selectedFragment = new CommentFragment();
+                        updateBadge();
+                        break;
                 }
+
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, Objects.requireNonNull(selectedFragment)).commit();
+                return true;
             };
 
     /*---------- Variables ----------*/
@@ -106,15 +99,12 @@ public class RecipeActivity extends AppCompatActivity {
 
     private void updateBadge() {
         RecipeBankFirebase recipeBankFirebase = new RecipeBankFirebase();
-        recipeBankFirebase.getCommentsCount(new CommentsFirebaseAsyncResponse() {
-            @Override
-            public void processFinishedCommentsCount(int commentsCount) {
-                if (commentsCount > 0) {
-                    badgeDrawable.setNumber(commentsCount);
-                    badgeDrawable.setVisible(true);
-                } else {
-                    badgeDrawable.setVisible(false);
-                }
+        recipeBankFirebase.getCommentsCount(commentsCount -> {
+            if (commentsCount > 0) {
+                badgeDrawable.setNumber(commentsCount);
+                badgeDrawable.setVisible(true);
+            } else {
+                badgeDrawable.setVisible(false);
             }
         }, recipe.getName(), language.getLanguage());
 

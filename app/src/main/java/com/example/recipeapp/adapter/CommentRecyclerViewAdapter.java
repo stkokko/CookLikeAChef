@@ -1,5 +1,6 @@
 package com.example.recipeapp.adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.text.Html;
 import android.text.SpannableStringBuilder;
@@ -24,14 +25,15 @@ import java.util.List;
 public class CommentRecyclerViewAdapter extends RecyclerView.Adapter<CommentRecyclerViewAdapter.ViewHolder> {
 
     /*----- Variables -----*/
-    private List<Comment> commentList;
+    private final List<Comment> commentList;
+    @SuppressLint("StaticFieldLeak")
     private static Context context;
-    private String userId;
+    private final String userId;
 
     /*----- Constructor -----*/
     public CommentRecyclerViewAdapter(List<Comment> commentList, Context context, String userId) {
         this.commentList = commentList;
-        this.context = context;
+        CommentRecyclerViewAdapter.context = context;
         this.userId = userId;
     }
 
@@ -43,6 +45,7 @@ public class CommentRecyclerViewAdapter extends RecyclerView.Adapter<CommentRecy
         return new ViewHolder(view);
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
 
@@ -50,11 +53,10 @@ public class CommentRecyclerViewAdapter extends RecyclerView.Adapter<CommentRecy
         Comment comment = commentList.get(position);
         if (comment.getAuthor().equals(userId)) {
             holder.comment.setText(context.getResources().getText(R.string.myComment) + " " + comment.getComment());
-            makeTextViewResizable(holder.comment, 3, context.getString(R.string.show_more), true);
         } else {
             holder.comment.setText(comment.getComment());
-            makeTextViewResizable(holder.comment, 3, context.getString(R.string.show_more), true);
         }
+        makeTextViewResizable(holder.comment, 3, context.getString(R.string.show_more), true);
 
         String timeAgo = (String) DateUtils.
                 getRelativeTimeSpanString(Long.parseLong(comment.getDate()) * 1000);
@@ -68,7 +70,7 @@ public class CommentRecyclerViewAdapter extends RecyclerView.Adapter<CommentRecy
         return commentList.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public static class ViewHolder extends RecyclerView.ViewHolder {
 
         /*----- XML Element Variables -----*/
         public TextView comment;
@@ -115,18 +117,18 @@ public class CommentRecyclerViewAdapter extends RecyclerView.Adapter<CommentRecy
                 tv.setText(text);
                 tv.setMovementMethod(LinkMovementMethod.getInstance());
                 tv.setText(
-                        addClickablePartTextViewResizable(Html.fromHtml(tv.getText().toString()), tv, lineEndIndex, expandText,
+                        addClickablePartTextViewResizable(Html.fromHtml(tv.getText().toString()), tv, expandText,
                                 viewMore), TextView.BufferType.SPANNABLE);
             }
         });
     }
 
     private static SpannableStringBuilder addClickablePartTextViewResizable(final Spanned strSpanned, final TextView tv,
-                                                                            final int maxLine, final String spanableText, final boolean viewMore) {
+                                                                            final String spannableText, final boolean viewMore) {
         String str = strSpanned.toString();
         SpannableStringBuilder ssb = new SpannableStringBuilder(strSpanned);
 
-        if (str.contains(spanableText)) {
+        if (str.contains(spannableText)) {
             ssb.setSpan(new ClickableSpan() {
 
                 @Override
@@ -141,7 +143,7 @@ public class CommentRecyclerViewAdapter extends RecyclerView.Adapter<CommentRecy
                     }
 
                 }
-            }, str.indexOf(spanableText), str.indexOf(spanableText) + spanableText.length(), 0);
+            }, str.indexOf(spannableText), str.indexOf(spannableText) + spannableText.length(), 0);
 
         }
         return ssb;

@@ -17,10 +17,10 @@ import java.util.ArrayList;
 public class IngredientRecyclerViewAdapter extends RecyclerView.Adapter<IngredientRecyclerViewAdapter.ViewHolder> {
 
     /*----- Variables -----*/
-    private Context context;
-    private ArrayList<String> ingredients;
-    private boolean[] isSelected;
-    private OnIngredientListener onIngredientListener;
+    private final Context context;
+    private final ArrayList<String> ingredients;
+    private final boolean[] isSelected;
+    private final OnIngredientListener onIngredientListener;
     public ArrayList<String> selectedIngredients;
 
     /*----- Constructor -----*/
@@ -48,10 +48,7 @@ public class IngredientRecyclerViewAdapter extends RecyclerView.Adapter<Ingredie
 
         /*----- Init Variables -----*/
         holder.ingredientTextView.setText(ingredients.get(position));
-        if (isSelected[position])
-            holder.ingredientCheckbox.setChecked(true);
-        else
-            holder.ingredientCheckbox.setChecked(false);
+        holder.ingredientCheckbox.setChecked(isSelected[position]);
 
     }
 
@@ -85,12 +82,12 @@ public class IngredientRecyclerViewAdapter extends RecyclerView.Adapter<Ingredie
         public void onClick(View v) {
             if (!ingredientCheckbox.isChecked()) {
                 selectedIngredients.remove(ingredientTextView.getText().toString());
-                isSelected[getAdapterPosition()] = false;
+                isSelected[getBindingAdapterPosition()] = false;
             } else {
                 selectedIngredients.add(ingredientTextView.getText().toString());
-                isSelected[getAdapterPosition()] = true;
+                isSelected[getBindingAdapterPosition()] = true;
             }
-            onIngredientListener.onIngredientClick(getAdapterPosition());
+            onIngredientListener.onIngredientClick(getBindingAdapterPosition());
         }
     }
 
