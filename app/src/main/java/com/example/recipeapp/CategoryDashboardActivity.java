@@ -184,18 +184,17 @@ public class CategoryDashboardActivity extends AppCompatActivity implements Bott
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.home_item:
-                startActivity(new Intent(this, HomeActivity.class));
-                overridePendingTransition(R.anim.slide_up_in, R.anim.slide_up_out);
-                finish();
-                break;
-            case R.id.favourites_item:
-                startActivity(new Intent(this, FavouritesActivity.class));
-                overridePendingTransition(R.anim.slide_up_in, R.anim.slide_up_out);
-                finish();
-                break;
+
+        if (item.getItemId() == R.id.home_item) {
+            startActivity(new Intent(this, HomeActivity.class));
+            overridePendingTransition(R.anim.slide_up_in, R.anim.slide_up_out);
+            finish();
+        } else if (item.getItemId() == R.id.favourites_item) {
+            startActivity(new Intent(this, FavouritesActivity.class));
+            overridePendingTransition(R.anim.slide_up_in, R.anim.slide_up_out);
+            finish();
         }
+
         return true;
     }
 
@@ -273,43 +272,36 @@ public class CategoryDashboardActivity extends AppCompatActivity implements Bott
     @Override
     public void onClick(View v) {
 
-        switch (v.getId()) {
-
-            case R.id.brunch:
-                //Start Brunch
-                Intent brunchIntent = new Intent(CategoryDashboardActivity.this, CategoryActivity.class);
-                brunchIntent.putExtra("category", getResources().getString(R.string.brunch));
-                brunchIntent.putExtra("recipes", brunchRecipes);
-                startActivity(brunchIntent);
-                break;
-            case R.id.salads:
-                //Start Salads
-                Intent saladsIntent = new Intent(CategoryDashboardActivity.this, CategoryActivity.class);
-                saladsIntent.putExtra("category", getResources().getString(R.string.salads));
-                saladsIntent.putExtra("recipes", saladsRecipes);
-                startActivity(saladsIntent);
-                break;
-            case R.id.main_dishes:
-                //Start Main Dishes
-                Intent mainDishesIntent = new Intent(CategoryDashboardActivity.this, CategoryActivity.class);
-                mainDishesIntent.putExtra("category", getResources().getString(R.string.main_dishes));
-                mainDishesIntent.putExtra("recipes", mainDishesRecipes);
-                startActivity(mainDishesIntent);
-                break;
-            case R.id.burgers:
-                //Start Burgers
-                Intent burgersIntent = new Intent(CategoryDashboardActivity.this, CategoryActivity.class);
-                burgersIntent.putExtra("category", getResources().getString(R.string.burgers));
-                burgersIntent.putExtra("recipes", burgersRecipes);
-                startActivity(burgersIntent);
-                break;
-            case R.id.desserts:
-                //Start Desserts
-                Intent dessertsIntent = new Intent(CategoryDashboardActivity.this, CategoryActivity.class);
-                dessertsIntent.putExtra("category", getResources().getString(R.string.desserts));
-                dessertsIntent.putExtra("recipes", dessertsRecipes);
-                startActivity(dessertsIntent);
-                break;
+        if (v.getId() == R.id.brunch) {
+            //Start Brunch
+            Intent brunchIntent = new Intent(CategoryDashboardActivity.this, CategoryActivity.class);
+            brunchIntent.putExtra("category", getResources().getString(R.string.brunch));
+            brunchIntent.putExtra("recipes", brunchRecipes);
+            startActivity(brunchIntent);
+        } else if (v.getId() == R.id.salads) {
+            //Start Salads
+            Intent saladsIntent = new Intent(CategoryDashboardActivity.this, CategoryActivity.class);
+            saladsIntent.putExtra("category", getResources().getString(R.string.salads));
+            saladsIntent.putExtra("recipes", saladsRecipes);
+            startActivity(saladsIntent);
+        } else if (v.getId() == R.id.main_dishes) {
+            //Start Main Dishes
+            Intent mainDishesIntent = new Intent(CategoryDashboardActivity.this, CategoryActivity.class);
+            mainDishesIntent.putExtra("category", getResources().getString(R.string.main_dishes));
+            mainDishesIntent.putExtra("recipes", mainDishesRecipes);
+            startActivity(mainDishesIntent);
+        } else if (v.getId() == R.id.burgers) {
+            //Start Burgers
+            Intent burgersIntent = new Intent(CategoryDashboardActivity.this, CategoryActivity.class);
+            burgersIntent.putExtra("category", getResources().getString(R.string.burgers));
+            burgersIntent.putExtra("recipes", burgersRecipes);
+            startActivity(burgersIntent);
+        } else if (v.getId() == R.id.desserts) {
+            //Start Desserts
+            Intent dessertsIntent = new Intent(CategoryDashboardActivity.this, CategoryActivity.class);
+            dessertsIntent.putExtra("category", getResources().getString(R.string.desserts));
+            dessertsIntent.putExtra("recipes", dessertsRecipes);
+            startActivity(dessertsIntent);
         }
 
     }

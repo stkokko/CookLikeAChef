@@ -32,7 +32,6 @@ import com.example.recipeapp.model.Comment;
 import com.example.recipeapp.model.Recipe;
 import com.example.recipeapp.ui.LoadingDialog;
 import com.example.recipeapp.util.LanguageUtils;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;

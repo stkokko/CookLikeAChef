@@ -316,88 +316,83 @@ public class CategoryActivity extends AppCompatActivity implements AdapterView.O
     public void onClick(View v) {
         String[] brunchSaltyIngredients;
         String[] brunchSweetIngredients;
-        switch (v.getId()) {
-            case R.id.close_imageView:
-                bottomSheetDialog.dismiss();
-                break;
-            case R.id.checkbox_salty:
-                cancelFilters.setVisibility(View.GONE);
-                if (saltyCheckbox.isChecked() && !sweetCheckbox.isChecked()) {
-                    /*---------- Set Up RecyclerViewAdapter ----------*/
-                    brunchSaltyIngredients = getResources().getStringArray(R.array.salty_ingredients);
-                    ingredientRecyclerViewAdapter = new IngredientRecyclerViewAdapter(CategoryActivity.this, new ArrayList<>(Arrays.asList(brunchSaltyIngredients)), this);
-                } else if (!saltyCheckbox.isChecked() && sweetCheckbox.isChecked()) {
-                    /*---------- Set Up RecyclerViewAdapter ----------*/
-                    brunchSweetIngredients = getResources().getStringArray(R.array.sweet_ingredients);
-                    ingredientRecyclerViewAdapter = new IngredientRecyclerViewAdapter(CategoryActivity.this, new ArrayList<>(Arrays.asList(brunchSweetIngredients)), this);
-                } else {
-                    /*---------- Set Up RecyclerViewAdapter ----------*/
-                    String[] brunchIngredients = getResources().getStringArray(R.array.brunch_ingredients);
-                    ingredientRecyclerViewAdapter = new IngredientRecyclerViewAdapter(CategoryActivity.this, new ArrayList<>(Arrays.asList(brunchIngredients)), this);
-                }
-                ingredientRecyclerView.setAdapter(ingredientRecyclerViewAdapter);
-                break;
-            case R.id.checkbox_sweet:
-                cancelFilters.setVisibility(View.GONE);
-                if (sweetCheckbox.isChecked() && !saltyCheckbox.isChecked()) {
-                    /*---------- Set Up RecyclerViewAdapter ----------*/
-                    brunchSweetIngredients = getResources().getStringArray(R.array.sweet_ingredients);
-                    ingredientRecyclerViewAdapter = new IngredientRecyclerViewAdapter(CategoryActivity.this, new ArrayList<>(Arrays.asList(brunchSweetIngredients)), this);
-                } else if (!sweetCheckbox.isChecked() && saltyCheckbox.isChecked()) {
-                    /*---------- Set Up RecyclerViewAdapter ----------*/
-                    brunchSaltyIngredients = getResources().getStringArray(R.array.salty_ingredients);
-                    ingredientRecyclerViewAdapter = new IngredientRecyclerViewAdapter(CategoryActivity.this, new ArrayList<>(Arrays.asList(brunchSaltyIngredients)), this);
-                } else {
-                    /*---------- Set Up RecyclerViewAdapter ----------*/
-                    String[] brunchIngredients = getResources().getStringArray(R.array.brunch_ingredients);
-                    ingredientRecyclerViewAdapter = new IngredientRecyclerViewAdapter(CategoryActivity.this, new ArrayList<>(Arrays.asList(brunchIngredients)), this);
-                }
-                ingredientRecyclerView.setAdapter(ingredientRecyclerViewAdapter);
-                break;
-            case R.id.cancel_textView:
-                if (saltyCheckbox != null && saltyCheckbox.isChecked()) {
-                    /*---------- Set Up RecyclerViewAdapter ----------*/
-                    brunchSaltyIngredients = getResources().getStringArray(R.array.salty_ingredients);
-                    ingredientRecyclerViewAdapter = new IngredientRecyclerViewAdapter(CategoryActivity.this, new ArrayList<>(Arrays.asList(brunchSaltyIngredients)), this);
-                    saltyCheckbox.setChecked(false);
-                } else if (sweetCheckbox != null && sweetCheckbox.isChecked()) {
-                    /*---------- Set Up RecyclerViewAdapter ----------*/
-                    brunchSweetIngredients = getResources().getStringArray(R.array.sweet_ingredients);
-                    ingredientRecyclerViewAdapter = new IngredientRecyclerViewAdapter(CategoryActivity.this, new ArrayList<>(Arrays.asList(brunchSweetIngredients)), this);
-                    sweetCheckbox.setChecked(false);
-                }
 
-                if (categoryTextView.getText().toString().equalsIgnoreCase(getResources().getString(R.string.brunch))) {
-                    /*---------- Set Up RecyclerViewAdapter ----------*/
-                    String[] brunchIngredients = getResources().getStringArray(R.array.brunch_ingredients);
-                    ingredientRecyclerViewAdapter = new IngredientRecyclerViewAdapter(CategoryActivity.this, new ArrayList<>(Arrays.asList(brunchIngredients)), this);
-                } else if (categoryTextView.getText().toString().equalsIgnoreCase(getResources().getString(R.string.salads))) {
-                    /*---------- Set Up RecyclerViewAdapter ----------*/
-                    String[] saladsIngredients = getResources().getStringArray(R.array.salads_ingredients);
-                    ingredientRecyclerViewAdapter = new IngredientRecyclerViewAdapter(CategoryActivity.this, new ArrayList<>(Arrays.asList(saladsIngredients)), this);
-                } else if (categoryTextView.getText().toString().equalsIgnoreCase(getResources().getString(R.string.main_dishes))) {
-                    /*---------- Set Up RecyclerViewAdapter ----------*/
-                    String[] mainDishesIngredients = getResources().getStringArray(R.array.main_dishes_ingredients);
-                    ingredientRecyclerViewAdapter = new IngredientRecyclerViewAdapter(CategoryActivity.this, new ArrayList<>(Arrays.asList(mainDishesIngredients)), this);
-                } else if (categoryTextView.getText().toString().equalsIgnoreCase(getResources().getString(R.string.burgers))) {
-                    /*---------- Set Up RecyclerViewAdapter ----------*/
-                    String[] burgersIngredients = getResources().getStringArray(R.array.burger_ingredients);
-                    ingredientRecyclerViewAdapter = new IngredientRecyclerViewAdapter(CategoryActivity.this, new ArrayList<>(Arrays.asList(burgersIngredients)), this);
-                }
-
+        if (v.getId() == R.id.close_imageView) {
+            bottomSheetDialog.dismiss();
+        } else if (v.getId() == R.id.checkbox_salty) {
+            cancelFilters.setVisibility(View.GONE);
+            if (saltyCheckbox.isChecked() && !sweetCheckbox.isChecked()) {
                 /*---------- Set Up RecyclerViewAdapter ----------*/
-                ingredientRecyclerView.setAdapter(ingredientRecyclerViewAdapter);
-                cancelFilters.setVisibility(View.GONE);
-                break;
-            case R.id.ingredient_filter_fab:
-                if (ingredientRecyclerViewAdapter.getSelectedIngredients().size() == 0) {
-                    Snackbar.make(v, getResources().getString(R.string.please_choose_ingredient), Snackbar.LENGTH_LONG).show();
-                } else {
-                    Intent searchResultsIntent = new Intent(CategoryActivity.this, SearchResultsActivity.class);
-                    searchResultsIntent.putExtra("filteredRecipes", filterByIngredients());
-                    startActivity(searchResultsIntent);
-                }
+                brunchSaltyIngredients = getResources().getStringArray(R.array.salty_ingredients);
+                ingredientRecyclerViewAdapter = new IngredientRecyclerViewAdapter(CategoryActivity.this, new ArrayList<>(Arrays.asList(brunchSaltyIngredients)), this);
+            } else if (!saltyCheckbox.isChecked() && sweetCheckbox.isChecked()) {
+                /*---------- Set Up RecyclerViewAdapter ----------*/
+                brunchSweetIngredients = getResources().getStringArray(R.array.sweet_ingredients);
+                ingredientRecyclerViewAdapter = new IngredientRecyclerViewAdapter(CategoryActivity.this, new ArrayList<>(Arrays.asList(brunchSweetIngredients)), this);
+            } else {
+                /*---------- Set Up RecyclerViewAdapter ----------*/
+                String[] brunchIngredients = getResources().getStringArray(R.array.brunch_ingredients);
+                ingredientRecyclerViewAdapter = new IngredientRecyclerViewAdapter(CategoryActivity.this, new ArrayList<>(Arrays.asList(brunchIngredients)), this);
+            }
+            ingredientRecyclerView.setAdapter(ingredientRecyclerViewAdapter);
+        } else if (v.getId() == R.id.checkbox_sweet) {
+            cancelFilters.setVisibility(View.GONE);
+            if (sweetCheckbox.isChecked() && !saltyCheckbox.isChecked()) {
+                /*---------- Set Up RecyclerViewAdapter ----------*/
+                brunchSweetIngredients = getResources().getStringArray(R.array.sweet_ingredients);
+                ingredientRecyclerViewAdapter = new IngredientRecyclerViewAdapter(CategoryActivity.this, new ArrayList<>(Arrays.asList(brunchSweetIngredients)), this);
+            } else if (!sweetCheckbox.isChecked() && saltyCheckbox.isChecked()) {
+                /*---------- Set Up RecyclerViewAdapter ----------*/
+                brunchSaltyIngredients = getResources().getStringArray(R.array.salty_ingredients);
+                ingredientRecyclerViewAdapter = new IngredientRecyclerViewAdapter(CategoryActivity.this, new ArrayList<>(Arrays.asList(brunchSaltyIngredients)), this);
+            } else {
+                /*---------- Set Up RecyclerViewAdapter ----------*/
+                String[] brunchIngredients = getResources().getStringArray(R.array.brunch_ingredients);
+                ingredientRecyclerViewAdapter = new IngredientRecyclerViewAdapter(CategoryActivity.this, new ArrayList<>(Arrays.asList(brunchIngredients)), this);
+            }
+            ingredientRecyclerView.setAdapter(ingredientRecyclerViewAdapter);
+        } else if (v.getId() == R.id.cancel_textView) {
+            if (saltyCheckbox != null && saltyCheckbox.isChecked()) {
+                /*---------- Set Up RecyclerViewAdapter ----------*/
+                brunchSaltyIngredients = getResources().getStringArray(R.array.salty_ingredients);
+                ingredientRecyclerViewAdapter = new IngredientRecyclerViewAdapter(CategoryActivity.this, new ArrayList<>(Arrays.asList(brunchSaltyIngredients)), this);
+                saltyCheckbox.setChecked(false);
+            } else if (sweetCheckbox != null && sweetCheckbox.isChecked()) {
+                /*---------- Set Up RecyclerViewAdapter ----------*/
+                brunchSweetIngredients = getResources().getStringArray(R.array.sweet_ingredients);
+                ingredientRecyclerViewAdapter = new IngredientRecyclerViewAdapter(CategoryActivity.this, new ArrayList<>(Arrays.asList(brunchSweetIngredients)), this);
+                sweetCheckbox.setChecked(false);
+            }
 
+            if (categoryTextView.getText().toString().equalsIgnoreCase(getResources().getString(R.string.brunch))) {
+                /*---------- Set Up RecyclerViewAdapter ----------*/
+                String[] brunchIngredients = getResources().getStringArray(R.array.brunch_ingredients);
+                ingredientRecyclerViewAdapter = new IngredientRecyclerViewAdapter(CategoryActivity.this, new ArrayList<>(Arrays.asList(brunchIngredients)), this);
+            } else if (categoryTextView.getText().toString().equalsIgnoreCase(getResources().getString(R.string.salads))) {
+                /*---------- Set Up RecyclerViewAdapter ----------*/
+                String[] saladsIngredients = getResources().getStringArray(R.array.salads_ingredients);
+                ingredientRecyclerViewAdapter = new IngredientRecyclerViewAdapter(CategoryActivity.this, new ArrayList<>(Arrays.asList(saladsIngredients)), this);
+            } else if (categoryTextView.getText().toString().equalsIgnoreCase(getResources().getString(R.string.main_dishes))) {
+                /*---------- Set Up RecyclerViewAdapter ----------*/
+                String[] mainDishesIngredients = getResources().getStringArray(R.array.main_dishes_ingredients);
+                ingredientRecyclerViewAdapter = new IngredientRecyclerViewAdapter(CategoryActivity.this, new ArrayList<>(Arrays.asList(mainDishesIngredients)), this);
+            } else if (categoryTextView.getText().toString().equalsIgnoreCase(getResources().getString(R.string.burgers))) {
+                /*---------- Set Up RecyclerViewAdapter ----------*/
+                String[] burgersIngredients = getResources().getStringArray(R.array.burger_ingredients);
+                ingredientRecyclerViewAdapter = new IngredientRecyclerViewAdapter(CategoryActivity.this, new ArrayList<>(Arrays.asList(burgersIngredients)), this);
+            }
+
+            /*---------- Set Up RecyclerViewAdapter ----------*/
+            ingredientRecyclerView.setAdapter(ingredientRecyclerViewAdapter);
+            cancelFilters.setVisibility(View.GONE);
+        } else if (v.getId() == R.id.ingredient_filter_fab) {
+            if (ingredientRecyclerViewAdapter.getSelectedIngredients().size() == 0) {
+                Snackbar.make(v, getResources().getString(R.string.please_choose_ingredient), Snackbar.LENGTH_LONG).show();
+            } else {
+                Intent searchResultsIntent = new Intent(CategoryActivity.this, SearchResultsActivity.class);
+                searchResultsIntent.putExtra("filteredRecipes", filterByIngredients());
+                startActivity(searchResultsIntent);
+            }
         }
     }
 

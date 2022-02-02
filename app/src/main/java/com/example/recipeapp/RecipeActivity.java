@@ -27,18 +27,12 @@ public class RecipeActivity extends AppCompatActivity {
             item -> {
                 Fragment selectedFragment = null;
 
-                switch (item.getItemId()) {
-
-                    case R.id.recipeNavIcon:
-
-                        selectedFragment = new RecipeFragment();
-                        updateBadge();
-                        break;
-
-                    case R.id.commentsNavIcon:
-                        selectedFragment = new CommentFragment();
-                        updateBadge();
-                        break;
+                if (item.getItemId() == R.id.recipeNavIcon) {
+                    selectedFragment = new RecipeFragment();
+                    updateBadge();
+                } else if (item.getItemId() == R.id.commentsNavIcon) {
+                    selectedFragment = new CommentFragment();
+                    updateBadge();
                 }
 
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, Objects.requireNonNull(selectedFragment)).commit();

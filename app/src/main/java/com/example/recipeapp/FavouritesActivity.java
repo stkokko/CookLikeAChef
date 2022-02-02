@@ -213,18 +213,17 @@ public class FavouritesActivity extends AppCompatActivity implements TextWatcher
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.categories_item:
-                startActivity(new Intent(this, CategoryDashboardActivity.class));
-                overridePendingTransition(R.anim.slide_up_in, R.anim.slide_up_out);
-                finish();
-                break;
-            case R.id.home_item:
-                startActivity(new Intent(this, HomeActivity.class));
-                overridePendingTransition(R.anim.slide_up_in, R.anim.slide_up_out);
-                finish();
-                break;
+
+        if (item.getItemId() == R.id.categories_item) {
+            startActivity(new Intent(this, CategoryDashboardActivity.class));
+            overridePendingTransition(R.anim.slide_up_in, R.anim.slide_up_out);
+            finish();
+        } else if (item.getItemId() == R.id.home_item) {
+            startActivity(new Intent(this, HomeActivity.class));
+            overridePendingTransition(R.anim.slide_up_in, R.anim.slide_up_out);
+            finish();
         }
+
         return true;
     }
 
