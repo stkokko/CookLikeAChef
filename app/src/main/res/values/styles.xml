@@ -19,12 +19,6 @@
         <item name="colorPrimary">@color/general_color</item>
     </style>
 
-    <style name="BottomNavigationView" parent="Widget.MaterialComponents.BottomNavigationView">
-        <item name="colorPrimary">@android:color/white</item>
-        <item name="android:background">@color/general_color</item>
-        <item name="backgroundTint">@color/general_color</item>
-    </style>
-
     <style name="CollapsedAppBar" parent="@android:style/TextAppearance.Medium">
         <item name="android:textSize">18sp</item>
         <item name="android:textColor">@android:color/white</item>

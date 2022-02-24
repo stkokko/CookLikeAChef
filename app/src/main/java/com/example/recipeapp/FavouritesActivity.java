@@ -11,7 +11,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
-import android.net.Uri;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -38,7 +37,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class FavouritesActivity extends AppCompatActivity implements TextWatcher, BottomNavigationView.OnNavigationItemSelectedListener, AdapterView.OnItemClickListener, TextView.OnEditorActionListener {
+public class FavouritesActivity extends AppCompatActivity implements TextWatcher, BottomNavigationView.OnItemSelectedListener, AdapterView.OnItemClickListener, TextView.OnEditorActionListener {
 
 
     /*----- XML Element Variables -----*/
@@ -113,7 +112,7 @@ public class FavouritesActivity extends AppCompatActivity implements TextWatcher
         bottomNavigationView.setSelectedItemId(R.id.favourites_item);
 
         /*----------- Event Listeners -----------*/
-        bottomNavigationView.setOnNavigationItemSelectedListener(this);
+        bottomNavigationView.setOnItemSelectedListener(this);
         searchAutoCompleteEditText.setOnItemClickListener(this);
         searchAutoCompleteEditText.setOnEditorActionListener(this);
         searchAutoCompleteEditText.addTextChangedListener(this);
@@ -136,13 +135,9 @@ public class FavouritesActivity extends AppCompatActivity implements TextWatcher
 
         menu.getItem(0).setOnMenuItemClickListener(item -> {
 
-            String uriText =
-                    "mailto:" + getResources().getString(R.string.app_email);
-
-            Uri uri = Uri.parse(uriText);
-
-            Intent intent = new Intent(Intent.ACTION_SENDTO);
-            intent.setDataAndType(uri, "text/plain");
+            Intent intent = new Intent(Intent.ACTION_SEND);
+            intent.setType("message/rfc822");
+            intent.putExtra(Intent.EXTRA_EMAIL, new String[]{getResources().getString(R.string.app_email)});
             startActivity(Intent.createChooser(intent, getResources().getString(R.string.contact_us)));
 
             return true;
@@ -184,7 +179,6 @@ public class FavouritesActivity extends AppCompatActivity implements TextWatcher
             bottomNavigationView.setSelectedItemId(R.id.favourites_item);
             recipeBankFirebase.getFavouriteRecipes(favouriteRecipes -> {
 
-
                 adapter = new RecipeRecyclerViewAdapter(FavouritesActivity.this, favouriteRecipes);
 
                 for (Recipe recipe : favouriteRecipes) {
@@ -199,7 +193,6 @@ public class FavouritesActivity extends AppCompatActivity implements TextWatcher
                 recipesRecyclerView.setAdapter(adapter);
                 recipesRecyclerView.setHasFixedSize(true);
                 recipesRecyclerView.setLayoutManager(new LinearLayoutManager(FavouritesActivity.this));
-
 
                 if (favouriteRecipes.size() == 0) {
                     empty_list_textView.setVisibility(View.VISIBLE);

@@ -18,7 +18,6 @@ import java.util.Objects;
 
 public class SearchResultsActivity extends AppCompatActivity {
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,7 +36,7 @@ public class SearchResultsActivity extends AppCompatActivity {
         } else {
             recipes = new ArrayList<>();
         }
-        
+
         if (recipes != null) {
             if (recipes.size() == 0) {
                 empty_list_textView.setVisibility(View.VISIBLE);
@@ -62,6 +61,5 @@ public class SearchResultsActivity extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
-
     }
 }

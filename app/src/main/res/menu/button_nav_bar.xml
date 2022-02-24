@@ -3,12 +3,16 @@
 
     <item
         android:id="@+id/recipeNavIcon"
+        android:enabled="true"
+        android:icon="@drawable/ic_dining"
         android:title="@string/recipe"
-        android:icon="@drawable/ic_dining" />
+        android:visible="true" />
 
     <item
         android:id="@+id/commentsNavIcon"
+        android:enabled="true"
+        android:icon="@drawable/ic_comment"
         android:title="@string/comments"
-        android:icon="@drawable/ic_comment" />
+        android:visible="true" />
 
 </menu>

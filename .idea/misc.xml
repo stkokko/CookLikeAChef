@@ -1,5 +1,62 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/DELL/AndroidStudioProjects/CookLikeAChef/RecipeApp/app/src/main/res/drawable/ic_warning.xml" value="0.14930555555555555" />
+        <entry key="..\:/Users/DELL/AndroidStudioProjects/CookLikeAChef/RecipeApp/app/src/main/res/layout-large-xhdpi/activity_category.xml" value="0.17933006535947713" />
+        <entry key="..\:/Users/DELL/AndroidStudioProjects/CookLikeAChef/RecipeApp/app/src/main/res/layout-large-xhdpi/activity_category_dashboard.xml" value="0.165" />
+        <entry key="..\:/Users/DELL/AndroidStudioProjects/CookLikeAChef/RecipeApp/app/src/main/res/layout-large-xhdpi/activity_favourites.xml" value="0.165" />
+        <entry key="..\:/Users/DELL/AndroidStudioProjects/CookLikeAChef/RecipeApp/app/src/main/res/layout-large-xhdpi/activity_home.xml" value="0.165" />
+        <entry key="..\:/Users/DELL/AndroidStudioProjects/CookLikeAChef/RecipeApp/app/src/main/res/layout-large-xhdpi/activity_register.xml" value="0.3104575163398693" />
+        <entry key="..\:/Users/DELL/AndroidStudioProjects/CookLikeAChef/RecipeApp/app/src/main/res/layout-large-xhdpi/category_recipe_column.xml" value="0.3055555555555556" />
+        <entry key="..\:/Users/DELL/AndroidStudioProjects/CookLikeAChef/RecipeApp/app/src/main/res/layout-large-xxhdpi/activity_category.xml" value="0.18288508557457211" />
+        <entry key="..\:/Users/DELL/AndroidStudioProjects/CookLikeAChef/RecipeApp/app/src/main/res/layout-large-xxhdpi/activity_category_dashboard.xml" value="0.1" />
+        <entry key="..\:/Users/DELL/AndroidStudioProjects/CookLikeAChef/RecipeApp/app/src/main/res/layout-large-xxhdpi/activity_favourites.xml" value="0.1" />
+        <entry key="..\:/Users/DELL/AndroidStudioProjects/CookLikeAChef/RecipeApp/app/src/main/res/layout-large-xxhdpi/activity_home.xml" value="0.3104575163398693" />
+        <entry key="..\:/Users/DELL/AndroidStudioProjects/CookLikeAChef/RecipeApp/app/src/main/res/layout-large-xxhdpi/activity_login.xml" value="0.3104575163398693" />
+        <entry key="..\:/Users/DELL/AndroidStudioProjects/CookLikeAChef/RecipeApp/app/src/main/res/layout-large-xxhdpi/category_recipe_column.xml" value="0.3104575163398693" />
+        <entry key="..\:/Users/DELL/AndroidStudioProjects/CookLikeAChef/RecipeApp/app/src/main/res/layout-normal-hdpi/activity_category.xml" value="0.7420634920634921" />
+        <entry key="..\:/Users/DELL/AndroidStudioProjects/CookLikeAChef/RecipeApp/app/src/main/res/layout-normal-hdpi/activity_category_dashboard.xml" value="0.41217798594847777" />
+        <entry key="..\:/Users/DELL/AndroidStudioProjects/CookLikeAChef/RecipeApp/app/src/main/res/layout-normal-hdpi/activity_favourites.xml" value="0.41217798594847777" />
+        <entry key="..\:/Users/DELL/AndroidStudioProjects/CookLikeAChef/RecipeApp/app/src/main/res/layout-normal-hdpi/activity_home.xml" value="0.41217798594847777" />
+        <entry key="..\:/Users/DELL/AndroidStudioProjects/CookLikeAChef/RecipeApp/app/src/main/res/layout-normal-hdpi/category_recipe_column.xml" value="0.7420634920634921" />
+        <entry key="..\:/Users/DELL/AndroidStudioProjects/CookLikeAChef/RecipeApp/app/src/main/res/layout-normal-hdpi/recipe_fragment.xml" value="0.753968253968254" />
+        <entry key="..\:/Users/DELL/AndroidStudioProjects/CookLikeAChef/RecipeApp/app/src/main/res/layout-normal-xhdpi/activity_category.xml" value="0.4558011049723757" />
+        <entry key="..\:/Users/DELL/AndroidStudioProjects/CookLikeAChef/RecipeApp/app/src/main/res/layout-normal-xhdpi/activity_category_dashboard.xml" value="0.1" />
+        <entry key="..\:/Users/DELL/AndroidStudioProjects/CookLikeAChef/RecipeApp/app/src/main/res/layout-normal-xhdpi/activity_favourites.xml" value="0.1" />
+        <entry key="..\:/Users/DELL/AndroidStudioProjects/CookLikeAChef/RecipeApp/app/src/main/res/layout-normal-xhdpi/activity_home.xml" value="0.1" />
+        <entry key="..\:/Users/DELL/AndroidStudioProjects/CookLikeAChef/RecipeApp/app/src/main/res/layout-normal-xhdpi/category_recipe_column.xml" value="0.5026881720430108" />
+        <entry key="..\:/Users/DELL/AndroidStudioProjects/CookLikeAChef/RecipeApp/app/src/main/res/layout-normal-xxhdpi/activity_category.xml" value="0.338768115942029" />
+        <entry key="..\:/Users/DELL/AndroidStudioProjects/CookLikeAChef/RecipeApp/app/src/main/res/layout-normal-xxhdpi/activity_category_dashboard.xml" value="0.17831813576494426" />
+        <entry key="..\:/Users/DELL/AndroidStudioProjects/CookLikeAChef/RecipeApp/app/src/main/res/layout-normal-xxhdpi/activity_favourites.xml" value="0.17831813576494426" />
+        <entry key="..\:/Users/DELL/AndroidStudioProjects/CookLikeAChef/RecipeApp/app/src/main/res/layout-normal-xxhdpi/activity_home.xml" value="0.1" />
+        <entry key="..\:/Users/DELL/AndroidStudioProjects/CookLikeAChef/RecipeApp/app/src/main/res/layout-normal-xxhdpi/activity_login.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/DELL/AndroidStudioProjects/CookLikeAChef/RecipeApp/app/src/main/res/layout-xlarge-mdpi/activity_category.xml" value="0.25546448087431695" />
+        <entry key="..\:/Users/DELL/AndroidStudioProjects/CookLikeAChef/RecipeApp/app/src/main/res/layout-xlarge-mdpi/activity_category_dashboard.xml" value="0.13465952563121653" />
+        <entry key="..\:/Users/DELL/AndroidStudioProjects/CookLikeAChef/RecipeApp/app/src/main/res/layout-xlarge-mdpi/activity_favourites.xml" value="0.13465952563121653" />
+        <entry key="..\:/Users/DELL/AndroidStudioProjects/CookLikeAChef/RecipeApp/app/src/main/res/layout-xlarge-mdpi/activity_home.xml" value="0.13465952563121653" />
+        <entry key="..\:/Users/DELL/AndroidStudioProjects/CookLikeAChef/RecipeApp/app/src/main/res/layout-xxhdpi/latest_recipes_column.xml" value="0.3442028985507246" />
+        <entry key="..\:/Users/DELL/AndroidStudioProjects/CookLikeAChef/RecipeApp/app/src/main/res/layout/activity_category.xml" value="0.7220394736842105" />
+        <entry key="..\:/Users/DELL/AndroidStudioProjects/CookLikeAChef/RecipeApp/app/src/main/res/layout/activity_category_dashboard.xml" value="0.7071428571428572" />
+        <entry key="..\:/Users/DELL/AndroidStudioProjects/CookLikeAChef/RecipeApp/app/src/main/res/layout/activity_favourites.xml" value="0.7071428571428572" />
+        <entry key="..\:/Users/DELL/AndroidStudioProjects/CookLikeAChef/RecipeApp/app/src/main/res/layout/activity_home.xml" value="0.7071428571428572" />
+        <entry key="..\:/Users/DELL/AndroidStudioProjects/CookLikeAChef/RecipeApp/app/src/main/res/layout/activity_recipe.xml" value="0.25956284153005466" />
+        <entry key="..\:/Users/DELL/AndroidStudioProjects/CookLikeAChef/RecipeApp/app/src/main/res/layout/activity_search_results.xml" value="0.25956284153005466" />
+        <entry key="..\:/Users/DELL/AndroidStudioProjects/CookLikeAChef/RecipeApp/app/src/main/res/layout/activity_splash_screen.xml" value="0.25956284153005466" />
+        <entry key="..\:/Users/DELL/AndroidStudioProjects/CookLikeAChef/RecipeApp/app/src/main/res/layout/bsd_header.xml" value="0.25956284153005466" />
+        <entry key="..\:/Users/DELL/AndroidStudioProjects/CookLikeAChef/RecipeApp/app/src/main/res/layout/category_recipe_column.xml" value="0.22" />
+        <entry key="..\:/Users/DELL/AndroidStudioProjects/CookLikeAChef/RecipeApp/app/src/main/res/layout/comment_row.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/DELL/AndroidStudioProjects/CookLikeAChef/RecipeApp/app/src/main/res/layout/comments_fragment.xml" value="0.17831813576494426" />
+        <entry key="..\:/Users/DELL/AndroidStudioProjects/CookLikeAChef/RecipeApp/app/src/main/res/layout/layout_bottom_sheet_all.xml" value="0.22" />
+        <entry key="..\:/Users/DELL/AndroidStudioProjects/CookLikeAChef/RecipeApp/app/src/main/res/layout/layout_bottom_sheet_brunch.xml" value="0.28940217391304346" />
+        <entry key="..\:/Users/DELL/AndroidStudioProjects/CookLikeAChef/RecipeApp/app/src/main/res/layout/recipe_fragment.xml" value="0.7071428571428572" />
+        <entry key="..\:/Users/DELL/AndroidStudioProjects/CookLikeAChef/RecipeApp/app/src/main/res/menu/bottom_navigation_menu.xml" value="0.1" />
+        <entry key="..\:/Users/DELL/AndroidStudioProjects/CookLikeAChef/RecipeApp/app/src/main/res/menu/button_nav_bar.xml" value="0.1" />
+        <entry key="..\:/Users/DELL/AndroidStudioProjects/CookLikeAChef/RecipeApp/app/src/main/res/menu/toolbar_menu.xml" value="0.18333333333333332" />
+      </map>
+    </option>
+  </component>
   <component name="NullableNotNullManager">
     <option name="myDefaultNullable" value="org.jetbrains.annotations.Nullable" />
     <option name="myDefaultNotNull" value="android.annotation.NonNull" />
@@ -26,7 +83,7 @@
     </option>
     <option name="myNotNulls">
       <value>
-        <list size="14">
+        <list size="15">
           <item index="0" class="java.lang.String" itemvalue="org.jetbrains.annotations.NotNull" />
           <item index="1" class="java.lang.String" itemvalue="javax.annotation.Nonnull" />
           <item index="2" class="java.lang.String" itemvalue="edu.umd.cs.findbugs.annotations.NonNull" />
@@ -41,6 +98,7 @@
           <item index="11" class="java.lang.String" itemvalue="org.eclipse.jdt.annotation.NonNull" />
           <item index="12" class="java.lang.String" itemvalue="io.reactivex.annotations.NonNull" />
           <item index="13" class="java.lang.String" itemvalue="io.reactivex.rxjava3.annotations.NonNull" />
+          <item index="14" class="java.lang.String" itemvalue="lombok.NonNull" />
         </list>
       </value>
     </option>

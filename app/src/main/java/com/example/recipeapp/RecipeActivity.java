@@ -23,7 +23,7 @@ public class RecipeActivity extends AppCompatActivity {
 
     /*---------- Fragments Variables ----------*/
     public static BottomNavigationView bottomNavigationView;
-    private final BottomNavigationView.OnNavigationItemSelectedListener navigationItemSelectedListener =
+    private final BottomNavigationView.OnItemSelectedListener navigationItemSelectedListener =
             item -> {
                 Fragment selectedFragment = null;
 
@@ -82,7 +82,7 @@ public class RecipeActivity extends AppCompatActivity {
         bottomNavigationView.setSelectedItemId(R.id.recipeNavIcon);
 
         /*---------- Event Listeners ----------*/
-        bottomNavigationView.setOnNavigationItemSelectedListener(navigationItemSelectedListener);
+        bottomNavigationView.setOnItemSelectedListener(navigationItemSelectedListener);
     }
 
     @Override

@@ -23,7 +23,7 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:background="#30000000"
-        android:contentDescription="Home Image View"
+        android:contentDescription="@string/home_image_view"
         android:scaleType="fitXY"
         android:src="@drawable/home_image_background" />
 
@@ -37,13 +37,14 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="170dp"
             android:fontFamily="sans-serif-medium"
             android:paddingStart="15dp"
             android:text="@string/welcome_to_appname"
             android:textColor="@android:color/white"
             android:textSize="38sp"
             android:textStyle="bold"
-            android:layout_marginBottom="170dp" />
+            tools:ignore="RtlSymmetry" />
 
 
     </LinearLayout>
@@ -79,13 +80,13 @@
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigationView"
+        style="@style/Widget.MaterialComponents.BottomNavigationView.Colored"
         android:layout_width="match_parent"
-        android:layout_height="70dp"
+        android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_gravity="bottom"
-        android:theme="@style/BottomNavigationView"
         app:labelVisibilityMode="labeled"
         app:menu="@menu/bottom_navigation_menu" />
 

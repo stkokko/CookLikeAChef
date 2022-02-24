@@ -112,4 +112,6 @@
     <string name="cancel">Ακυρωση</string>
     <string name="enter_valid_email">Παρακαλώ εισάγετε ένα έγκυρο email</string>
     <string name="enter_password">Παρακαλώ εισάγετε τον κωδικό πρόσβασης.</string>
+    <string name="category_recipe_image_view">Εικόνα συνταγής κατηγορίας</string>
+    <string name="home_image_view">Εικόνα αρχικής οθόνης</string>
 </resources>

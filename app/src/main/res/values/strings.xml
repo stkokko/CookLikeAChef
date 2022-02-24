@@ -118,4 +118,6 @@
     <string name="cancel">Cancel</string>
     <string name="enter_valid_email">Please enter a valid email address</string>
     <string name="enter_password">Please enter your password.</string>
+    <string name="category_recipe_image_view">category recipe image view</string>
+    <string name="home_image_view">Home Image View</string>
 </resources>

@@ -10,7 +10,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -30,7 +29,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import java.util.ArrayList;
 import java.util.Objects;
 
-public class HomeActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
+public class HomeActivity extends AppCompatActivity implements BottomNavigationView.OnItemSelectedListener {
 
     /*----- Variables -----*/
     private SharedPreferences sharedPreferences;
@@ -45,7 +44,6 @@ public class HomeActivity extends AppCompatActivity implements BottomNavigationV
     /*----- XML Element Variables -----*/
     private BottomNavigationView bottomNavigationView;
     private RecyclerView latestRecipesRecyclerView;
-
 
     @Override
     protected void onDestroy() {
@@ -107,7 +105,7 @@ public class HomeActivity extends AppCompatActivity implements BottomNavigationV
 
 
         /*----------- Event Listeners -----------*/
-        bottomNavigationView.setOnNavigationItemSelectedListener(this);
+        bottomNavigationView.setOnItemSelectedListener(this);
     }
 
     @Override
@@ -122,20 +120,15 @@ public class HomeActivity extends AppCompatActivity implements BottomNavigationV
 
         menu.getItem(0).setOnMenuItemClickListener(item -> {
 
-            String uriText =
-                    "mailto:" + getResources().getString(R.string.app_email);
-
-            Uri uri = Uri.parse(uriText);
-
-            Intent intent = new Intent(Intent.ACTION_SENDTO);
-            intent.setDataAndType(uri, "text/plain");
+            Intent intent = new Intent(Intent.ACTION_SEND);
+            intent.setType("message/rfc822");
+            intent.putExtra(Intent.EXTRA_EMAIL, new String[]{getResources().getString(R.string.app_email)});
             startActivity(Intent.createChooser(intent, getResources().getString(R.string.contact_us)));
 
             return true;
         });
         return true;
     }
-
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {

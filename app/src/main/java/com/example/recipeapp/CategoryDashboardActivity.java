@@ -9,7 +9,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
-import android.net.Uri;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -37,7 +36,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class CategoryDashboardActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener, TextWatcher, AdapterView.OnItemClickListener, TextView.OnEditorActionListener, View.OnClickListener {
+public class CategoryDashboardActivity extends AppCompatActivity implements BottomNavigationView.OnItemSelectedListener, TextWatcher, AdapterView.OnItemClickListener, TextView.OnEditorActionListener, View.OnClickListener {
 
     /*----- XML Element Variables -----*/
     private BottomNavigationView bottomNavigationView;
@@ -112,7 +111,7 @@ public class CategoryDashboardActivity extends AppCompatActivity implements Bott
         bottomNavigationView.setSelectedItemId(R.id.categories_item);
 
         /*----------- Event Listeners -----------*/
-        bottomNavigationView.setOnNavigationItemSelectedListener(this);
+        bottomNavigationView.setOnItemSelectedListener(this);
         searchAutoCompleteEditText.addTextChangedListener(this);
         searchAutoCompleteEditText.setOnEditorActionListener(this);
         brunchCardView.setOnClickListener(this);
@@ -168,13 +167,9 @@ public class CategoryDashboardActivity extends AppCompatActivity implements Bott
 
         menu.getItem(0).setOnMenuItemClickListener(item -> {
 
-            String uriText =
-                    "mailto:" + getResources().getString(R.string.app_email);
-
-            Uri uri = Uri.parse(uriText);
-
-            Intent intent = new Intent(Intent.ACTION_SENDTO);
-            intent.setDataAndType(uri, "text/plain");
+            Intent intent = new Intent(Intent.ACTION_SEND);
+            intent.setType("message/rfc822");
+            intent.putExtra(Intent.EXTRA_EMAIL, new String[]{getResources().getString(R.string.app_email)});
             startActivity(Intent.createChooser(intent, getResources().getString(R.string.contact_us)));
 
             return true;

@@ -13,7 +13,6 @@ public class LoadingDialog {
     private final Context context;
     private AlertDialog dialog;
 
-
     public LoadingDialog(Context context) {
         this.context = context;
     }
@@ -25,7 +24,6 @@ public class LoadingDialog {
 
         builder.setView(view);
         builder.setCancelable(false);
-
 
         dialog = builder.create();
         dialog.show();

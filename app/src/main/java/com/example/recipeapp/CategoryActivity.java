@@ -4,6 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager2.widget.CompositePageTransformer;
+import androidx.viewpager2.widget.MarginPageTransformer;
+import androidx.viewpager2.widget.ViewPager2;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -18,12 +21,11 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.CheckBox;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 
 import com.example.recipeapp.adapter.IngredientRecyclerViewAdapter;
-import com.example.recipeapp.adapter.RecipeCategoryRecyclerViewAdapter;
+import com.example.recipeapp.adapter.RecipeCategoryViewPager2Adapter;
 import com.example.recipeapp.model.Ingredient;
 import com.example.recipeapp.model.Recipe;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
@@ -38,7 +40,6 @@ public class CategoryActivity extends AppCompatActivity implements AdapterView.O
         TextWatcher, View.OnClickListener, IngredientRecyclerViewAdapter.OnIngredientListener {
 
     /*----- XML Element Variables -----*/
-    private TextView categoryTextView;
     private AutoCompleteTextView searchAutoCompleteEditText;
     private TextView cancelFilters;
     private BottomSheetDialog bottomSheetDialog;
@@ -50,7 +51,7 @@ public class CategoryActivity extends AppCompatActivity implements AdapterView.O
     private IngredientRecyclerViewAdapter ingredientRecyclerViewAdapter;
     private ArrayList<Recipe> recipes;
     private ArrayAdapter<String> adapterNames;
-
+    private String category;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,15 +60,14 @@ public class CategoryActivity extends AppCompatActivity implements AdapterView.O
 
         /*---------- Hooks ----------*/
         Toolbar toolbar = findViewById(R.id.toolbar);
-        categoryTextView = findViewById(R.id.category);
         searchAutoCompleteEditText = findViewById(R.id.searchAutoCompleteEditText);
         ImageView filterImageView = findViewById(R.id.filter_imageView);
-        RecyclerView recipesRecyclerView = findViewById(R.id.category_recipes_recyclerView);
+        ViewPager2 imageSliderViewPager2 = findViewById(R.id.viewPager2);
 
         /*---------- Getting Extras ----------*/
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
-            categoryTextView.setText((String) bundle.get("category"));
+            category = bundle.getString("category");
             recipes = (ArrayList<Recipe>) bundle.get("recipes");
         } else {
             recipes = new ArrayList<>();
@@ -80,7 +80,7 @@ public class CategoryActivity extends AppCompatActivity implements AdapterView.O
         }
 
         /*----- Desserts has no filters -----*/
-        if (categoryTextView.getText().toString().equalsIgnoreCase(getResources().getString(R.string.desserts)))
+        if (category.equalsIgnoreCase(getResources().getString(R.string.desserts)))
             filterImageView.setVisibility(View.GONE);
 
         /*----- Setting Up ArrayAdapter -----*/
@@ -94,13 +94,24 @@ public class CategoryActivity extends AppCompatActivity implements AdapterView.O
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         toolbar.setNavigationIcon(R.drawable.return_white_icon);
 
-        /*---------- Set Up RecyclerViewAdapter ----------*/
-        RecipeCategoryRecyclerViewAdapter adapter = new RecipeCategoryRecyclerViewAdapter(this, recipes);
+        /*---------- Set Up ViewPager2Adapter ----------*/
+        RecipeCategoryViewPager2Adapter adapter = new RecipeCategoryViewPager2Adapter(this, recipes);
+        imageSliderViewPager2.setAdapter(adapter);
 
-        /*---------- Set Up Recycler View ----------*/
-        recipesRecyclerView.setHasFixedSize(true);
-        recipesRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
-        recipesRecyclerView.setAdapter(adapter);
+        /*---------- Set Up ViewPager2 ----------*/
+        imageSliderViewPager2.setClipToPadding(false);
+        imageSliderViewPager2.setClipChildren(false);
+        imageSliderViewPager2.setOffscreenPageLimit(3);
+        imageSliderViewPager2.getChildAt(0).setOverScrollMode(RecyclerView.OVER_SCROLL_NEVER);
+
+        /*------------ Set Up CompositePageTransformer ------------*/
+        CompositePageTransformer compositePageTransformer = new CompositePageTransformer();
+        compositePageTransformer.addTransformer(new MarginPageTransformer(40));
+        compositePageTransformer.addTransformer((page, position) -> {
+            float r = 1 - Math.abs(position);
+            page.setScaleY(0.95f + r * 0.05f);
+        });
+        imageSliderViewPager2.setPageTransformer(compositePageTransformer);
 
         /*----- Event Listeners -----*/
         toolbar.setNavigationOnClickListener(v -> onBackPressed());
@@ -117,12 +128,12 @@ public class CategoryActivity extends AppCompatActivity implements AdapterView.O
         View bottomSheetView;
         FloatingActionButton ingredientFilterFab;
 
-        if (categoryTextView.getText().toString().equalsIgnoreCase(getResources().getString(R.string.brunch))) {
+        if (category.equalsIgnoreCase(getResources().getString(R.string.brunch))) {
 
             /*---------- Hooks ----------*/
             bottomSheetDialog = new BottomSheetDialog(CategoryActivity.this, R.style.BottomSheetDialogTheme);
             bottomSheetView = LayoutInflater.from(this).inflate(R.layout.layout_bottom_sheet_brunch,
-                    (RelativeLayout) findViewById(R.id.bottomSheetContainer));
+                    findViewById(R.id.bottomSheetContainer));
             ImageView closeImageView = bottomSheetView.findViewById(R.id.close_imageView);
             ingredientRecyclerView = bottomSheetView.findViewById(R.id.ingredients_recyclerView);
             cancelFilters = bottomSheetView.findViewById(R.id.cancel_textView);
@@ -139,7 +150,6 @@ public class CategoryActivity extends AppCompatActivity implements AdapterView.O
             bottomSheetDialog.setContentView(bottomSheetView);
             bottomSheetDialog.show();
 
-
             /*---------- Set Up Recycler View ----------*/
             ingredientRecyclerView.setHasFixedSize(true);
             ingredientRecyclerView.setLayoutManager(new LinearLayoutManager(CategoryActivity.this));
@@ -152,13 +162,12 @@ public class CategoryActivity extends AppCompatActivity implements AdapterView.O
             cancelFilters.setOnClickListener(this);
             ingredientFilterFab.setOnClickListener(this);
 
-
-        } else if (categoryTextView.getText().toString().equalsIgnoreCase(getResources().getString(R.string.salads))) {
+        } else if (category.equalsIgnoreCase(getResources().getString(R.string.salads))) {
 
             /*---------- Hooks ----------*/
             bottomSheetDialog = new BottomSheetDialog(CategoryActivity.this, R.style.BottomSheetDialogTheme);
             bottomSheetView = LayoutInflater.from(this).inflate(R.layout.layout_bottom_sheet_all,
-                    (RelativeLayout) findViewById(R.id.bottomSheetContainer));
+                    findViewById(R.id.bottomSheetContainer));
             ImageView closeImageView = bottomSheetView.findViewById(R.id.close_imageView);
             ingredientRecyclerView = bottomSheetView.findViewById(R.id.ingredients_recyclerView);
             cancelFilters = bottomSheetView.findViewById(R.id.cancel_textView);
@@ -181,13 +190,12 @@ public class CategoryActivity extends AppCompatActivity implements AdapterView.O
             ingredientFilterFab.setOnClickListener(this);
             closeImageView.setOnClickListener(this);
 
-
-        } else if (categoryTextView.getText().toString().equalsIgnoreCase(getResources().getString(R.string.main_dishes))) {
+        } else if (category.equalsIgnoreCase(getResources().getString(R.string.main_dishes))) {
 
             /*---------- Hooks ----------*/
             bottomSheetDialog = new BottomSheetDialog(CategoryActivity.this, R.style.BottomSheetDialogTheme);
             bottomSheetView = LayoutInflater.from(this).inflate(R.layout.layout_bottom_sheet_all,
-                    (RelativeLayout) findViewById(R.id.bottomSheetContainer));
+                    findViewById(R.id.bottomSheetContainer));
             ImageView closeImageView = bottomSheetView.findViewById(R.id.close_imageView);
             ingredientRecyclerView = bottomSheetView.findViewById(R.id.ingredients_recyclerView);
             cancelFilters = bottomSheetView.findViewById(R.id.cancel_textView);
@@ -196,7 +204,6 @@ public class CategoryActivity extends AppCompatActivity implements AdapterView.O
             /*---------- Set Up RecyclerViewAdapter ----------*/
             String[] mainDishesIngredients = getResources().getStringArray(R.array.main_dishes_ingredients);
             ingredientRecyclerViewAdapter = new IngredientRecyclerViewAdapter(CategoryActivity.this, new ArrayList<>(Arrays.asList(mainDishesIngredients)), this);
-
 
             bottomSheetDialog.setContentView(bottomSheetView);
             bottomSheetDialog.show();
@@ -211,12 +218,12 @@ public class CategoryActivity extends AppCompatActivity implements AdapterView.O
             ingredientFilterFab.setOnClickListener(this);
             closeImageView.setOnClickListener(this);
 
-        } else if (categoryTextView.getText().toString().equalsIgnoreCase(getResources().getString(R.string.burgers))) {
+        } else if (category.equalsIgnoreCase(getResources().getString(R.string.burgers))) {
 
             /*---------- Hooks ----------*/
             bottomSheetDialog = new BottomSheetDialog(CategoryActivity.this, R.style.BottomSheetDialogTheme);
             bottomSheetView = LayoutInflater.from(this).inflate(R.layout.layout_bottom_sheet_all,
-                    (RelativeLayout) findViewById(R.id.bottomSheetContainer));
+                    findViewById(R.id.bottomSheetContainer));
             ImageView closeImageView = bottomSheetView.findViewById(R.id.close_imageView);
             ingredientRecyclerView = bottomSheetView.findViewById(R.id.ingredients_recyclerView);
             cancelFilters = bottomSheetView.findViewById(R.id.cancel_textView);
@@ -261,7 +268,6 @@ public class CategoryActivity extends AppCompatActivity implements AdapterView.O
         // IME_ACTION: actionSearch onClick
         if (actionId == EditorInfo.IME_ACTION_SEARCH) {
             searchAutoCompleteEditText.setText("");
-
 
             Intent searchResultsIntent = new Intent(CategoryActivity.this, SearchResultsActivity.class);
             searchResultsIntent.putExtra("filteredRecipes", filterByName());
@@ -364,19 +370,19 @@ public class CategoryActivity extends AppCompatActivity implements AdapterView.O
                 sweetCheckbox.setChecked(false);
             }
 
-            if (categoryTextView.getText().toString().equalsIgnoreCase(getResources().getString(R.string.brunch))) {
+            if (category.equalsIgnoreCase(getResources().getString(R.string.brunch))) {
                 /*---------- Set Up RecyclerViewAdapter ----------*/
                 String[] brunchIngredients = getResources().getStringArray(R.array.brunch_ingredients);
                 ingredientRecyclerViewAdapter = new IngredientRecyclerViewAdapter(CategoryActivity.this, new ArrayList<>(Arrays.asList(brunchIngredients)), this);
-            } else if (categoryTextView.getText().toString().equalsIgnoreCase(getResources().getString(R.string.salads))) {
+            } else if (category.equalsIgnoreCase(getResources().getString(R.string.salads))) {
                 /*---------- Set Up RecyclerViewAdapter ----------*/
                 String[] saladsIngredients = getResources().getStringArray(R.array.salads_ingredients);
                 ingredientRecyclerViewAdapter = new IngredientRecyclerViewAdapter(CategoryActivity.this, new ArrayList<>(Arrays.asList(saladsIngredients)), this);
-            } else if (categoryTextView.getText().toString().equalsIgnoreCase(getResources().getString(R.string.main_dishes))) {
+            } else if (category.equalsIgnoreCase(getResources().getString(R.string.main_dishes))) {
                 /*---------- Set Up RecyclerViewAdapter ----------*/
                 String[] mainDishesIngredients = getResources().getStringArray(R.array.main_dishes_ingredients);
                 ingredientRecyclerViewAdapter = new IngredientRecyclerViewAdapter(CategoryActivity.this, new ArrayList<>(Arrays.asList(mainDishesIngredients)), this);
-            } else if (categoryTextView.getText().toString().equalsIgnoreCase(getResources().getString(R.string.burgers))) {
+            } else if (category.equalsIgnoreCase(getResources().getString(R.string.burgers))) {
                 /*---------- Set Up RecyclerViewAdapter ----------*/
                 String[] burgersIngredients = getResources().getStringArray(R.array.burger_ingredients);
                 ingredientRecyclerViewAdapter = new IngredientRecyclerViewAdapter(CategoryActivity.this, new ArrayList<>(Arrays.asList(burgersIngredients)), this);
@@ -423,7 +429,6 @@ public class CategoryActivity extends AppCompatActivity implements AdapterView.O
             }
 
         }
-
 
         return filteredRecipes;
     }

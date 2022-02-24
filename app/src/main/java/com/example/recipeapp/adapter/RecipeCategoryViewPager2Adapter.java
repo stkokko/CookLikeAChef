@@ -6,10 +6,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -21,7 +19,7 @@ import com.example.recipeapp.model.Recipe;
 
 import java.util.ArrayList;
 
-public class RecipeCategoryRecyclerViewAdapter extends RecyclerView.Adapter<RecipeCategoryRecyclerViewAdapter.ViewHolder> {
+public class RecipeCategoryViewPager2Adapter extends RecyclerView.Adapter<RecipeCategoryViewPager2Adapter.ViewHolder> {
 
     /*----- Variables -----*/
     private final Context context;
@@ -29,7 +27,7 @@ public class RecipeCategoryRecyclerViewAdapter extends RecyclerView.Adapter<Reci
     private final RequestOptions options;
 
     /*----- Constructor -----*/
-    public RecipeCategoryRecyclerViewAdapter(Context context, ArrayList<Recipe> recipes) {
+    public RecipeCategoryViewPager2Adapter(Context context, ArrayList<Recipe> recipes) {
         this.context = context;
         this.recipes = recipes;
 
@@ -49,7 +47,6 @@ public class RecipeCategoryRecyclerViewAdapter extends RecyclerView.Adapter<Reci
 
         /*----- Init Variables -----*/
         Recipe recipe = recipes.get(position);
-        holder.recipeTextView.setText(String.format("%s\n\n%s", recipe.getName(), recipe.getSteps()));
         Glide.with(context).load(recipe.getImageURL()).apply(options).into(holder.recipeImageView);
 
     }
@@ -62,20 +59,16 @@ public class RecipeCategoryRecyclerViewAdapter extends RecyclerView.Adapter<Reci
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         /*----- XML Element Variables -----*/
-        public CardView recipeCardView;
         public ImageView recipeImageView;
-        public TextView recipeTextView;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
             /*---------- Hooks ----------*/
-            recipeCardView = itemView.findViewById(R.id.recipe_cardView);
-            recipeImageView = itemView.findViewById(R.id.recipe_imageView);
-            recipeTextView = itemView.findViewById(R.id.recipe_textView);
+            recipeImageView = itemView.findViewById(R.id.viewPagerItem_imageView);
 
             /*---------- Event Listeners ----------*/
-            recipeCardView.setOnClickListener(v -> {
+            recipeImageView.setOnClickListener(v -> {
                 Intent recipeIntent = new Intent(context, RecipeActivity.class);
                 recipeIntent.putExtra("recipe", recipes.get(getBindingAdapterPosition()));
                 (context).startActivity(recipeIntent);

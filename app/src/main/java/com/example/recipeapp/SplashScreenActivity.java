@@ -18,7 +18,6 @@ public class SplashScreenActivity extends AppCompatActivity {
         setContentView(R.layout.activity_splash_screen);
     }
 
-    
     private final Runnable runnable = () -> {
         if (!isFinishing()) {
             startActivity(new Intent(SplashScreenActivity.this, LogInActivity.class));

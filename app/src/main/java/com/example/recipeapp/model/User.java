@@ -1,15 +1,12 @@
 package com.example.recipeapp.model;
 
-
 public class User {
 
     private String email;
     private String password;
 
-
     public User() {
     }
-
 
     public String getEmail() {
         return email;
@@ -26,7 +23,6 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
-
 
     @Override
     public String toString() {

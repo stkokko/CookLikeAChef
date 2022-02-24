@@ -5,7 +5,6 @@ import java.util.ArrayList;
 
 public class Recipe implements Serializable {
 
-
     private String name;
     private RecipeCategory category;
     private String imageURL;
@@ -17,7 +16,6 @@ public class Recipe implements Serializable {
     public Recipe() {
 
     }
-
 
     public Recipe(String name, RecipeCategory category, String imageURL, ArrayList<Ingredient> ingredients, String steps, ArrayList<Comment> comment, String language) {
         this.name = name;

@@ -4,14 +4,12 @@ import java.io.Serializable;
 
 public class Ingredient implements Serializable {
 
-
     private String quantity;
     private String name;
 
     public Ingredient() {
 
     }
-
 
     public String getQuantity() {
         return quantity;
